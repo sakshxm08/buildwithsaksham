@@ -93,15 +93,14 @@
 
     <p class="credits">
       <span>
-        <span v-if="disableExternal">File Browser</span>
+        <span v-if="disableExternal">sDrive</span>
         <a
           v-else
           rel="noopener noreferrer"
           target="_blank"
-          href="https://github.com/filebrowser/filebrowser"
-          >File Browser</a
+          href="https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive"
+          >sDrive | Build With Saksham</a
         >
-        <span> {{ " " }} {{ version }}</span>
       </span>
       <span>
         <a @click="help">{{ $t("sidebar.help") }}</a>
@@ -119,7 +118,6 @@ import { useLayoutStore } from "@/stores/layout";
 
 import * as auth from "@/utils/auth";
 import {
-  version,
   signup,
   disableExternal,
   disableUsedPercentage,
@@ -150,7 +148,6 @@ export default {
       return this.currentPromptName === "sidebar";
     },
     signup: () => signup,
-    version: () => version,
     disableExternal: () => disableExternal,
     disableUsedPercentage: () => disableUsedPercentage,
     canLogout: () => !noAuth && loginPage,

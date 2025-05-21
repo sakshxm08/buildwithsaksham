@@ -13,7 +13,8 @@
     [{[ end ]}]
 
     <title>
-      [{[ if .Name -]}][{[ .Name ]}][{[ else ]}]File Browser[{[ end ]}]
+      [{[ if .Name -]}][{[ .Name ]}][{[ else ]}]sDrive - Build With Saksham[{[
+      end ]}]
     </title>
 
     <meta name="robots" content="noindex,nofollow" />
@@ -75,8 +76,8 @@
         return `${window.FileBrowser.StaticURL}/${url.replace(/^\/+/, "")}`;
       };
       var dynamicManifest = {
-        name: window.FileBrowser.Name || "File Browser",
-        short_name: window.FileBrowser.Name || "File Browser",
+        name: window.FileBrowser.Name || "sDrive - Build With Saksham",
+        short_name: window.FileBrowser.Name || "sDrive - Build With Saksham",
         icons: [
           {
             src: window.__prependStaticUrl("/img/icons/android-chrome-192x192.png"),

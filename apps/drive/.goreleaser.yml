@@ -34,16 +34,14 @@ builds:
         goarch: arm
 
 archives:
-  -
-    name_template: "{{.Os}}-{{.Arch}}{{if .Arm}}v{{.Arm}}{{end}}-{{ .ProjectName }}"
-    formats: [ 'tar.gz' ]
+  - name_template: "{{.Os}}-{{.Arch}}{{if .Arm}}v{{.Arm}}{{end}}-{{ .ProjectName }}"
+    formats: ["tar.gz"]
     format_overrides:
       - goos: windows
-        formats: [ 'zip' ]
+        formats: ["zip"]
 
 dockers:
-  -
-    dockerfile: Dockerfile
+  - dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -61,8 +59,7 @@ dockers:
     extra_files:
       - docker_config.json
       - healthcheck.sh
-  -
-    dockerfile: Dockerfile
+  - dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -80,8 +77,7 @@ dockers:
     extra_files:
       - docker_config.json
       - healthcheck.sh
-  -
-    dockerfile: Dockerfile
+  - dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -93,15 +89,14 @@ dockers:
       - "--platform=linux/arm/v6"
     goos: linux
     goarch: arm
-    goarm: '6'
+    goarm: "6"
     image_templates:
       - "filebrowser/filebrowser:{{ .Tag }}-armv6"
       - "filebrowser/filebrowser:v{{ .Major }}-armv6"
     extra_files:
       - docker_config.json
       - healthcheck.sh
-  -
-    dockerfile: Dockerfile
+  - dockerfile: Dockerfile
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -113,16 +108,15 @@ dockers:
       - "--platform=linux/arm/v7"
     goos: linux
     goarch: arm
-    goarm: '7'
+    goarm: "7"
     image_templates:
       - "filebrowser/filebrowser:{{ .Tag }}-armv7"
       - "filebrowser/filebrowser:v{{ .Major }}-armv7"
     extra_files:
       - docker_config.json
       - healthcheck.sh
-## s6 based docker images
-  -
-    dockerfile: Dockerfile.s6
+  ## s6 based docker images
+  - dockerfile: Dockerfile.s6
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -140,8 +134,7 @@ dockers:
     extra_files:
       - docker/root
       - healthcheck.sh
-  -
-    dockerfile: Dockerfile.s6.aarch64
+  - dockerfile: Dockerfile.s6.aarch64
     use: buildx
     build_flag_templates:
       - "--pull"
@@ -175,7 +168,7 @@ docker_manifests:
       - "filebrowser/filebrowser:v{{ .Major }}-amd64"
       - "filebrowser/filebrowser:v{{ .Major }}-arm64"
       - "filebrowser/filebrowser:v{{ .Major }}-armv7"
-## s6 image manifests
+  ## s6 image manifests
   - name_template: "filebrowser/filebrowser:s6"
     image_templates:
       - "filebrowser/filebrowser:{{ .Tag }}-amd64-s6"
@@ -198,5 +191,5 @@ brews:
     commit_author:
       name: FileBrowser Robot
       email: robot@filebrowser.org
-    description: File Browser is a create-your-own-cloud-kind of software where you can install it on a server, direct it to a path and then access your files through a nice web interface
+    description: sDrive is a create-your-own-cloud-kind of software where you can install it on a server, direct it to a path and then access your files through a nice web interface
     license: "MIT"

@@ -1,6 +1,6 @@
 {
-  "name": "File Browser",
-  "short_name": "File Browser",
+  "name": "sDrive - Build With Saksham",
+  "short_name": "sDrive",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
