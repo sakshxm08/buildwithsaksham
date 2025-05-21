@@ -39,7 +39,7 @@
     />
     <meta
       name="theme-color"
-      content="[{[ if .Color -]}][{[ .Color ]}][{[ else ]}]#2979ff[{[ end ]}]"
+      content="[{[ if .Color -]}][{[ .Color ]}][{[ else ]}]#eeeeee[{[ end ]}]"
     />
 
     <!-- Add to home screen for Safari on iOS/iPadOS -->
@@ -51,6 +51,11 @@
       href="[{[ .StaticURL ]}]/img/icons/apple-touch-icon.png"
     />
 
+    <meta
+      name="msapplication-config"
+      content="[{[ .StaticURL ]}]/img/icons/browserconfig.xml"
+    />
+
     <!-- Add to home screen for Windows -->
     <meta
       name="msapplication-TileImage"
@@ -58,7 +63,7 @@
     />
     <meta
       name="msapplication-TileColor"
-      content="[{[ if .Color -]}][{[ .Color ]}][{[ else ]}]#2979ff[{[ end ]}]"
+      content="[{[ if .Color -]}][{[ .Color ]}][{[ else ]}]#eeeeee[{[ end ]}]"
     />
 
     <!-- Inject Some Variables and generate the manifest json -->
