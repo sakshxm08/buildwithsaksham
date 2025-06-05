@@ -1,28 +1,15 @@
 .input {
-  background: var(--surfacePrimary);
-  color: var(--textSecondary);
-  border: 1px solid var(--borderPrimary);
-  border-radius: 0.1em;
-  padding: 0.5em 1em;
-  transition: 0.2s ease all;
-  margin: 0;
-}
-
-.input:hover,
-.input:focus {
-  border-color: var(--borderSecondary);
+  @apply bg-transparent border-0 p-2 border-b border-gray-200 outline-none text-lg transition-colors focus-visible:border-primary focus:ring-0;
 }
 
 .input--block {
-  margin-bottom: 0.5em;
-  display: block;
-  width: 100%;
+  @apply w-full;
 }
 
 .input--textarea {
   line-height: 1.15;
   font-family: monospace;
-  min-height: 10em;
+  min-height: 10rem;
   resize: vertical;
 }
 

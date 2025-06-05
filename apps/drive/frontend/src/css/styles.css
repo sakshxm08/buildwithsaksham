@@ -1,6 +1,7 @@
-@import "normalize.css/normalize.css";
+/* @import "normalize.css/normalize.css"; */
 @import "vue-toastification/dist/index.css";
-@import "vue-final-modal/style.css";
+@import "tailwindcss";
+/* @import "vue-final-modal/style.css"; */
 @import "./_variables.css";
 @import "./_buttons.css";
 @import "./_inputs.css";
@@ -23,6 +24,10 @@
   outline: 2px solid crimson !important;
   border-radius: 3px !important;
 } */
+
+h1 {
+  @apply text-4xl font-bold my-4;
+}
 
 .link {
   color: var(--blue);

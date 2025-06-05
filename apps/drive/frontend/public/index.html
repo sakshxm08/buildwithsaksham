@@ -13,7 +13,7 @@
     [{[ end ]}]
 
     <title>
-      [{[ if .Name -]}][{[ .Name ]}][{[ else ]}]sDrive - Build With Saksham[{[
+      [{[ if .Name -]}][{[ .Name ]}][{[ else ]}]Devault - Build With Saksham[{[
       end ]}]
     </title>
 
@@ -70,14 +70,14 @@
     <!-- Inject Some Variables and generate the manifest json -->
     <script>
       // We can assign JSON directly
-      window.FileBrowser = [{[ .Json ]}];
+      window.Devault = [{[ .Json ]}];
       // Global function to prepend static url
       window.__prependStaticUrl = (url) => {
-        return `${window.FileBrowser.StaticURL}/${url.replace(/^\/+/, "")}`;
+        return `${window.Devault.StaticURL}/${url.replace(/^\/+/, "")}`;
       };
       var dynamicManifest = {
-        name: window.FileBrowser.Name || "sDrive - Build With Saksham",
-        short_name: window.FileBrowser.Name || "sDrive - Build With Saksham",
+        name: window.Devault.Name || "Devault - Build With Saksham",
+        short_name: window.Devault.Name || "Devault - Build With Saksham",
         icons: [
           {
             src: window.__prependStaticUrl("/img/icons/android-chrome-192x192.png"),
@@ -90,10 +90,10 @@
             type: "image/png",
           },
         ],
-        start_url: window.location.origin + window.FileBrowser.BaseURL,
+        start_url: window.location.origin + window.Devault.BaseURL,
         display: "standalone",
         background_color: "#ffffff",
-        theme_color: window.FileBrowser.Color || "#455a64",
+        theme_color: window.Devault.Color || "#455a64",
       };
 
       const stringManifest = JSON.stringify(dynamicManifest);

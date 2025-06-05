@@ -9,7 +9,7 @@
     />
     <meta name="msapplication-config" content="/img/icons/browserconfig.xml" />
 
-    <title>sDrive - Build With Saksham</title>
+    <title>Devault - Build With Saksham</title>
 
     <link
       rel="icon"
@@ -48,7 +48,7 @@
     <!-- Inject Some Variables and generate the manifest json -->
     <script>
       // We can assign JSON directly
-      window.FileBrowser = {
+      window.Devault = {
         AuthMethod: "json",
         BaseURL: "",
         CSS: false,
@@ -70,11 +70,11 @@
       };
       // Global function to prepend static url
       window.__prependStaticUrl = (url) => {
-        return `${window.FileBrowser.StaticURL}/${url.replace(/^\/+/, "")}`;
+        return `${window.Devault.StaticURL}/${url.replace(/^\/+/, "")}`;
       };
       var dynamicManifest = {
-        name: window.FileBrowser.Name || "sDrive - Build With Saksham",
-        short_name: window.FileBrowser.Name || "sDrive - Build With Saksham",
+        name: window.Devault.Name || "Devault - Build With Saksham",
+        short_name: window.Devault.Name || "Devault - Build With Saksham",
         icons: [
           {
             src: window.__prependStaticUrl(
@@ -91,10 +91,10 @@
             type: "image/png",
           },
         ],
-        start_url: window.location.origin + window.FileBrowser.BaseURL,
+        start_url: window.location.origin + window.Devault.BaseURL,
         display: "standalone",
         background_color: "#ffffff",
-        theme_color: window.FileBrowser.Color || "#455a64",
+        theme_color: window.Devault.Color || "#455a64",
       };
 
       const stringManifest = JSON.stringify(dynamicManifest);

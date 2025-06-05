@@ -1,6 +1,5 @@
 body {
   font-family: "Roboto", sans-serif;
-  padding-top: 4em;
   background: var(--background);
   color: var(--textSecondary);
 }

@@ -1,24 +1,9 @@
 .button {
-  outline: 0;
-  border: 0;
-  padding: 0.5em 1em;
-  border-radius: 0.1em;
-  cursor: pointer;
-  background: var(--blue);
-  color: white;
-  border: 1px solid var(--divider);
-  box-shadow: 0 0 5px var(--divider);
-  transition: 0.1s ease all;
-}
-
-.button:hover {
-  background-color: var(--dark-blue);
+  @apply outline-none border-none p-3 cursor-pointer rounded-full text-white bg-primary shadow transition-all hover:bg-primary-hover disabled:hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60;
 }
 
 .button--block {
-  margin: 0 0 0.5em;
-  display: block;
-  width: 100%;
+  @apply w-full;
 }
 
 .button--red {
@@ -47,9 +32,4 @@
 
 .button--flat.button--grey {
   color: #6f6f6f;
-}
-
-.button[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
 }

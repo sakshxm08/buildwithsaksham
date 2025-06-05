@@ -4,9 +4,11 @@ import vue from "@vitejs/plugin-vue";
 import VueI18nPlugin from "@intlify/unplugin-vue-i18n/vite";
 import legacy from "@vitejs/plugin-legacy";
 import { compression } from "vite-plugin-compression2";
+import tailwindcss from "@tailwindcss/vite";
 
 const plugins = [
   vue(),
+  tailwindcss(),
   VueI18nPlugin({
     include: [path.resolve(__dirname, "./src/i18n/**/*.json")],
   }),

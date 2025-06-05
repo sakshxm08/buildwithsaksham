@@ -93,13 +93,13 @@
 
     <p class="credits">
       <span>
-        <span v-if="disableExternal">sDrive</span>
+        <span v-if="disableExternal">Devault</span>
         <a
           v-else
           rel="noopener noreferrer"
           target="_blank"
           href="https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive"
-          >sDrive | Build With Saksham</a
+          >Devault | Build With Saksham</a
         >
       </span>
       <span>

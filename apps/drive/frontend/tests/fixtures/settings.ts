@@ -48,7 +48,7 @@ const test = base.extend<{ settingsPage: SettingsPage }>({
     const authPage = new AuthPage(page);
     await authPage.goto();
     await authPage.loginAs();
-    await expect(page).toHaveTitle(/.*Files - sDrive$/);
+    await expect(page).toHaveTitle(/.*Files - Devault$/);
     // Use signed-in page in the test.
     await use(page);
   },

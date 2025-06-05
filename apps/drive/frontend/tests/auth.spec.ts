@@ -10,7 +10,7 @@ test("redirect to login", async ({ page }) => {
 
 test("login and logout", async ({ authPage, page, context }) => {
   await authPage.goto();
-  await expect(page).toHaveTitle(/Login - sDrive$/);
+  await expect(page).toHaveTitle(/Login - Devault$/);
 
   await authPage.loginAs("fake", "fake");
   await expect(authPage.wrongCredentials).toBeVisible();
@@ -18,14 +18,14 @@ test("login and logout", async ({ authPage, page, context }) => {
   await authPage.loginAs();
   await expect(authPage.wrongCredentials).toBeHidden();
   // await page.waitForURL("**/files/", { timeout: 5000 });
-  await expect(page).toHaveTitle(/.*Files - sDrive$/);
+  await expect(page).toHaveTitle(/.*Files - Devault$/);
 
   let cookies = await context.cookies();
   expect(cookies.find((c) => c.name == "auth")?.value).toBeDefined();
 
   await authPage.logout();
   // await page.waitForURL("**/login", { timeout: 5000 });
-  await expect(page).toHaveTitle(/Login - sDrive$/);
+  await expect(page).toHaveTitle(/Login - Devault$/);
 
   cookies = await context.cookies();
   expect(cookies.find((c) => c.name == "auth")?.value).toBeUndefined();
