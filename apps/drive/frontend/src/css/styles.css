@@ -1,7 +1,6 @@
-/* @import "normalize.css/normalize.css"; */
+@import "normalize.css/normalize.css";
 @import "vue-toastification/dist/index.css";
 @import "tailwindcss";
-/* @import "vue-final-modal/style.css"; */
 @import "./_variables.css";
 @import "./_buttons.css";
 @import "./_inputs.css";
@@ -30,14 +29,14 @@ h1 {
 }
 
 .link {
-  color: var(--blue);
+  color: var(--primary);
 }
 
 #loading {
   background: var(--background);
 }
 #loading .spinner > div {
-  background: var(--iconPrimary);
+  background: var(--icon-primary);
 }
 
 main .spinner {
@@ -52,7 +51,7 @@ main .spinner > div {
   height: 0.8em;
   margin: 0 0.1em;
   font-size: 1em;
-  background: var(--iconPrimary);
+  background: var(--icon-primary);
   border-radius: 100%;
   display: inline-block;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -157,8 +156,8 @@ main .spinner .bounce2 {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--blue);
-  color: var(--iconSecondary);
+  background: var(--primary);
+  color: var(--icon-secondary);
   border-radius: 50%;
   font-size: 0.75em;
   width: 1.8em;
@@ -166,7 +165,7 @@ main .spinner .bounce2 {
   text-align: center;
   line-height: 1.55em;
   font-weight: bold;
-  border: 2px solid var(--borderPrimary);
+  border: 2px solid var(--border-primary);
 }
 
 /* PREVIEWER */
@@ -326,7 +325,7 @@ main .spinner .bounce2 {
 #previewer .spinner > div {
   width: 18px;
   height: 18px;
-  background: var(--iconPrimary);
+  background: var(--icon-primary);
 }
 
 /* EDITOR */
@@ -346,7 +345,7 @@ main .spinner .bounce2 {
 }
 
 #editor-container .bar {
-  background: var(--surfacePrimary);
+  background: var(--surface-primary);
 }
 
 #editor-container #editor {

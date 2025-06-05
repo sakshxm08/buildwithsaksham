@@ -3,10 +3,10 @@
   bottom: 0;
   left: 0;
   max-height: calc(100% - 4em);
-  background: var(--surfacePrimary);
-  color: var(--textPrimary);
+  background: var(--surface-srimary);
+  color: var(--text-primary);
   z-index: 9999;
-  background: var(--dividerSecondary);
+  background: var(--divider-secondary);
   transition: 0.2s ease background;
   cursor: ns-resize;
   touch-action: none;
@@ -30,7 +30,7 @@
   overflow: auto;
   font-size: 1rem;
   cursor: text;
-  box-shadow: 0 0 5px var(--borderPrimary);
+  box-shadow: 0 0 5px var(--border-primary);
   transition: 0.2s ease transform;
 }
 
@@ -41,7 +41,7 @@
   top: 0px;
   left: 0px;
   z-index: 9998;
-  background-color: var(--dividerPrimary);
+  background-color: var(--divider-primary);
 }
 
 body.rtl .shell-content {
@@ -74,7 +74,7 @@ body.rtl .shell-content {
 }
 
 .shell__prompt i {
-  color: var(--blue);
+  color: var(--primary);
 }
 
 .shell__text {
@@ -82,5 +82,5 @@ body.rtl .shell-content {
   font-family: inherit;
   white-space: pre-wrap;
   width: 100%;
-  color: var(--textSecondary);
+  color: var(--text-secondary);
 }

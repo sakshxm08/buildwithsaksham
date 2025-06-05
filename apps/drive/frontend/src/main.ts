@@ -29,6 +29,8 @@ dayjs.extend(duration);
 const pinia = createPinia(router);
 const vfm = createVfm();
 
+import "vue-final-modal/style.css";
+
 const app = createApp(App);
 
 app.component(VueNumberInput.name || "vue-number-input", VueNumberInput);

@@ -1,7 +1,8 @@
 body {
   font-family: "Roboto", sans-serif;
   background: var(--background);
-  color: var(--textSecondary);
+  padding-top: 4em;
+  color: var(--text-secondary);
 }
 
 * {
@@ -101,7 +102,7 @@ main {
 .breadcrumbs {
   display: flex;
   align-items: center;
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 .breadcrumbs a {
@@ -149,9 +150,9 @@ html[dir="rtl"] .breadcrumbs a {
 }
 
 .vue-number-input > input {
-  background: var(--surfacePrimary) !important;
-  border-color: var(--surfaceSecondary) !important;
-  color: var(--textSecondary) !important;
+  background: var(--surface-primary) !important;
+  border-color: var(--surface-secondary) !important;
+  color: var(--text-secondary) !important;
 }
 
 .vue-number-input--small > input {
@@ -161,21 +162,21 @@ html[dir="rtl"] .breadcrumbs a {
 
 .vue-number-input :hover,
 .vue-number-input :focus {
-  border-color: var(--borderSecondary) !important;
+  border-color: var(--border-secondary) !important;
 }
 
 .vue-number-input__button {
-  background: var(--surfacePrimary) !important;
+  background: var(--surface-primary) !important;
 }
 
 .vue-number-input__button--minus,
 .vue-number-input__button--plus {
-  border-color: var(--surfaceSecondary) !important;
+  border-color: var(--surface-secondary) !important;
 }
 
 .vue-number-input__button::before,
 .vue-number-input__button::after {
-  background: var(--textSecondary) !important;
+  background: var(--text-secondary) !important;
 }
 
 .vfm-modal {

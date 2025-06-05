@@ -5,7 +5,7 @@ html[dir="rtl"] #listing {
 #listing h2 {
   margin: 0 0 0 0.5em;
   font-size: 0.9em;
-  color: var(--textPrimary);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -21,12 +21,12 @@ html[dir="rtl"] #listing {
 }
 
 #listing .item {
-  background: var(--surfacePrimary);
+  background: var(--surface-primary);
   border-color: var(--divider);
   position: relative;
   display: flex;
   flex-wrap: nowrap;
-  color: var(--textPrimary);
+  color: var(--text-primary);
   transition:
     0.1s ease background,
     0.1s ease opacity;
@@ -74,7 +74,7 @@ html[dir="rtl"] #listing {
   margin: 1em auto;
   display: block !important;
   width: 95%;
-  color: var(--textPrimary);
+  color: var(--text-primary);
   font-weight: 500;
 }
 
@@ -162,7 +162,7 @@ html[dir="rtl"] #listing {
 #listing.list .item {
   width: 100%;
   margin: 0;
-  border: 1px solid var(--borderPrimary);
+  border: 1px solid var(--border-primary);
   padding: 1em;
   border-top: 0;
 }
@@ -172,8 +172,8 @@ html[dir="rtl"] #listing {
 }
 
 #listing .item[aria-selected="true"] {
-  background: var(--blue) !important;
-  color: var(--iconSecondary) !important;
+  background: var(--primary) !important;
+  color: var(--icon-secondary) !important;
 }
 
 #listing.list .item div:first-of-type {
@@ -209,7 +209,7 @@ html[dir="rtl"] #listing {
 
 #listing .item.header {
   display: none !important;
-  background-color: var(--iconTertiary);
+  background-color: var(--icon-tertiary);
 }
 
 #listing.list .header i {
@@ -224,7 +224,7 @@ html[dir="rtl"] #listing {
   z-index: 999;
   padding: 0.85em;
   border: 0;
-  border-bottom: 1px solid var(--borderPrimary);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 #listing.list .item.header > div:first-child {
@@ -270,7 +270,7 @@ html[dir="rtl"] #listing {
   left: 0;
   z-index: 99999;
   width: 100%;
-  background-color: var(--blue);
+  background-color: var(--primary);
   height: 4em;
   padding: 0.5em 0.5em 0.5em 1em;
   justify-content: space-between;
@@ -283,5 +283,5 @@ html[dir="rtl"] #listing {
 
 #listing #multiple-selection p,
 #listing #multiple-selection i {
-  color: var(--iconSecondary);
+  color: var(--icon-secondary);
 }

@@ -15,8 +15,8 @@
   box-shadow:
     rgba(0, 0, 0, 0.06) 0px 1px 3px,
     rgba(0, 0, 0, 0.12) 0px 1px 2px;
-  background: var(--surfacePrimary);
-  color: var(--textPrimary);
+  background: var(--surface-primary);
+  color: var(--text-primary);
   border-radius: 0.2em;
   margin: 5px;
   overflow: hidden;
@@ -42,7 +42,7 @@
 
 .share__box__element {
   padding: 1em;
-  border-top: 1px solid var(--borderPrimary);
+  border-top: 1px solid var(--border-primary);
   word-break: break-all;
 }
 
@@ -65,7 +65,7 @@
   border-left: 0;
   border-right: 0;
   border-bottom: 0;
-  border-top: 1px solid var(--borderPrimary);
+  border-top: 1px solid var(--border-primary);
 }
 
 #listing.list .item .name {

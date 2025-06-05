@@ -37,7 +37,7 @@ a {
   display: block;
   font-size: 0.8em;
   font-weight: 500;
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 li code,
@@ -89,12 +89,12 @@ html[dir="rtl"] .dashboard #nav .wrapper {
 }
 
 .dashboard #nav ul li:hover {
-  background: var(--surfaceSecondary);
+  background: var(--surface-secondary);
 }
 
 .dashboard #nav ul li.active {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: var(--primary);
+  color: var(--primary);
 }
 
 .dashboard #nav ul li.active::before {
@@ -104,7 +104,7 @@ html[dir="rtl"] .dashboard #nav .wrapper {
   top: 0;
   left: 0;
   content: "";
-  background: var(--blue);
+  background: var(--primary);
   opacity: 0.08;
 }
 
@@ -119,7 +119,7 @@ table {
 }
 
 table tr {
-  border-bottom: 1px solid var(--iconTertiary);
+  border-bottom: 1px solid var(--icon-tertiary);
 }
 
 table tr:last-child {
@@ -128,7 +128,7 @@ table tr:last-child {
 
 table th {
   font-weight: 500;
-  color: var(--textSecondary);
+  color: var(--text-secondary);
   text-align: left;
 }
 
@@ -159,8 +159,8 @@ table tr > *:last-child {
 .card {
   position: relative;
   margin: 0 0 1rem 0;
-  background: var(--surfacePrimary);
-  color: var(--textSecondary);
+  background: var(--surface-primary);
+  color: var(--text-secondary);
   border-radius: 2px;
   box-shadow:
     0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -237,7 +237,7 @@ body.rtl .card .card-action {
 }
 
 .card h3 {
-  color: var(--textPrimary);
+  color: var(--text-primary);
   font-size: 1em;
   font-weight: 500;
   margin: 2em 0 1em;
@@ -253,15 +253,16 @@ body.rtl .card .card-action {
 }
 
 .card#download {
-  max-width: 15em;
+  max-width: 25em;
+  @apply rounded-lg shadow p-4;
 }
 
 .card#share input,
 .card#share select,
 .card#share input::-webkit-inner-spin-button,
 .card#share input::-webkit-outer-spin-button {
-  background: var(--surfacePrimary);
-  color: var(--textSecondary);
+  background: var(--surface-primary);
+  color: var(--text-secondary);
 }
 
 .card#share ul {
@@ -277,7 +278,7 @@ body.rtl .card .card-action {
 }
 
 .card#share ul li a {
-  color: var(--blue);
+  color: var(--primary);
   cursor: pointer;
   margin-right: auto;
 }
@@ -290,7 +291,7 @@ body.rtl .card .card-action {
 .card#share ul li select {
   padding: 0.2em;
   margin-right: 0.5em;
-  border: 1px solid var(--borderPrimary);
+  border: 1px solid var(--border-primary);
 }
 
 .card#share .action.copy-clipboard::after {
@@ -359,19 +360,19 @@ body.rtl .card .card-action {
 }
 
 .file-list li[aria-selected="true"] {
-  background: var(--blue) !important;
-  color: var(--iconSecondary) !important;
+  background: var(--primary) !important;
+  color: var(--icon-secondary) !important;
   transition: 0.1s ease all;
 }
 
 .file-list li:hover {
-  background: var(--surfaceSecondary);
+  background: var(--surface-secondary);
   cursor: pointer;
 }
 
 .file-list li:before {
   content: "folder";
-  color: var(--textPrimary);
+  color: var(--text-primary);
   vertical-align: middle;
   line-height: 1.4;
   font-family: "Material Icons";
@@ -380,7 +381,7 @@ body.rtl .card .card-action {
 }
 
 .file-list li[aria-selected="true"]:before {
-  color: var(--iconSecondary);
+  color: var(--icon-secondary);
 }
 
 .help {
@@ -409,11 +410,11 @@ body.rtl .card .card-action {
 }
 
 .collapsible {
-  border-top: 1px solid var(--borderPrimary);
+  border-top: 1px solid var(--border-primary);
 }
 
 .collapsible:last-of-type {
-  border-bottom: 1px solid var(--borderPrimary);
+  border-bottom: 1px solid var(--border-primary);
 }
 
 .collapsible > input {
@@ -431,7 +432,7 @@ body.rtl .card .card-action {
 
 .collapsible > label * {
   margin: 0;
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 .collapsible > label i {
@@ -478,7 +479,7 @@ body.rtl .card .card-action {
   flex: 1;
   padding: 2em;
   border-radius: 0.2em;
-  border: 1px solid var(--borderPrimary);
+  border: 1px solid var(--border-primary);
   text-align: center;
 }
 

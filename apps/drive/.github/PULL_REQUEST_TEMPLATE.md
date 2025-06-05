@@ -9,7 +9,7 @@ If the feature changes current behaviour, explain why your solution is better.
 
 - [ ] DO make sure you are requesting to **pull a topic/feature/bugfix branch** (right side). Don't request your master!
 - [ ] DO make sure you are making a pull request against the **master branch** (left side). Also you should start _your branch_ off _our master_.
-- [ ] DO make sure that sDrive can be successfully built. See [builds](https://github.com/filebrowser/community/blob/master/builds.md) and [development](https://github.com/filebrowser/community/blob/master/development.md).
+- [ ] DO make sure that Devault can be successfully built. See [builds](https://github.com/filebrowser/community/blob/master/builds.md) and [development](https://github.com/filebrowser/community/blob/master/development.md).
 - [ ] AVOID breaking the continuous integration build.
 
 **Further comments**

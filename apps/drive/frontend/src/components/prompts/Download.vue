@@ -6,16 +6,17 @@
 
     <div class="card-content">
       <p>{{ t("prompts.downloadMessage") }}</p>
-
-      <button
-        id="focus-prompt"
-        v-for="(ext, format) in formats"
-        :key="format"
-        class="button button--block"
-        @click="layoutStore.currentPrompt?.confirm(format)"
-      >
-        {{ ext }}
-      </button>
+      <div class="flex flex-col gap-2 my-4">
+        <button
+          id="focus-prompt"
+          v-for="(ext, format) in formats"
+          :key="format"
+          class="button button--block button--outline--primary"
+          @click="layoutStore.currentPrompt?.confirm(format)"
+        >
+          {{ ext }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,5 +1,5 @@
 #login {
-  background: var(--surfacePrimary);
+  background: var(--surface-primary);
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
 
 #login form {
   padding: 20px;
-  border: 1px solid var(--borderPrimary);
+  border: 1px solid var(--border-primary);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -59,7 +59,7 @@
 #login p {
   cursor: pointer;
   text-align: right;
-  color: var(--blue);
+  color: var(--primary);
   text-transform: lowercase;
   font-weight: 500;
   font-size: 0.9rem;

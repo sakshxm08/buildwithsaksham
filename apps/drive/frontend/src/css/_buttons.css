@@ -1,5 +1,5 @@
 .button {
-  @apply outline-none border-none p-3 cursor-pointer rounded-full text-white bg-primary shadow transition-all hover:bg-primary-hover disabled:hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60;
+  @apply outline-none py-3 px-5 cursor-pointer rounded-full text-white bg-primary shadow transition-all hover:bg-primary-hover disabled:hover:bg-primary disabled:cursor-not-allowed disabled:opacity-60;
 }
 
 .button--block {
@@ -10,20 +10,30 @@
   background: var(--red);
 }
 
+.button--outline--primary {
+  @apply bg-white text-primary border border-primary hover:bg-primary/20 transition-all cursor-pointer;
+}
+
+.button--primary {
+  background: var(--primary);
+  color: white;
+}
+
 .button--blue {
   background: var(--blue);
 }
 
 .button--flat {
-  color: var(--dark-blue);
+  color: var(--primary);
   background: transparent;
+  padding: 10px 20px;
   box-shadow: 0 0 0;
   border: 0;
   text-transform: uppercase;
 }
 
 .button--flat:hover {
-  background: var(--surfaceSecondary);
+  background: var(--surface-secondary);
 }
 
 .button--flat.button--red {

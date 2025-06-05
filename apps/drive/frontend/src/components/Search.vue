@@ -26,11 +26,8 @@
     <div id="result" ref="result">
       <div>
         <template v-if="isEmpty">
-          <p>{{ text }}</p>
-
           <template v-if="prompt.length === 0">
             <div class="boxes">
-              <h3>{{ $t("search.types") }}</h3>
               <div>
                 <div
                   tabindex="0"
@@ -71,7 +68,7 @@ import { useLayoutStore } from "@/stores/layout";
 import url from "@/utils/url";
 import { search } from "@/api";
 import { computed, inject, onMounted, ref, watch } from "vue";
-import { useI18n } from "vue-i18n";
+// import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 
@@ -99,7 +96,7 @@ const $showError = inject<IToastError>("$showError")!;
 const input = ref<HTMLInputElement | null>(null);
 const result = ref<HTMLElement | null>(null);
 
-const { t } = useI18n();
+// const { t } = useI18n();
 
 const route = useRoute();
 
@@ -136,15 +133,15 @@ watch(prompt, () => {
 const isEmpty = computed(() => {
   return results.value.length === 0;
 });
-const text = computed(() => {
-  if (ongoing.value) {
-    return "";
-  }
+// const text = computed(() => {
+//   if (ongoing.value) {
+//     return "";
+//   }
 
-  return prompt.value === ""
-    ? t("search.typeToSearch")
-    : t("search.pressToSearch");
-});
+//   return prompt.value === ""
+//     ? t("search.typeToSearch")
+//     : t("search.pressToSearch");
+// });
 const filteredResults = computed(() => {
   return results.value.slice(0, resultsCount.value);
 });

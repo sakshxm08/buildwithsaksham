@@ -1,8 +1,8 @@
 header {
   z-index: 1000;
-  background: var(--surfacePrimary);
+  background: var(--surface-primary);
   border-bottom: 1px solid var(--divider);
-  box-shadow: 0 0 5px var(--borderPrimary);
+  box-shadow: 0 0 5px var(--border-primary);
   position: fixed;
   top: 0;
   left: 0;
@@ -82,25 +82,26 @@ header .menu-button {
 }
 
 #search #input {
-  background: var(--surfaceSecondary);
-  border-color: var(--surfacePrimary);
+  /* background: var(--surface-secondary);
+  border-color: var(--surface-primary);
   display: flex;
   height: 100%;
   padding: 0em 0.75em;
   border-radius: 0.3em;
   transition: 0.1s ease all;
   align-items: center;
-  z-index: 2;
+  z-index: 2; */
+  @apply bg-transparent flex items-center h-full p-4 border border-gray-200  rounded-full;
 }
 
 #search #input input::placeholder {
-  color: var(--textSecondary);
+  color: var(--text-secondary);
 }
 
 #search.active #input {
-  border-bottom: 1px solid var(--borderPrimary);
-  box-shadow: 0 0 5px var(--borderPrimary);
-  background: var(--surfacePrimary);
+  border-bottom: 1px solid var(--border-primary);
+  box-shadow: 0 0 5px var(--border-primary);
+  background: var(--surface-primary);
   height: 4em;
 }
 
@@ -110,7 +111,7 @@ header .menu-button {
 
 #search.active i,
 #search.active input {
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 #search #input > .action,
@@ -132,7 +133,7 @@ header .menu-button {
   background: var(--background);
   text-align: left;
   padding: 0;
-  color: var(--textPrimary);
+  color: var(--text-primary);
   height: 0;
   transition:
     0.1s ease height,
@@ -171,10 +172,6 @@ html[dir="rtl"] #search #result ul > * {
   list-style: none;
 }
 
-#search li {
-  margin-bottom: 0.5em;
-}
-
 #search #result > div {
   max-width: 45em;
   margin: 0 auto;
@@ -193,7 +190,7 @@ html[dir="rtl"] #search #result ul > * {
 }
 
 #search.active #result i {
-  color: var(--iconTertiary);
+  @apply text-primary;
 }
 
 #search.active #result > p > i {
@@ -203,9 +200,7 @@ html[dir="rtl"] #search #result ul > * {
 }
 
 #search.active #result ul li a {
-  display: flex;
-  align-items: center;
-  padding: 0.3em 0;
+  @apply flex items-center py-2 px-4 rounded-md text-gray-500 hover:bg-gray-200 transition-all;
 }
 
 #search.active #result ul li a i {
@@ -214,35 +209,28 @@ html[dir="rtl"] #search #result ul > * {
 
 /* I dont think we need these anymore */
 /* #search::-webkit-input-placeholder {
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 #search::-moz-placeholder {
   opacity: 1;
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 #search:-ms-input-placeholder {
-  color: var(--textPrimary);
+  color: var(--text-primary);
 }
 
 #search #input input::placeholder {
-  color: var(--textPrimary);
+  color: var(--text-primary);
 } */
 
 #search .boxes {
-  border: 1px solid var(--borderPrimary);
-  box-shadow: 0 0 5px var(--borderPrimary);
-  background: var(--surfacePrimary);
-  margin: 1em 0;
-}
-
-#search .boxes h3 {
-  margin: 0;
-  font-weight: 500;
-  font-size: 1em;
-  color: var(--textSecondary);
-  padding: 0.5em;
+  /* border: 1px solid var(--border-primary);
+  box-shadow: 0 0 5px var(--border-primary);
+  background: var(--surface-primary);
+  margin: 1em 0; */
+  @apply pt-8;
 }
 
 html[dir="rtl"] #search .boxes h3 {
@@ -250,23 +238,11 @@ html[dir="rtl"] #search .boxes h3 {
 }
 
 #search .boxes > div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-right: -1em;
-  margin-bottom: -1em;
+  @apply flex items-center justify-center flex-wrap gap-4;
 }
 
 #search .boxes > div > div {
-  background: var(--blue);
-  color: #fff;
-  text-align: center;
-  width: 10em;
-  padding: 1em;
-  cursor: pointer;
-  margin-bottom: 1em;
-  margin-right: 1em;
-  flex-grow: 1;
+  @apply rounded-lg bg-primary hover:bg-primary-hover transition-all cursor-pointer text-white grow p-4 w-40 text-center;
 }
 
 #search .boxes p {

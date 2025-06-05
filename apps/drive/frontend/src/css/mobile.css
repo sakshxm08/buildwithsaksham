@@ -26,15 +26,15 @@
   header .overlay {
     width: 100%;
     height: 100%;
-    background-color: var(--borderPrimary);
+    background-color: var(--border-primary);
   }
   #dropdown {
     position: fixed;
     top: 1em;
     right: 1em;
     display: block;
-    background: var(--surfaceSecondary);
-    box-shadow: 0 0 5px var(--borderPrimary);
+    background: var(--surface-secondary);
+    box-shadow: 0 0 5px var(--border-primary);
     transform: scale(0);
     transition: 0.1s ease-in-out transform;
     transform-origin: top right;
@@ -73,7 +73,7 @@
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    background: var(--surfaceSecondary);
+    background: var(--surface-secondary);
     box-shadow:
       rgba(0, 0, 0, 0.06) 0px 1px 3px,
       rgba(0, 0, 0, 0.12) 0px 1px 2px;
@@ -88,7 +88,7 @@
   #file-selection > span {
     display: inline-block;
     margin-left: 1em;
-    color: var(--textPrimary);
+    color: var(--text-primary);
     margin-right: auto;
   }
   #file-selection .action span {
@@ -97,10 +97,10 @@
   nav {
     top: 0;
     z-index: 99999;
-    background: var(--surfaceSecondary);
+    background: var(--surface-secondary);
     height: 100%;
     width: 16em;
-    box-shadow: 0 0 5px var(--borderPrimary);
+    box-shadow: 0 0 5px var(--border-primary);
     transition: 0.1s ease left;
     left: -17em;
   }

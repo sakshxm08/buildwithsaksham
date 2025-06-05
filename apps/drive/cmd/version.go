@@ -16,6 +16,6 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version number",
 	Run: func(_ *cobra.Command, _ []string) {
-		fmt.Println("sDrive v" + version.Version + "/" + version.CommitSHA)
+		fmt.Println("Devault v" + version.Version + "/" + version.CommitSHA)
 	},
 }
