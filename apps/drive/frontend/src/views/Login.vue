@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-screen h-screen flex justify-center items-center"
+    class="w-screen h-screen flex justify-center items-center -my-16"
     :class="{ recaptcha: recaptcha }"
   >
     <div
-      class="shadow border border-gray-200 rounded-md p-8 w-4/5 sm:w-2/3 md:w-1/2 lg:w-1/3 flex flex-col"
+      class="shadow border border-gray-200 rounded-md p-8 pt-0 w-4/5 sm:w-2/3 md:w-1/2 lg:w-1/3 flex flex-col"
     >
       <div class="flex items-center gap-4 mx-auto my-6">
         <img :src="logoURL" alt="Devault" class="w-12 aspect-square" />
