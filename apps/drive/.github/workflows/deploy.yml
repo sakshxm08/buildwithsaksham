@@ -1,0 +1,53 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to server
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Configure SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/drive_deploy_key
+          chmod 600 ~/.ssh/drive_deploy_key
+
+      - name: Deploy to server
+        run: |
+          ssh -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            cd /home/saksham/Desktop/buildwithsaksham
+            git pull origin main
+            
+            # Navigate to the drive app
+            cd apps/drive
+            
+            # Build frontend
+            cd frontend
+            npm install
+            npm run build
+            cd ..
+            
+            # Build backend
+            go build -o drive-server main.go
+            
+            # Restart the service using antiX service command
+            sudo service drive-actions-service restart
+            
+            echo "Deployment completed successfully!"
+          EOF
