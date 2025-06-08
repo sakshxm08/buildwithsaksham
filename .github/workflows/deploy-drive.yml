@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/drive/**'
   workflow_dispatch:
 
 jobs:
@@ -40,11 +42,15 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
 
-      - name: Configure SSH key
+      - name: Configure SSH key and known hosts
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/drive_deploy_key
           chmod 600 ~/.ssh/drive_deploy_key
+          
+          # Add server's host key to known_hosts to prevent host verification errors
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
       - name: Deploy to server
         run: |
