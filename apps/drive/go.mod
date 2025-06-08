@@ -1,4 +1,4 @@
-module github.com/filebrowser/filebrowser/v2
+module github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2
 
 go 1.23.0
 

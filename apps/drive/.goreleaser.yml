@@ -1,6 +1,6 @@
 version: 2
 
-project_name: filebrowser
+project_name: devault
 
 env:
   - GO111MODULE=on
@@ -9,9 +9,9 @@ builds:
   - env:
       - CGO_ENABLED=0
     ldflags:
-      - -s -w -X github.com/filebrowser/filebrowser/v2/version.Version={{ .Version }} -X github.com/filebrowser/filebrowser/v2/version.CommitSHA={{ .ShortCommit }}
+      - -s -w -X github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/version.Version={{ .Version }} -X github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/version.CommitSHA={{ .ShortCommit }}
     main: main.go
-    binary: filebrowser
+    binary: devault
     goos:
       - darwin
       - linux
@@ -54,8 +54,8 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64"
-      - "filebrowser/filebrowser:v{{ .Major }}-amd64"
+      - "sakshxm08/devault:{{ .Tag }}-amd64"
+      - "sakshxm08/devault:v{{ .Major }}-amd64"
     extra_files:
       - docker_config.json
       - healthcheck.sh
@@ -72,8 +72,8 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64"
-      - "filebrowser/filebrowser:v{{ .Major }}-arm64"
+      - "sakshxm08/devault:{{ .Tag }}-arm64"
+      - "sakshxm08/devault:v{{ .Major }}-arm64"
     extra_files:
       - docker_config.json
       - healthcheck.sh
@@ -91,8 +91,8 @@ dockers:
     goarch: arm
     goarm: "6"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-armv6"
-      - "filebrowser/filebrowser:v{{ .Major }}-armv6"
+      - "sakshxm08/devault:{{ .Tag }}-armv6"
+      - "sakshxm08/devault:v{{ .Major }}-armv6"
     extra_files:
       - docker_config.json
       - healthcheck.sh
@@ -110,8 +110,8 @@ dockers:
     goarch: arm
     goarm: "7"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-armv7"
-      - "filebrowser/filebrowser:v{{ .Major }}-armv7"
+      - "sakshxm08/devault:{{ .Tag }}-armv7"
+      - "sakshxm08/devault:v{{ .Major }}-armv7"
     extra_files:
       - docker_config.json
       - healthcheck.sh
@@ -129,8 +129,8 @@ dockers:
     goos: linux
     goarch: amd64
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64-s6"
-      - "filebrowser/filebrowser:v{{ .Major }}-amd64-s6"
+      - "sakshxm08/devault:{{ .Tag }}-amd64-s6"
+      - "sakshxm08/devault:v{{ .Major }}-amd64-s6"
     extra_files:
       - docker/root
       - healthcheck.sh
@@ -147,49 +147,49 @@ dockers:
     goos: linux
     goarch: arm64
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64-s6"
-      - "filebrowser/filebrowser:v{{ .Major }}-arm64-s6"
+      - "sakshxm08/devault:{{ .Tag }}-arm64-s6"
+      - "sakshxm08/devault:v{{ .Major }}-arm64-s6"
     extra_files:
       - docker/root
       - healthcheck.sh
 docker_manifests:
-  - name_template: "filebrowser/filebrowser:latest"
+  - name_template: "sakshxm08/devault:latest"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64"
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64"
-      - "filebrowser/filebrowser:{{ .Tag }}-armv7"
-  - name_template: "filebrowser/filebrowser:{{ .Tag }}"
+      - "sakshxm08/devault:{{ .Tag }}-amd64"
+      - "sakshxm08/devault:{{ .Tag }}-arm64"
+      - "sakshxm08/devault:{{ .Tag }}-armv7"
+  - name_template: "sakshxm08/devault:{{ .Tag }}"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64"
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64"
-      - "filebrowser/filebrowser:{{ .Tag }}-armv7"
-  - name_template: "filebrowser/filebrowser:v{{ .Major }}"
+      - "sakshxm08/devault:{{ .Tag }}-amd64"
+      - "sakshxm08/devault:{{ .Tag }}-arm64"
+      - "sakshxm08/devault:{{ .Tag }}-armv7"
+  - name_template: "sakshxm08/devault:v{{ .Major }}"
     image_templates:
-      - "filebrowser/filebrowser:v{{ .Major }}-amd64"
-      - "filebrowser/filebrowser:v{{ .Major }}-arm64"
-      - "filebrowser/filebrowser:v{{ .Major }}-armv7"
+      - "sakshxm08/devault:v{{ .Major }}-amd64"
+      - "sakshxm08/devault:v{{ .Major }}-arm64"
+      - "sakshxm08/devault:v{{ .Major }}-armv7"
   ## s6 image manifests
-  - name_template: "filebrowser/filebrowser:s6"
+  - name_template: "sakshxm08/devault:s6"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64-s6"
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64-s6"
-  - name_template: "filebrowser/filebrowser:{{ .Tag }}-s6"
+      - "sakshxm08/devault:{{ .Tag }}-amd64-s6"
+      - "sakshxm08/devault:{{ .Tag }}-arm64-s6"
+  - name_template: "sakshxm08/devault:{{ .Tag }}-s6"
     image_templates:
-      - "filebrowser/filebrowser:{{ .Tag }}-amd64-s6"
-      - "filebrowser/filebrowser:{{ .Tag }}-arm64-s6"
-  - name_template: "filebrowser/filebrowser:v{{ .Major }}-s6"
+      - "sakshxm08/devault:{{ .Tag }}-amd64-s6"
+      - "sakshxm08/devault:{{ .Tag }}-arm64-s6"
+  - name_template: "sakshxm08/devault:v{{ .Major }}-s6"
     image_templates:
-      - "filebrowser/filebrowser:v{{ .Major }}-amd64-s6"
-      - "filebrowser/filebrowser:v{{ .Major }}-arm64-s6"
+      - "sakshxm08/devault:v{{ .Major }}-amd64-s6"
+      - "sakshxm08/devault:v{{ .Major }}-arm64-s6"
 brews:
-  - name: filebrowser
+  - name: devault
     repository:
-      owner: filebrowser
+      owner: sakshxm08
       name: homebrew-tap
     directory: Formula
-    homepage: https://filebrowser.org
+    homepage: https://drive.buildwithsaksham.in
     commit_author:
-      name: FileBrowser Robot
-      email: robot@filebrowser.org
+      name: Devault Robot
+      email: saksham@buildwithsaksham.in
     description: Devault is a create-your-own-cloud-kind of software where you can install it on a server, direct it to a path and then access your files through a nice web interface
     license: "MIT"

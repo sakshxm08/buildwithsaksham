@@ -11,9 +11,9 @@ import (
 
 	"github.com/mholt/archiver/v3"
 
-	"github.com/filebrowser/filebrowser/v2/files"
-	"github.com/filebrowser/filebrowser/v2/fileutils"
-	"github.com/filebrowser/filebrowser/v2/users"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/files"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/fileutils"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/users"
 )
 
 func slashClean(name string) string {

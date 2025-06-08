@@ -21,14 +21,14 @@ import (
 	v "github.com/spf13/viper"
 	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 
-	"github.com/filebrowser/filebrowser/v2/auth"
-	"github.com/filebrowser/filebrowser/v2/diskcache"
-	"github.com/filebrowser/filebrowser/v2/frontend"
-	fbhttp "github.com/filebrowser/filebrowser/v2/http"
-	"github.com/filebrowser/filebrowser/v2/img"
-	"github.com/filebrowser/filebrowser/v2/settings"
-	"github.com/filebrowser/filebrowser/v2/storage"
-	"github.com/filebrowser/filebrowser/v2/users"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/auth"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/diskcache"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/frontend"
+	fbhttp "github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/http"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/img"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/settings"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/storage"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/users"
 )
 
 var (
@@ -45,7 +45,7 @@ func init() {
 	persistent := rootCmd.PersistentFlags()
 
 	persistent.StringVarP(&cfgFile, "config", "c", "", "config file path")
-	persistent.StringP("database", "d", "./filebrowser.db", "database path")
+	persistent.StringP("database", "d", "./devault.db", "database path")
 	flags.Bool("noauth", false, "use the noauth auther when using quick setup")
 	flags.String("username", "admin", "username for the first user when using quick config")
 	flags.String("password", "", "hashed password for the first user when using quick config (default \"admin\")")
@@ -73,7 +73,7 @@ func addServerFlags(flags *pflag.FlagSet) {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "filebrowser",
+	Use:   "devault",
 	Short: "A stylish web-based file browser",
 	Long: `Devault CLI lets you create the database to use with Devault,
 manage your users and all the configurations without accessing the
@@ -89,11 +89,11 @@ For this specific command, all the flags you have available (except
 environment variables or configuration files.
 
 If you don't set "config", it will look for a configuration file called
-.filebrowser.{json, toml, yaml, yml} in the following directories:
+.devault.{json, toml, yaml, yml} in the following directories:
 
 - ./
 - $HOME/
-- /etc/filebrowser/
+- /etc/devault/
 
 The precedence of the configuration values are as follows:
 
@@ -405,8 +405,8 @@ func initConfig() {
 		checkErr(err)
 		v.AddConfigPath(".")
 		v.AddConfigPath(home)
-		v.AddConfigPath("/etc/filebrowser/")
-		v.SetConfigName(".filebrowser")
+		v.AddConfigPath("/etc/devault/")
+		v.SetConfigName(".devault")
 	} else {
 		v.SetConfigFile(cfgFile)
 	}

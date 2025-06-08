@@ -14,9 +14,9 @@ import (
 	"github.com/spf13/pflag"
 	yaml "gopkg.in/yaml.v2"
 
-	"github.com/filebrowser/filebrowser/v2/settings"
-	"github.com/filebrowser/filebrowser/v2/storage"
-	"github.com/filebrowser/filebrowser/v2/storage/bolt"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/settings"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/storage"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/storage/bolt"
 )
 
 func checkErr(err error) {
@@ -98,9 +98,9 @@ func python(fn pythonFunc, cfg pythonConfig) cobraFunc {
 		} else if exists && cfg.noDB {
 			log.Fatal(absPath + " already exists")
 		} else if !exists && !cfg.noDB && !cfg.allowNoDB {
-			log.Fatal(absPath + " does not exist. Please run 'filebrowser config init' first.")
+			log.Fatal(absPath + " does not exist. Please run 'devault config init' first.")
 		} else if !exists && !cfg.noDB {
-			log.Println("Warning: filebrowser.db can't be found. Initialing in " + strings.TrimSuffix(absPath, "filebrowser.db"))
+			log.Println("Warning: devault.db can't be found. Initialing in " + strings.TrimSuffix(absPath, "devault.db"))
 		}
 
 		log.Println("Using database: " + absPath)

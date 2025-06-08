@@ -15,7 +15,9 @@ defineProps<{
 }>();
 
 const clicked = () => {
-  window.open("https://github.com/filebrowser/filebrowser/issues/new/choose");
+  window.open(
+    "https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/issues/new/choose"
+  );
 };
 </script>
 

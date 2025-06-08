@@ -15,9 +15,9 @@ import (
 	"github.com/shirou/gopsutil/v3/disk"
 	"github.com/spf13/afero"
 
-	fbErrors "github.com/filebrowser/filebrowser/v2/errors"
-	"github.com/filebrowser/filebrowser/v2/files"
-	"github.com/filebrowser/filebrowser/v2/fileutils"
+	fbErrors "github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/errors"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/files"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/fileutils"
 )
 
 var resourceGetHandler = withUser(func(w http.ResponseWriter, r *http.Request, d *data) (int, error) {

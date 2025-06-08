@@ -8,8 +8,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/filebrowser/filebrowser/v2/auth"
-	"github.com/filebrowser/filebrowser/v2/settings"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/auth"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/settings"
 )
 
 func init() {

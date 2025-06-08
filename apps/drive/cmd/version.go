@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/filebrowser/filebrowser/v2/version"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/version"
 )
 
 func init() {

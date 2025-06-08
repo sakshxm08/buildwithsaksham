@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/filebrowser/filebrowser/v2/rules"
-	"github.com/filebrowser/filebrowser/v2/settings"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/rules"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/settings"
 )
 
 type settingsData struct {

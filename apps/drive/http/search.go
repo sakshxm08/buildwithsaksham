@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/filebrowser/filebrowser/v2/search"
+	"github.com/sakshxm08/buildwithsaksham/tree/main/apps/drive/v2/search"
 )
 
 var searchHandler = withUser(func(w http.ResponseWriter, r *http.Request, d *data) (int, error) {
