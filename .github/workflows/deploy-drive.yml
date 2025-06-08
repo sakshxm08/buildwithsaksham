@@ -1,0 +1,65 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to server
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js for frontend build
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
+      - name: Setup Go for backend build
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.23.0"
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Build complete project
+        run: |
+          cd apps/drive
+          make build
+
+      - name: Setup Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
+      - name: Configure SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/drive_deploy_key
+          chmod 600 ~/.ssh/drive_deploy_key
+
+      - name: Deploy to server
+        run: |
+          # Transfer built frontend files
+          scp -i ~/.ssh/drive_deploy_key -r apps/drive/frontend/dist/* saksham@${{ secrets.DEPLOY_HOST }}:/home/saksham/Desktop/buildwithsaksham/apps/drive/frontend/dist/
+
+          # Transfer built backend binary
+          scp -i ~/.ssh/drive_deploy_key apps/drive/drive saksham@${{ secrets.DEPLOY_HOST }}:/home/saksham/Desktop/buildwithsaksham/apps/drive/
+
+          # Update code and restart service
+          ssh -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} << 'EOF'
+            cd /home/saksham/Desktop/buildwithsaksham
+            git pull origin main
+            cd apps/drive
+            chmod +x drive
+            sudo service drive-actions-service restart
+            echo "Deployment completed successfully!"
+          EOF
