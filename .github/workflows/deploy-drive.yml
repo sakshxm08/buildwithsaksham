@@ -54,11 +54,8 @@ jobs:
 
       - name: Deploy to server
         run: |
-          # Stop the service first to release file locks
-          ssh -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            sudo service drive-actions-service stop
-            echo "Service stopped"
-          EOF
+          # Stop the service first to release file locks (with TTY allocation)
+          ssh -t -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} "sudo service drive-actions-service stop"
 
           # Transfer built frontend files
           scp -i ~/.ssh/drive_deploy_key -r apps/drive/frontend/dist/* saksham@${{ secrets.DEPLOY_HOST }}:/home/saksham/Desktop/buildwithsaksham/apps/drive/frontend/dist/
@@ -67,7 +64,7 @@ jobs:
           scp -i ~/.ssh/drive_deploy_key apps/drive/drive saksham@${{ secrets.DEPLOY_HOST }}:/home/saksham/Desktop/buildwithsaksham/apps/drive/
 
           # Update code and restart service
-          ssh -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} << 'EOF'
+          ssh -t -i ~/.ssh/drive_deploy_key -o StrictHostKeyChecking=no saksham@${{ secrets.DEPLOY_HOST }} << 'EOF'
             cd /home/saksham/Desktop/buildwithsaksham
             git pull origin main
             cd apps/drive
