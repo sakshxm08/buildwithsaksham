@@ -12,9 +12,11 @@ export const metadata: Metadata = {
   title: "Projects - 3D theme Portfolio",
   description: `Explore the latest projects by ${CONFIG.name.first.concat(
     " ",
-    CONFIG.name.last,
+    CONFIG.name.last
   )} in this section of the 3D theme Portfolio.`,
 };
+
+export const dynamic = "force-static";
 
 const TECH_STACK_ICON_MAX_LENGTH = 5;
 const projects = CONFIG.projects;

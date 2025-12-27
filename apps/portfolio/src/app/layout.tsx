@@ -6,17 +6,19 @@ import { env } from "@/env";
 
 import "./globals.css";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "3D theme Portfolio",
   description: `${CONFIG.name.first.concat(
     " ",
-    CONFIG.name.last,
+    CONFIG.name.last
   )}'s 3D theme Portfolio`,
   openGraph: {
     title: "3D theme Portfolio",
     description: `${CONFIG.name.first.concat(
       " ",
-      CONFIG.name.last,
+      CONFIG.name.last
     )}'s 3D theme Portfolio`,
     url: env.NEXT_PUBLIC_APP_URL,
     images: [
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     title: "3D theme Portfolio",
     description: `${CONFIG.name.first.concat(
       " ",
-      CONFIG.name.last,
+      CONFIG.name.last
     )}'s 3D theme Portfolio`,
     images: [`${env.NEXT_PUBLIC_APP_URL}/og-image.webp`],
     card: "summary_large_image",

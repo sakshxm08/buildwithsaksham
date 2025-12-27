@@ -10,6 +10,8 @@ export const metadata = {
   description: "Deri Kurniawan Portfolio",
 };
 
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <div className="dk-safe-layout">
