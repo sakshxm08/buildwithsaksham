@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #a293ff;
+  --color-secondary: #00f0ff;
+  --color-accent: #000000;
+  --color-accent2: #8e8e8e;
+  --color-gray: #f1f1f1;
+  --font-poppins: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat:
+    var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer base {
+  html {
+    @apply font-poppins;
+  }
+
+  body > div {
+    @apply overflow-x-hidden;
+  }
+
+  /* remove highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .dk-safe-layout {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .dk-safe-x-padding {
+    @apply px-5 md:px-[50px] lg:px-[120px];
+  }
+
+  .dk-gradient-text {
+    @apply text-transparent bg-linear-to-r from-primary to-secondary bg-clip-text;
+  }
+
+  .dk-gradient-bg {
+    @apply bg-linear-to-r from-primary to-secondary;
+  }
+
+  .dk-gradient-btn {
+    @apply bg-linear-to-r from-primary to-secondary;
+    position: relative;
+    color: #fff;
+    border: none;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .dk-section-title {
+    @apply mb-6 text-4xl font-extrabold md:text-5xl lg:text-6xl font-montserrat text-transparent bg-linear-to-r from-primary to-secondary bg-clip-text;
+  }
+
+  .dk-section-description {
+    @apply text-base font-medium md:text-xl lg:text-2xl text-accent;
+  }
+
+  .dk-section-distance {
+    @apply my-[172px];
+  }
+}
+
+/* Start of gradient button */
+.dk-gradient-btn:hover {
+  transform: scale(1.05);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.dk-gradient-btn:active {
+  transform: scale(0.9);
+}
+.dk-gradient-btn::before {
+  @apply bg-linear-to-l from-secondary to-primary rounded-lg absolute -z-1 top-0 -left-full w-full h-full transition-all duration-500 ease-in-out;
+  content: "";
+}
+.dk-gradient-btn:hover::before {
+  left: 0;
+}
+/* End of gradient button */
+
+/* Start of Mobile & Tablet Hamburger */
+.hamburger svg {
+  @apply w-10;
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hamburger svg > path.line {
+  @apply stroke-secondary fill-none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition:
+    stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hamburger svg > path.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+.hamburger input:checked + svg {
+  @apply -rotate-45;
+}
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+/* End of Mobile & Tablet Hamburger */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-poppins);
+}

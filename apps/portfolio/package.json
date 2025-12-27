@@ -1,0 +1,50 @@
+{
+  "name": "3d-portfolio",
+  "version": "0.2.2",
+  "private": true,
+  "description": "A beautiful 3D-themed portfolio template built with Next.js 15, Tailwind CSS 4, and Framer Motion",
+  "keywords": [
+    "portfolio",
+    "template",
+    "nextjs",
+    "tailwindcss",
+    "framer-motion",
+    "3d-themed",
+    "personal-website"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Deri-Kurniawan/3d-portfolio.git"
+  },
+  "author": "Deri Kurniawan",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "biome check",
+    "lint:fix": "biome check --fix",
+    "format:check": "biome format --check",
+    "format:fix": "biome format --write"
+  },
+  "dependencies": {
+    "@t3-oss/env-nextjs": "^0.13.8",
+    "framer-motion": "^12.23.26",
+    "motion": "^12.23.26",
+    "next": "^15.5.9",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^10.0.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
