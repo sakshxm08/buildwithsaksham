@@ -1,6 +1,6 @@
 {
   "name": "buildwithsaksham",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A personal card for Saksham Gambhir (@sakshxm08)",
   "main": "card.js",
   "bin": {
@@ -12,7 +12,7 @@
     "test": "node card.js",
     "release": "npm version patch && npm publish"
   },
-  "author": "Saksham Gambhir <saksham2211gambhir@gmail.me> (https://buildwithsaksham.in/)",
+  "author": "Saksham Gambhir <saksham2211gambhir@gmail.com> (https://buildwithsaksham.in/)",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sakshxm08/buildwithsaksham.git"
