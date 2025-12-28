@@ -7,7 +7,8 @@ import { BsFileEarmarkPerson } from "react-icons/bs";
 import { RxCaretRight } from "react-icons/rx";
 import { CONFIG } from "@/config";
 import { NAVIGATION_LINKS } from "@/constant/navigation";
-import BrandIcon from "./brand-icon";
+import Image from "next/image";
+import { ASSETS } from "@/constant/assets";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -54,14 +55,21 @@ const Navbar = () => {
     <>
       <nav
         ref={navbarRef}
-        className={`sticky top-0 z-50 w-screen bg-white md:relative dk-safe-layout`}
+        className={`sticky top-0 z-50 w-screen bg-white dk-safe-layout`}
       >
         {/* <Banner /> */}
         <div className="flex flex-row items-center justify-between py-6 border-b-2 border-b-gray dk-safe-x-padding">
           <Link className="z-50" href="/" onClick={closeMenu} prefetch={false}>
-            <div className="w-8 h-10 lg:w-[42px] lg:h-[50px]">
-              <BrandIcon />
-            </div>
+            {/* <div className="w-8 h-10 lg:w-[42px] lg:h-[50px]"> */}
+            {/* <BrandIcon /> */}
+            <Image
+              src={ASSETS.logos.buildwithsaksham}
+              alt="Logo"
+              // width={42}
+              height={40}
+              className="object-contain"
+            />
+            {/* </div> */}
           </Link>
           {/* desktop menu */}
           <div className="flex-row items-center justify-between hidden text-lg font-bold md:flex md:gap-6 lg:gap-8">
@@ -70,7 +78,9 @@ const Navbar = () => {
                 <li key={link.name}>
                   <Link
                     className={`${
-                      pathname === link.href ? "text-accent" : "text-accent2"
+                      pathname === link.href
+                        ? "text-accent"
+                        : "text-accent2 hover:text-gray-500 duration-300"
                     } p-4`}
                     href={link.href}
                   >

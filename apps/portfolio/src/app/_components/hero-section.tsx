@@ -130,7 +130,7 @@ const HeroSection = () => {
                     animate,
                     transition,
                   },
-                  index,
+                  index
                 ) => (
                   <AnimatedImage
                     key={`decorative-image-${index.toString()}`}
@@ -144,7 +144,7 @@ const HeroSection = () => {
                     transition={transition}
                     aria-hidden={!inView}
                   />
-                ),
+                )
               )}
             </div>
           </div>

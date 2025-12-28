@@ -26,4 +26,7 @@ export const ASSETS = {
     paintKit: require("@/assets/images/decoratives/paint-kit.webp"),
     teaCup: require("@/assets/images/decoratives/tea-cup.webp"),
   },
+  logos: {
+    buildwithsaksham: require("@/assets/images/logos/logo.svg"),
+  },
 };

@@ -20,8 +20,8 @@ export default function LetsConnectSection() {
     {
       initial: { y: 50, opacity: 0 },
       animate: inView ? { y: 0, opacity: 1 } : {},
-      transition: { duration: 0.5, delay: 0.4 },
-      whileHover: { scale: 1.1, transition: { duration: 0.2 } },
+      transition: { duration: 0.3, delay: 0 },
+      whileHover: { scale: 1.1 },
       className:
         "hidden lg:block absolute hover:cursor-pointer top-14 left-14 xl:left-24 w-10 h-10 md:w-[168px] md:h-[168px] z-10",
       src: ASSETS.home.letsConnect.linkedin,
@@ -34,8 +34,8 @@ export default function LetsConnectSection() {
     {
       initial: { y: 50, opacity: 0 },
       animate: inView ? { y: 0, opacity: 1 } : {},
-      transition: { duration: 0.5, delay: 0.6 },
-      whileHover: { scale: 1.1, transition: { duration: 0.2 } },
+      transition: { duration: 0.3, delay: 0 },
+      whileHover: { scale: 1.1 },
       className:
         "hidden lg:block absolute hover:cursor-pointer top-14 right-14 xl:right-24 w-10 h-10 md:w-[168px] md:h-[168px] z-10",
       src: ASSETS.home.letsConnect.instagram,
@@ -48,10 +48,10 @@ export default function LetsConnectSection() {
     {
       initial: { y: -50, opacity: 0 },
       animate: inView ? { y: 0, opacity: 1 } : {},
-      transition: { duration: 0.5, delay: 1 },
-      whileHover: { scale: 1.1, transition: { duration: 0.2 } },
+      transition: { duration: 0.3, delay: 0 },
+      whileHover: { scale: 1.1 },
       className:
-        "hidden lg:block absolute hover:cursor-pointer bottom-14 right-36 xl:right-44 md:right-24 w-10 h-10 md:w-[168px] md:h-[168px] z-10",
+        "hidden lg:block absolute hover:cursor-pointer bottom-14 left-36 xl:left-44 md:left-24 w-10 h-10 md:w-[168px] md:h-[168px] z-10",
       src: ASSETS.home.letsConnect.github,
       alt: "",
       width: 168,
@@ -62,14 +62,14 @@ export default function LetsConnectSection() {
     {
       initial: { y: 100, opacity: 0 },
       animate: inView ? { y: 0, opacity: 1 } : {},
-      transition: { duration: 0.5, delay: 0 },
-      whileHover: { scale: 1.1, transition: { duration: 0.2 } },
+      transition: { duration: 0.3, delay: 0 },
+      whileHover: { scale: 1.1 },
       className:
-        "hidden lg:block absolute hover:cursor-pointer -bottom-64 w-10 h-10 md:w-[310px] md:h-[310px] z-10",
+        "hidden lg:block absolute hover:cursor-pointer bottom-14 right-36 xl:right-44 md:right-24 w-10 h-10 md:w-[168px] md:h-[168px] z-10",
       src: ASSETS.home.letsConnect.gmail,
       alt: "",
-      width: 310,
-      height: 310,
+      width: 168,
+      height: 168,
       tabIndex: 0,
       onClick: () => window.open(`mailto:${CONFIG.email}`, "_self"),
     },
@@ -88,7 +88,7 @@ export default function LetsConnectSection() {
         className="text-center"
         animate
       />
-      <div className="h-full mt-4">
+      <div className="h-full mt-10">
         <div className="relative flex flex-col items-center justify-center">
           <div className="absolute hidden lg:block animate-ping -z-2">
             <MotionWrapper
