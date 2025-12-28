@@ -93,6 +93,7 @@ const Navbar = () => {
               className="px-6 py-2 text-white dk-gradient-btn rounded-xl"
               href={CONFIG.resume.downloadUrl}
               download={CONFIG.resume.fileName}
+              target="_blank"
             >
               Resume
             </a>

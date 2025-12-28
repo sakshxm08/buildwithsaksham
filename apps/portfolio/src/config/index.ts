@@ -32,7 +32,8 @@ export const CONFIG = {
   ],
   resume: {
     fileName: "Saksham's Resume.pdf",
-    downloadUrl: "/files/sample.pdf",
+    downloadUrl:
+      "https://drive.google.com/file/d/1PAwOCj-z3_uYDbyPKANzd2JhCREc3dKA/view",
   },
   projects: [
     {

@@ -7,6 +7,7 @@ import { useInView } from "react-intersection-observer";
 import MotionWrapper from "@/components/motion-wrapper";
 import { CONFIG } from "@/config";
 import { ASSETS } from "@/constant/assets";
+import Terminal from "./terminal";
 
 type TAnimateImageProps = MotionProps & {
   className: string;
@@ -100,6 +101,9 @@ const HeroSection = () => {
             I&apos;m {CONFIG.name.first}
             {CONFIG.name.last && ` ${CONFIG.name.last}`}. A passionate{" "}
             {CONFIG.role} based in {CONFIG.location}.
+          </MotionWrapper>
+          <MotionWrapper aria-label="Terminal">
+            <Terminal />
           </MotionWrapper>
         </div>
         {/* illustration */}
