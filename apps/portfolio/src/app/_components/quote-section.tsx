@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import MotionWrapper from "@/components/motion-wrapper";
 import { CONFIG } from "@/config";
@@ -18,57 +18,26 @@ const QuoteSection = () => {
     triggerOnce: true,
   });
 
-  const { scrollYProgress } = useScroll({ target: ref });
-
   const FloatingImage = ({
     item,
-    inView,
-    scrollYProgress,
   }: {
     item: (typeof animatedFloatingImages)[0];
     inView: boolean;
-    scrollYProgress: any;
   }) => {
-    const [phase, setPhase] = useState<"entrance" | "floating">("entrance");
-
-    useEffect(() => {
-      if (inView) {
-        const timer = setTimeout(
-          () => setPhase("floating"),
-          (item.delay + 0.5) * 1000
-        );
-        return () => clearTimeout(timer);
-      }
-    }, [inView, item.delay]);
-
-    const opacity = useTransform(scrollYProgress, [0, 0.2], [0.15, 1]);
-
-    const variants = {
-      initial: item.initial,
-      entrance: { y: 0, x: 0 },
-      floating: {
-        y: [0, -5, 0],
-        transition: { duration: 2, repeat: Infinity },
-        opacity: 1,
-      },
-    };
-
     return (
-      <motion.div style={{ opacity }}>
-        <AnimatedImage
-          className={item.className}
-          src={item.src}
-          width={item.width}
-          height={item.height}
-          initial="initial"
-          animate={phase}
-          variants={variants}
-          transition={
-            phase === "entrance" ? { duration: 0.5, delay: item.delay } : {}
-          }
-          alt=""
-        />
-      </motion.div>
+      <AnimatedImage
+        className={item.className}
+        src={item.src}
+        width={item.width}
+        height={item.height}
+        initial={item.initial}
+        animate={{ x: 0, y: [0, -5, 0], opacity: 1 }}
+        transition={{
+          delay: item.delay,
+          y: { duration: 3, repeat: Infinity, delay: item.delay },
+        }}
+        alt=""
+      />
     );
   };
 
@@ -134,12 +103,7 @@ const QuoteSection = () => {
         />
 
         {animatedFloatingImages.map((item, index) => (
-          <FloatingImage
-            key={index.toString()}
-            item={item}
-            inView={inView}
-            scrollYProgress={scrollYProgress}
-          />
+          <FloatingImage key={index.toString()} item={item} inView={inView} />
         ))}
       </div>
       <MotionWrapper
