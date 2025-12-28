@@ -4,17 +4,22 @@
   "description": "A personal card for Saksham Gambhir (@sakshxm08)",
   "main": "card.js",
   "bin": {
-    "sakshxm08": "./card.js"
+    "buildwithsaksham": "card.js",
+    "bws": "card.js"
   },
   "type": "module",
   "scripts": {
     "test": "node card.js",
-    "pub": "npm version major & npm publish"
+    "release": "npm version patch && npm publish"
   },
   "author": "Saksham Gambhir <saksham2211gambhir@gmail.me> (https://buildwithsaksham.in/)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/npx"
+    "url": "git+https://github.com/sakshxm08/buildwithsaksham.git"
+  },
+  "homepage": "https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/npx",
+  "bugs": {
+    "url": "https://github.com/sakshxm08/buildwithsaksham/issues"
   },
   "keywords": [
     "buildwithsaksham",
