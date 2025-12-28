@@ -1,0 +1,39 @@
+name: Publish buildwithsaksham npx
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/npx/**"
+
+permissions:
+  contents: read
+  id-token: write # REQUIRED for npm Trusted Publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: apps/npx
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Bump patch version
+        run: npm version patch --no-git-tag-version
+
+      - name: Publish to npm
+        run: npm publish
