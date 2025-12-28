@@ -14,5 +14,5 @@ A command-line interface (CLI) tool that displays a personalized information car
 To use this tool, run the following command in your terminal:
 
 ```bash
-npx buildwithsaksham
+npx buildwithsaksham@latest
 ```
