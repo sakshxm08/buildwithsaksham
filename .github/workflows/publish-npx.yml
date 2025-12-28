@@ -27,11 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Ensure clean npm state
-        run: |
-          rm -f ~/.npmrc
-          npm config delete //registry.npmjs.org/:_authToken || true
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: npm ci
@@ -40,4 +36,4 @@ jobs:
         run: npm version patch --no-git-tag-version
 
       - name: Publish via Trusted Publishing
-        run: npm publish --provenance
+        run: npm publish
