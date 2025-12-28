@@ -1,6 +1,6 @@
 # npx buildwithsaksham
 
-A command-line interface (CLI) tool that displays a personalized information card for Saksham Gambhir, showcasing essential details such as education, GitHub, and LinkedIn links, with an option to send an email directly.
+A command-line interface (CLI) tool that displays a personalized information card for Saksham Gambhir (Build with Saksham), showcasing essential details such as education, GitHub, and LinkedIn links, with an option to send an email directly.
 
 ## Features
 
