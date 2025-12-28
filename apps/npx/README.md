@@ -4,10 +4,10 @@ A command-line interface (CLI) tool that displays a personalized information car
 
 ## Features
 
-- Displays a neatly formatted card with key information
-- Interactive terminal interface for user engagement
-- Quick access to GitHub and LinkedIn profiles
-- Option to send an email with a single command
+- Displays a neatly formatted card with key information.
+- Interactive terminal interface for user engagement.
+- Quick access to GitHub and LinkedIn profiles.
+- Option to send an email with a single command.
 
 ## Usage
 
