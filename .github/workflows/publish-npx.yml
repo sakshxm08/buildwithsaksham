@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write # REQUIRED for npm Trusted Publishing
+  id-token: write
 
 jobs:
   publish:
@@ -35,5 +35,5 @@ jobs:
       - name: Bump patch version
         run: npm version patch --no-git-tag-version
 
-      - name: Publish to npm
-        run: npm publish
+      - name: Publish to npm (Trusted Publishing)
+        run: npm publish --provenance
