@@ -1,5 +1,5 @@
 {
-  "name": "sakshxm08",
+  "name": "buildwithsaksham",
   "version": "1.0.1",
   "description": "A personal card for Saksham Gambhir (@sakshxm08)",
   "main": "card.js",
@@ -11,13 +11,13 @@
     "test": "node card.js",
     "pub": "npm version major & npm publish"
   },
-  "author": "Saksham Gambhir <saksham2211gambhir@gmail.me> (https://sakshxm08.in/)",
+  "author": "Saksham Gambhir <saksham2211gambhir@gmail.me> (https://buildwithsaksham.in/)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sakshxm08/npx-sakshxm08.git"
+    "url": "git+https://github.com/sakshxm08/buildwithsaksham/tree/main/apps/npx"
   },
   "keywords": [
-    "sakshxm08",
+    "buildwithsaksham",
     "card",
     "npm",
     "npm card",
