@@ -1,0 +1,26 @@
+name: PR Title Convention
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  validate-title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          echo "PR title: $TITLE"
+
+          if [[ ! "$TITLE" =~ ^(feat|fix|chore|docs|refactor|ci|test)\([a-z0-9\-]+\):\ .+ ]]; then
+            echo "❌ Invalid PR title format"
+            echo ""
+            echo "Expected:"
+            echo "  type(scope): description"
+            echo ""
+            echo "Examples:"
+            echo "  feat(npx): add email action"
+            echo "  fix(drive): handle empty folder"
+            exit 1
+          fi
