@@ -24,4 +24,4 @@ Drive is a lightweight, self-hosted file management application designed for sim
 **Philosophy**  
 Built to be practical, minimal, and extensible — focused on solving everyday file management needs without heavy abstractions or bloat.
 
-Repo path: `apps/drive`
+Made with ❤️ as part of [buildwithsaksham.in](https://buildwithsaksham.in)
