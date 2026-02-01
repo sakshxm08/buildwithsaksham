@@ -20,7 +20,7 @@ jobs:
             echo "  type(scope): description"
             echo ""
             echo "Examples:"
-            echo "  feat(npx): add email action"
+            echo "  feat(npx): update email action"
             echo "  fix(drive): handle empty folder"
             exit 1
           fi
