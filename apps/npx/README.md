@@ -1,19 +1,22 @@
-# npx buildwithsaksham
+### npx buildwithsaksham – Personal Info CLI
 
-A command-line interface (CLI) tool that displays a personalized information card for Saksham Gambhir (Build with Saksham), showcasing essential details such as education, GitHub, and LinkedIn links, with an option to send an email directly.
+🚀 **Current Version**  
+v1.0.5
 
-## Features
+🧩 **About**  
+`npx buildwithsaksham` is a lightweight, zero-setup command-line tool that instantly displays a clean, personalized information card for Saksham Gambhir right in your terminal.  
 
-- Displays a neatly formatted card with key information
-- Interactive terminal interface for user engagement
-- Quick access to GitHub and LinkedIn profiles
-- Option to send an email with a single command
+It’s a fun, modern way to share profile details, links, and quick actions without ever leaving the command line — perfect for networking, quick intros, or just showing off in a dev terminal.
 
-## Usage
+✨ **Features**  
+- Beautiful, well-formatted info card rendered in the terminal  
+- Interactive experience with guided options  
+- Direct links to GitHub and LinkedIn profiles  
+- One-click option to compose and send an email  
+- Runs instantly via `npx` — no installation required  
 
-To use this tool, run the following command in your terminal:
+▶️ **Usage**  
+Just run this in any terminal:
 
 ```bash
 npx buildwithsaksham@latest
-```
- 
