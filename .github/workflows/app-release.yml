@@ -1,7 +1,7 @@
 name: Create app release versions
 
 on:
-  workflow-dispatch:
+  workflow_dispatch:
     inputs:
       app:
         description: "App name (must exist in /apps)"
@@ -18,6 +18,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
@@ -65,7 +67,12 @@ jobs:
 
           echo "version=$MAJOR.$MINOR.$PATCH" >> $GITHUB_OUTPUT
       - name: Create tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ inputs.app }}@v${{ steps.next.outputs.version }}"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git tag "$TAG"
           git push origin "$TAG"
+          echo "Created and pushed tag: $TAG"
