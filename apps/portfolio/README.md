@@ -21,8 +21,8 @@ My personal portfolio website — a clean showcase of who I am, the tools & apps
 cd apps/portfolio
 npm install
 npm run dev
-Open http://localhost:3000
 ```
+Open http://localhost:3000
 
 📌 **Notes**
 - Built as part of the buildwithsaksham monorepo — shares configs & utilities where useful
