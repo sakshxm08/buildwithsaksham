@@ -1,6 +1,6 @@
 {
   "name": "buildwithsaksham",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A personal card for Saksham Gambhir (@sakshxm08)",
   "main": "card.js",
   "bin": {
