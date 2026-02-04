@@ -76,3 +76,35 @@ jobs:
           git tag "$TAG"
           git push origin "$TAG"
           echo "Created and pushed tag: $TAG"
+      - name: Update README version & commit to main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          README="apps/${{ inputs.app }}/README.md"
+          NEW_VERSION="v${{ steps.next.outputs.version }}"
+
+          if [ ! -f "$README" ]; then
+            echo "❌ README.md not found for app '${{ inputs.app }}'"
+            exit 1
+          fi
+
+          awk -v new_version="$NEW_VERSION" '
+            /^## 📦 Current Version/ {
+              print
+              getline
+              print "**" new_version "**"
+              next
+            }
+            { print }
+          ' "$README" > README.tmp && mv README.tmp "$README"
+
+          echo "Updated README version to $NEW_VERSION"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+          git add apps/${{ inputs.app }}/README.md
+          git commit -m "docs(${{
+            inputs.app
+          }}): bump version to v${{ steps.next.outputs.version }}"
+
+          git push origin main
