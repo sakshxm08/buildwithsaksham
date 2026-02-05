@@ -5,7 +5,7 @@ https://drive.buildwithsaksham.in
 **Credentials**: `demo` / `demo`
 
 📦 **Current Version**  
-v1.0.0
+v0.2.0
 
 Drive is a lightweight, self-hosted file management application designed for simplicity and real-world utility. It offers a clean interface to organize and interact with files in isolated user directories — no unnecessary complexity, just the features you actually need.
 
