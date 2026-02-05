@@ -4,7 +4,7 @@
 https://buildwithsaksham.in
 
 📦 **Current Version**  
-v1.0.0
+v0.2.0
 
 🧩 **About**  
 My personal portfolio website — a clean showcase of who I am, the tools & apps I build, key projects, tech preferences, and ways to connect. Focused on being fast, minimal, and developer-friendly.
