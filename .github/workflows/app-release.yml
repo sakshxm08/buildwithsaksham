@@ -15,6 +15,7 @@ on:
           - major
           - minor
           - patch
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -26,6 +27,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Ensure running on main
+        run: |
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          if [ "$BRANCH" != "main" ]; then
+            echo "❌ Releases must be run from main branch"
+            exit 1
+          fi
+
       - name: Validate app exists
         run: |
           if [ ! -d "apps/${{ inputs.app }}" ]; then
@@ -34,6 +44,7 @@ jobs:
             ls apps
             exit 1
           fi
+
       - name: Get latest version
         id: current
         run: |
@@ -45,6 +56,7 @@ jobs:
             VERSION=${TAG#*@v}
             echo "version=$VERSION" >> $GITHUB_OUTPUT
           fi
+
       - name: Calculate next version
         id: next
         run: |
@@ -66,19 +78,8 @@ jobs:
           esac
 
           echo "version=$MAJOR.$MINOR.$PATCH" >> $GITHUB_OUTPUT
-      - name: Create tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG="${{ inputs.app }}@v${{ steps.next.outputs.version }}"
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git tag "$TAG"
-          git push origin "$TAG"
-          echo "Created and pushed tag: $TAG"
+
       - name: Update README version & commit to main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           README="apps/${{ inputs.app }}/README.md"
           NEW_VERSION="v${{ steps.next.outputs.version }}"
@@ -98,7 +99,6 @@ jobs:
             { print }
           ' "$README" > README.tmp && mv README.tmp "$README"
 
-          echo "Updated README version to $NEW_VERSION"
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
@@ -108,3 +108,10 @@ jobs:
           }}): bump version to v${{ steps.next.outputs.version }}"
 
           git push origin main
+
+      - name: Create tag (after commit)
+        run: |
+          TAG="${{ inputs.app }}@v${{ steps.next.outputs.version }}"
+          git tag "$TAG"
+          git push origin "$TAG"
+          echo "Created and pushed tag: $TAG"
