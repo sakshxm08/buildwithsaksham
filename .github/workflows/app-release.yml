@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    concurrency:
+      group: release-${{ inputs.app }}
+      cancel-in-progress: false
 
     steps:
       - name: Checkout repo
@@ -89,15 +92,16 @@ jobs:
             exit 1
           fi
 
-          awk -v new_version="$NEW_VERSION" '
-            /^## 📦 Current Version/ {
-              print
-              getline
-              print "**" new_version "**"
-              next
-            }
-            { print }
-          ' "$README" > README.tmp && mv README.tmp "$README"
+          # Ensure the Current Version section exists
+          if ! grep -q "Current Version" "$README"; then
+            echo "❌ 'Current Version' section not found in README"
+            exit 1
+          fi
+
+          # Replace the version line that comes right after "Current Version"
+          perl -0777 -i -pe '
+            s/(Current Version\*\*\s*\n)(v[0-9]+\.[0-9]+\.[0-9]+)/$1'"$NEW_VERSION"'/;
+          ' "$README"
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
@@ -107,9 +111,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "ℹ️ README already at $NEW_VERSION — nothing to commit"
           else
-            git commit -m "docs(${{
-              inputs.app
-            }}): bump version to $NEW_VERSION"
+            git commit -m "docs(${{ inputs.app }}): bump version to $NEW_VERSION"
             git push origin main
           fi
 
