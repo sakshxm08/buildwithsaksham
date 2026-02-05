@@ -102,12 +102,24 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          git add apps/${{ inputs.app }}/README.md
-          git commit -m "docs(${{
-            inputs.app
-          }}): bump version to v${{ steps.next.outputs.version }}"
+          git add "$README"
 
-          git push origin main
+          if git diff --cached --quiet; then
+            echo "ℹ️ README already at $NEW_VERSION — nothing to commit"
+          else
+            git commit -m "docs(${{
+              inputs.app
+            }}): bump version to $NEW_VERSION"
+            git push origin main
+          fi
+
+      - name: Fail if tag already exists
+        run: |
+          TAG="${{ inputs.app }}@v${{ steps.next.outputs.version }}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "❌ Tag $TAG already exists"
+            exit 1
+          fi
 
       - name: Create tag (after commit)
         run: |
