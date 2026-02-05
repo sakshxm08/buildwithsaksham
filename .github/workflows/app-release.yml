@@ -82,6 +82,11 @@ jobs:
 
           echo "version=$MAJOR.$MINOR.$PATCH" >> $GITHUB_OUTPUT
 
+      - name: Capture release commit SHA
+        id: release_sha
+        run: |
+          echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
       - name: Update README version & commit to main
         run: |
           README="apps/${{ inputs.app }}/README.md"
@@ -123,9 +128,10 @@ jobs:
             exit 1
           fi
 
-      - name: Create tag (after commit)
+      - name: Create tag (on code commit)
         run: |
           TAG="${{ inputs.app }}@v${{ steps.next.outputs.version }}"
-          git tag "$TAG"
+          SHA="${{ steps.release_sha.outputs.sha }}"
+          git tag "$TAG" "$SHA"
           git push origin "$TAG"
-          echo "Created and pushed tag: $TAG"
+          echo "Created and pushed tag: $TAG at $SHA"
