@@ -87,37 +87,54 @@ jobs:
         run: |
           echo "sha=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
 
-      - name: Update README version & commit to main
+      - name: Update README & package.json version & commit to main
         run: |
-          README="apps/${{ inputs.app }}/README.md"
+          APP="${{ inputs.app }}"
           NEW_VERSION="v${{ steps.next.outputs.version }}"
-
-          if [ ! -f "$README" ]; then
-            echo "❌ README.md not found for app '${{ inputs.app }}'"
-            exit 1
-          fi
-
-          # Ensure the Current Version section exists
-          if ! grep -q "Current Version" "$README"; then
-            echo "❌ 'Current Version' section not found in README"
-            exit 1
-          fi
-
-          # Replace the version line that comes right after "Current Version"
-          perl -0777 -i -pe '
-            s/(Current Version\*\*\s*\n)(v[0-9]+\.[0-9]+\.[0-9]+)/$1'"$NEW_VERSION"'/;
-          ' "$README"
+          README="apps/$APP/README.md"
+          PKG="apps/$APP/package.json"
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
 
-          git add "$README"
+          CHANGED=0
 
-          if git diff --cached --quiet; then
-            echo "ℹ️ README already at $NEW_VERSION — nothing to commit"
+          # Update README if present
+          if [ -f "$README" ]; then
+            if ! grep -q "Current Version" "$README"; then
+              echo "❌ 'Current Version' section not found in README for $APP"
+              exit 1
+            fi
+
+            perl -0777 -i -pe '
+              s/(Current Version\*\*\s*\n)(v[0-9]+\.[0-9]+\.[0-9]+)/$1'"$NEW_VERSION"'/;
+            ' "$README"
+
+            git add "$README"
+            CHANGED=1
+          fi
+
+          # Update package.json if present
+          if [ -f "$PKG" ]; then
+            node -e "
+              const fs = require('fs');
+              const pkg = JSON.parse(fs.readFileSync('$PKG', 'utf8'));
+              pkg.version = '${{ steps.next.outputs.version }}';
+              fs.writeFileSync('$PKG', JSON.stringify(pkg, null, 2) + '\n');
+            "
+            git add "$PKG"
+            CHANGED=1
+          fi
+
+          if [ "$CHANGED" -eq 0 ]; then
+            echo "ℹ️ No README or package.json to update for $APP"
           else
-            git commit -m "docs(${{ inputs.app }}): bump version to $NEW_VERSION"
-            git push origin main
+            if git diff --cached --quiet; then
+              echo "ℹ️ Versions already up to date — nothing to commit"
+            else
+              git commit -m "chore($APP): bump version to $NEW_VERSION"
+              git push origin main
+            fi
           fi
 
       - name: Fail if tag already exists
