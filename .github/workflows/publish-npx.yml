@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - "apps/npx/**"
+      - "apps/npx/package.json"
 
 permissions:
-  contents: write
+  contents: read
   id-token: write
 
 jobs:
@@ -21,28 +21,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # needed to fetch tags
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump patch version
-        run: npm version patch
-
-      - name: Commit and push version bump
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Ensure release tag exists
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add .
-          git commit -m "chore(release): bump version to v$(node -p "require('./package.json').version") [skip ci]"
-          git push
-          git push --tags
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="npx@v$VERSION"
+          git fetch --tags
+          git rev-parse "$TAG" >/dev/null 2>&1 || (echo "❌ Tag $TAG not found" && exit 1)
+          echo "✅ Found tag $TAG"
 
       - name: Publish via Trusted Publishing
         run: npm publish
