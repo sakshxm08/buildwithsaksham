@@ -1,11 +1,10 @@
 name: Publish buildwithsaksham npx
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "apps/npx/package.json"
+  workflow_run:
+    workflows: ["Create app release versions"]
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -13,6 +12,7 @@ permissions:
 
 jobs:
   publish:
+    if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     defaults:
@@ -20,9 +20,19 @@ jobs:
         working-directory: apps/npx
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # needed to fetch tags
+          fetch-depth: 0
+
+      - name: Check if npx package.json changed in last release commit
+        run: |
+          git fetch origin main
+          # Compare the last two commits on main
+          git diff --name-only origin/main~1 origin/main | grep -q "^apps/npx/package.json$" || (
+            echo "ℹ️ npx was not released in this run — skipping publish"
+            exit 1
+          )
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
