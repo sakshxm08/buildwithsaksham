@@ -1,7 +1,7 @@
 ### npx buildwithsaksham – Personal Info CLI
 
 🚀 **Current Version**  
-v1.0.8
+v1.0.9
 
 🧩 **About**  
 `npx buildwithsaksham` is a lightweight, zero-setup command-line tool that instantly displays a clean, personalized information card for Saksham Gambhir right in your terminal.  
