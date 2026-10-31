@@ -20,26 +20,58 @@ const t = async (url) => {
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
 
 // ---------- LLM (Groq first, OpenRouter fallback) ----------
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// OpenRouter free models come and go, so look up what is free right now.
+async function freeOrModels() {
+  if (process.env.OPENROUTER_MODEL) return [process.env.OPENROUTER_MODEL];
+  const d = await j('https://openrouter.ai/api/v1/models');
+  const pref = ['llama-3.3-70b', 'gpt-oss', 'qwen', 'gemma', 'deepseek', 'mistral'];
+  const rank = (id) => { const i = pref.findIndex((x) => id.includes(x)); return i < 0 ? 99 : i; };
+  return d.data
+    .filter((m) => Number(m.pricing?.prompt) === 0 && Number(m.pricing?.completion) === 0 && (m.context_length || 0) >= 32000 && String(m.architecture?.modality || 'text').startsWith('text'))
+    .sort((a, b) => rank(a.id) - rank(b.id))
+    .slice(0, 3)
+    .map((m) => m.id);
+}
+
+async function chat(p, model, system, user) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const body = { model, temperature: 0.4, max_tokens: 2500, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] };
+    if (p.name === 'groq' && model.includes('gpt-oss')) body.reasoning_effort = 'low';
+    const r = await fetch(p.url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${p.key}` },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(120000),
+    });
+    if (r.status === 429 && attempt < 3) {
+      const wait = Math.min(65, Math.max(Number(r.headers.get('retry-after')) || 0, 20));
+      console.warn(`${p.name} 429 rate limit, waiting ${wait}s`);
+      await sleep(wait * 1000);
+      continue;
+    }
+    if (!r.ok) throw new Error(`${p.name} ${model} ${r.status} ${(await r.text()).slice(0, 200)}`);
+    const out = (await r.json()).choices?.[0]?.message?.content?.trim();
+    if (!out) throw new Error(`${p.name} ${model} empty reply`);
+    return out;
+  }
+}
+
 async function llm(system, user) {
   const providers = [
-    { name: 'groq', url: 'https://api.groq.com/openai/v1/chat/completions', key: process.env.GROQ_API_KEY, model: process.env.GROQ_MODEL || 'openai/gpt-oss-120b' },
-    { name: 'openrouter', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY, model: process.env.OPENROUTER_MODEL || 'openai/gpt-oss-120b:free' },
+    { name: 'groq', url: 'https://api.groq.com/openai/v1/chat/completions', key: process.env.GROQ_API_KEY, models: async () => [process.env.GROQ_MODEL || 'openai/gpt-oss-120b'] },
+    { name: 'openrouter', url: 'https://openrouter.ai/api/v1/chat/completions', key: process.env.OPENROUTER_API_KEY, models: freeOrModels },
   ];
   let lastErr;
   for (const p of providers) {
     if (!p.key) continue;
     try {
-      const r = await fetch(p.url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${p.key}` },
-        body: JSON.stringify({ model: p.model, temperature: 0.4, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
-        signal: AbortSignal.timeout(120000),
-      });
-      if (!r.ok) throw new Error(`${p.name} ${r.status} ${(await r.text()).slice(0, 200)}`);
-      const out = (await r.json()).choices?.[0]?.message?.content?.trim();
-      if (!out) throw new Error(`${p.name} empty reply`);
-      return out;
-    } catch (e) { lastErr = e; console.warn('LLM failed:', e.message); }
+      for (const model of await p.models()) {
+        try { return await chat(p, model, system, user); }
+        catch (e) { lastErr = e; console.warn('LLM failed:', e.message.slice(0, 300)); }
+      }
+    } catch (e) { lastErr = e; console.warn('LLM failed:', e.message.slice(0, 300)); }
   }
   throw lastErr || new Error('No LLM API key set');
 }
@@ -92,7 +124,7 @@ async function page(url) {
   try {
     const h = await t(url);
     return h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<nav[\s\S]*?<\/nav>|<footer[\s\S]*?<\/footer>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 6000);
+      .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 3000);
   } catch { return ''; }
 }
 
@@ -118,7 +150,7 @@ const pickRaw = await llm(
 const pick = JSON.parse(pickRaw.match(/\{[\s\S]*\}/)[0]);
 if (!cands[pick.index]) throw new Error('Bad pick: ' + pickRaw);
 
-const idxs = [pick.index, ...(pick.also || [])].filter((i, n, a) => cands[i] && a.indexOf(i) === n).slice(0, 3);
+const idxs = [pick.index, ...(pick.also || [])].filter((i, n, a) => cands[i] && a.indexOf(i) === n).slice(0, 2);
 const sources = [];
 for (const i of idxs) sources.push({ ...cands[i], text: await page(cands[i].url) });
 const material = sources.reduce((n, s) => n + s.text.length, 0);
