@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 env:
-  BLOG_DIR: src/content/blog        # <- change if your posts live elsewhere
+  BLOG_DIR: apps/portfolio/content/blog        # <- change if your posts live elsewhere
   SITE_URL: https://buildwithsaksham.in
   BLOG_URL_PATH: /blog/
 jobs:
