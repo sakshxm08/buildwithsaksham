@@ -1,0 +1,43 @@
+name: Daily blog draft
+on:
+  schedule:
+    - cron: '30 3 * * *'   # 9:00 AM IST
+  workflow_dispatch:
+permissions:
+  contents: write
+env:
+  BLOG_DIR: src/content/blog        # <- change if your posts live elsewhere
+  SITE_URL: https://buildwithsaksham.in
+  BLOG_URL_PATH: /blog/
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i nodemailer --no-save --no-package-lock
+      - name: Research + write draft
+        run: node scripts/generate.mjs
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push draft branch
+        run: |
+          BRANCH=$(jq -r .branch .draft-meta.json)
+          git config user.name "blog-bot"
+          git config user.email "blog-bot@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add "$BLOG_DIR" social data
+          git commit -m "draft: $(jq -r .title .draft-meta.json)"
+          git push origin "$BRANCH"
+      - name: Email me the draft
+        run: node scripts/notify.mjs
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          REPO: ${{ github.repository }}
