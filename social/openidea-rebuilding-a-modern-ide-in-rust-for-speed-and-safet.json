@@ -1,0 +1,8 @@
+{
+  "link": "https://buildwithsaksham.in/blog/openidea-rebuilding-a-modern-ide-in-rust-for-speed-and-safet",
+  "cover": "/blog-covers/openidea-rebuilding-a-modern-ide-in-rust-for-speed-and-safet.png",
+  "x": "0.9 s to open a 770‑file Python project – that’s OpenIDEA beating IntelliJ by over 3 seconds.\n\n2/ Memory drops from 2 GB to 169 MB when launching the same project.\n\n3/ Startup CPU time shrinks from 48 s to just 2.4 s.\n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/openidea-rebuilding-a-modern-ide-in-rust-for-speed-and-safet",
+  "threads": "Did you see the startup numbers? OpenIDEA launches a big Python repo in under a second, while IntelliJ takes three seconds. Memory usage is a fraction too. Curious how they did it?\n\nhttps://buildwithsaksham.in/blog/openidea-rebuilding-a-modern-ide-in-rust-for-speed-and-safet",
+  "linkedin": "OpenIDEA shows a 0.9 second launch for a 770‑file Python project, compared with IntelliJ’s 3.1 seconds.\n\nMemory usage falls to 169 MB versus over 2 GB.\n\nCPU time to readiness drops from 48 seconds to 2.4 seconds.\n\nThe full breakdown with sources is on the blog, link in the first comment.\n\nWhat do you think about Rust powering a modern IDE?",
+  "linkedin_comment": "Full breakdown with sources on the blog: https://buildwithsaksham.in/blog/openidea-rebuilding-a-modern-ide-in-rust-for-speed-and-safet"
+}

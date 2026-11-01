@@ -1,9 +1,12 @@
 {
   "urls": [
     "https://thedataexchange.media/leo-de-moura-lean-aws/",
-    "https://florianwilhelm.info/2026/10/sentinel_values/"
+    "https://florianwilhelm.info/2026/10/sentinel_values/",
+    "https://github.com/l0ng-ai/openidea",
+    "https://github.com/wangzan101/Mika"
   ],
   "titles": [
-    "AI, Lean, and the Future of Formal Verification"
+    "AI, Lean, and the Future of Formal Verification",
+    "OpenIDEA: Rebuilding a Modern IDE in Rust for Speed and Safety"
   ]
 }
