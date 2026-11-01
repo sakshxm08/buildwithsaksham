@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: sudo apt-get install -y fonts-dejavu-core > /dev/null
+      - run: sudo apt-get install -y fonts-inter fonts-dejavu-core > /dev/null || sudo apt-get install -y fonts-dejavu-core > /dev/null
       - run: npm i nodemailer @resvg/resvg-js --no-save --no-package-lock
       - name: Research + write draft
         run: node scripts/generate.mjs

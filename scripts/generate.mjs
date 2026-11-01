@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { makeCover, makeSlides } from './cover.mjs';
+import { makeCover, makeSlides, ICON_NAMES } from './cover.mjs';
 
 const BLOG_DIR = process.env.BLOG_DIR || 'src/content/blog';
 const SITE = (process.env.SITE_URL || 'https://buildwithsaksham.in').replace(/\/$/, '');
@@ -126,7 +126,7 @@ async function page(url) {
   try {
     const h = await t(url);
     return h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<nav[\s\S]*?<\/nav>|<footer[\s\S]*?<\/footer>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 3000);
+      .replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 4500);
   } catch { return ''; }
 }
 
@@ -152,41 +152,55 @@ const pickRaw = await llm(
 const pick = JSON.parse(pickRaw.match(/\{[\s\S]*\}/)[0]);
 if (!cands[pick.index]) throw new Error('Bad pick: ' + pickRaw);
 
-const idxs = [pick.index, ...(pick.also || [])].filter((i, n, a) => cands[i] && a.indexOf(i) === n).slice(0, 2);
+const idxs = [pick.index, ...(pick.also || [])].filter((i, n, a) => cands[i] && a.indexOf(i) === n).slice(0, 3);
 const sources = [];
 for (const i of idxs) sources.push({ ...cands[i], text: await page(cands[i].url) });
 const material = sources.reduce((n, s) => n + s.text.length, 0);
 if (material < 500) throw new Error('Not enough source text fetched, aborting instead of guessing');
 
 const srcBlock = sources.map((s, n) => `SOURCE ${n + 1}: ${s.title}\nURL: ${s.url}\n${s.text}`).join('\n\n---\n\n');
-const body = await llm(
-  'You write for buildwithsaksham.in, a developer blog on development, AI and LLMs. Voice: conversational and clear, like a developer explaining news to a peer ("you", "we"), short paragraphs, no hype. Never claim personal experience and never invent anecdotes. HARD RULES: use ONLY facts, names, numbers and quotes that appear in SOURCES. If a detail is not in SOURCES, leave it out. Never invent benchmarks, versions, dates or quotes. 700-900 words, markdown with ## subheadings, no H1 (the title is added separately). End with a "## Sources" section listing every source as a markdown link.',
-  `Write a blog post titled "${pick.title}".\n\nSOURCES:\n${srcBlock}`
+const SYS = 'You write for buildwithsaksham.in, a developer blog on development, AI and LLMs. Voice: clear, conversational and practical, like a developer explaining the news to a peer ("you", "we"). No hype. Never claim personal experience and never invent anecdotes. FACT RULES: every specific number, date, name, version, benchmark and quote must come from SOURCES; if it is not there, leave it out. You may add general, well-established background (what a technology is, how it works) but no invented specifics. Output markdown paragraphs only, no headings unless told.';
+const outlineRaw = await llm(
+  SYS + ' Reply with JSON only.',
+  `Plan a long-form blog post titled "${pick.title}" from SOURCES. Return exactly: {"sections":[{"h":"<section heading>","points":["<fact or idea to cover>"]}]} with 6 sections in this order: what happened, why it matters, how it works (background), the key details and numbers, what it means for developers, limits and caveats. Each section has 3-5 points drawn from SOURCES.\n\nSOURCES:\n${srcBlock}`
 );
+const outline = (JSON.parse(outlineRaw.match(/\{[\s\S]*\}/)[0]).sections || []).filter((x) => x.h && x.points?.length).slice(0, 7);
+if (outline.length < 4) throw new Error('Outline too short');
+const parts = [await llm(SYS, `Write the opening of the post "${pick.title}": 2 short paragraphs (110-150 words in total) that hook the reader with the news and say what the post covers. No heading.\n\nSOURCES:\n${srcBlock}`)];
+for (const sec of outline) {
+  const text = await llm(SYS, `Write the section "${sec.h}" for the post "${pick.title}". 250-320 words in 3-4 paragraphs of 3-5 sentences each. Cover these points:\n- ${sec.points.join('\n- ')}\nDo not repeat what earlier sections said. No heading.\n\nSOURCES:\n${srcBlock}`);
+  parts.push(`## ${sec.h.replace(/[#*]/g, '')}\n\n${text}`);
+}
+const takeaways = await llm(SYS, `Write 4-6 bullet points ("- " lines) of key takeaways for developers from the post "${pick.title}", one sentence each, using only facts from SOURCES. Output only the bullets.\n\nSOURCES:\n${srcBlock}`);
+parts.push(`## Key takeaways\n\n${takeaways}`);
+parts.push(`## Sources\n\n${sources.map((x) => `- [${x.title.replace(/[\[\]]/g, '')}](${x.url})`).join('\n')}`);
+const body = parts.join('\n\n');
+const brief = body.replace(/## Sources[\s\S]*$/, '').slice(0, 9000);
+console.log(`Blog body: ${body.split(/\s+/).length} words`);
 
 const slug = pick.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 const link = `${SITE}${URL_PATH}${slug}`;
 
 const socialRaw = await llm(
-  'You write social posts that tease a developer blog post and send readers to it. Use ONLY facts from the blog post provided. Neutral third-person voice: never use "I", "my" or "me", never invent personal experience or anecdotes. The posts must NOT read like the blog or summarise it; they create curiosity and point to the full post. Output exactly the four sections below, each starting with its marker line, nothing else.',
-  `Blog post:\n${body}\n\nWrite:\n===X===\nA teaser thread of 4-5 tweets. Tweet 1 is a punchy hook (a surprising fact or number from the post), no hashtags. Tweets 2-3 each carry ONE striking fact in plain language, numbered "2/", "3/". Do not explain the details. The last tweet says the full breakdown with sources is on the blog and includes {{LINK}}. Each tweet under 270 characters. At most 1 hashtag in the whole thread.\n===THREADS===\nOne casual post, 2-4 short lines, under 450 characters, like talking to a friend. At most one emoji, no hashtags, ends with a question, and {{LINK}} alone on the last line.\n===LINKEDIN===\nWrite a short LinkedIn teaser of 600-900 characters. Plain text only: no hashtags, no emojis, no bullet symbols, no link. It must NOT read like a blog post or a summary of one. Short lines separated by blank lines, in this order:\n1) Hook: one sharp line, a question or a surprising number about the news, naming the source.\n2) 2-3 very short lines with the most striking facts or numbers, just enough to create curiosity. Leave out the details, the how and the why.\n3) One line saying the full breakdown with sources is on the blog, link in the first comment.\n4) One closing question to the reader.\n===LINKEDIN_COMMENT===\nOne line: Full breakdown with sources on the blog: {{LINK}}`
+  'You write social posts that tease a developer blog post and send readers to it. Use ONLY facts from the blog post provided. Neutral third-person voice: never use "I", "my" or "me", never invent personal experience or anecdotes. The posts must read like social posts, not like the blog: keep the deep detail for the blog and point readers to the link. Output exactly the three sections below, each starting with its marker line, nothing else.',
+  `Blog post:\n${brief}\n\nWrite:\n===X===\nA teaser thread of 4-5 tweets. Tweet 1 is a punchy hook (a surprising fact or number from the post), no hashtags. Tweets 2-3 each carry ONE striking fact in plain language, numbered "2/", "3/". Do not explain the details. The last tweet says the full breakdown with sources is on the blog and includes {{LINK}}. Each tweet under 270 characters. At most 1 hashtag in the whole thread.\n===THREADS===\nOne casual post, 2-4 short lines, under 450 characters, like talking to a friend. At most one emoji, no hashtags, ends with a question, and {{LINK}} alone on the last line.\n===LINKEDIN===\nWrite a LinkedIn post of 1400-1900 characters. Plain text only: no hashtags, no emojis, no bullet symbols. Short paragraphs of 1-3 sentences separated by blank lines, in this order:\n1) Hook: 1-2 sentences, a sharp question or surprising statement about the news, naming the source.\n2) The core finding with the specific numbers.\n3) What else changed, with more specific numbers.\n4) Only if the post contains a direct quote: include it in quotation marks, under 20 words.\n5) Why it matters: 1-2 factual, neutral sentences.\n6) A caveat about the data, only if the post mentions one.\n7) One specific question to the reader.\n8) Last line exactly: Full breakdown with sources: {{LINK}}\nIt must read like a social post written from the news, NOT like a copy or summary of the blog. Keep the deep detail (how it works, implications, step by step) for the blog.\n`
 );
-const marks = [...socialRaw.matchAll(/===(X|THREADS|LINKEDIN_COMMENT|LINKEDIN)===/g)];
+const marks = [...socialRaw.matchAll(/===(X|THREADS|LINKEDIN)===/g)];
 const social = {};
 marks.forEach((m, i) => { social[m[1].toLowerCase()] = socialRaw.slice(m.index + m[0].length, marks[i + 1]?.index ?? socialRaw.length).trim().replaceAll('{{LINK}}', link); });
-if (!social.x || !social.threads || !social.linkedin || !social.linkedin_comment) throw new Error('Social parse failed');
+if (!social.x || !social.threads || !social.linkedin) throw new Error('Social parse failed');
 
 let slideFiles = [];
 try {
   const raw = await llm(
     'You turn a blog post into two LinkedIn image cards. Reply with JSON only. Use ONLY facts from the post.',
-    `Post:\n${body}\n\nReturn exactly this JSON shape and respect the length limits:\n{"headline":"<=22 chars, lowercase, like: human = bottleneck","source":"<=40 chars, the report or source name and date if known","facts":[["key <=12 chars","value <=26 chars"]],"tags":["<=16 chars","<=16 chars","<=16 chars"],"sub":"<=32 chars, short line for the second card","sections":[{"h":"<=14 chars","items":["<=38 chars","<=38 chars"]},{"h":"<=14 chars","items":["<=38 chars","<=38 chars"]}],"punch":"<=36 chars, punchy closing line"}\n"facts" must hold 4 to 6 pairs: the most striking numbers or facts in the post.`
+    `Post:\n${brief}\n\nReturn exactly this JSON shape and respect the length limits:\n{"kicker":"<=26 chars, the report or source name","stat":{"value":"<=7 chars, the single most striking number, like 80% or 6:1 or 27→9%","label":"<=70 chars, what that number measures"},"headline":"<=70 chars, the news in one sentence-case line","title2":"<=24 chars, like Key takeaways","points":[{"icon":"<one of: ${ICON_NAMES.join(', ')}>","title":"<=26 chars","text":"<=80 chars"}]}\n"points" must hold 3 or 4 items, each a distinct fact from the post.`
   );
   const d = JSON.parse(raw.match(/\{[\s\S]*\}/)[0]);
-  if (!Array.isArray(d.facts) || d.facts.length < 3 || !Array.isArray(d.sections) || !d.sections.length) throw new Error('bad slide json');
+  if (!d.stat?.value || !Array.isArray(d.points) || d.points.length < 3) throw new Error('bad slide json');
   const dir = path.join('social', slug);
   fs.mkdirSync(dir, { recursive: true });
-  slideFiles = makeSlides(d).map((buf, i) => { const f = path.join(dir, `slide-${i + 1}.png`); fs.writeFileSync(f, buf); return f; });
+  slideFiles = makeSlides(d, slug).map((buf, i) => { const f = path.join(dir, `slide-${i + 1}.png`); fs.writeFileSync(f, buf); return f; });
 } catch (e) { console.warn('Slides skipped:', e.message); }
 
 const desc = body.replace(/^#+.*$/gm, '').replace(/[#*_`>\[\]]/g, '').trim().split(/\n\s*\n/)[0].replace(/\s+/g, ' ').slice(0, 155);
@@ -203,10 +217,10 @@ fs.mkdirSync('data', { recursive: true });
 const file = path.join(BLOG_DIR, `${slug}.md`);
 const coverFile = path.join(COVER_DIR, `${slug}.png`);
 fs.writeFileSync(file, post);
-fs.writeFileSync(coverFile, makeCover({ title: pick.title, category, readMin: readTime }));
+fs.writeFileSync(coverFile, makeCover({ title: pick.title, category, readMin: readTime, seed: slug }));
 fs.writeFileSync(`social/${slug}.json`, JSON.stringify({ link, cover: coverUrl, ...social }, null, 2));
 hist.used.urls.push(...sources.map((s) => s.url));
 hist.used.titles.push(pick.title);
 fs.writeFileSync('data/used.json', JSON.stringify(hist.used, null, 2));
-fs.writeFileSync('.draft-meta.json', JSON.stringify({ branch: `draft/${today}-${slug}`, slug, title: pick.title, file, coverFile, slides: slideFiles, link, preview: body.slice(0, 700), x: social.x, threads: social.threads, linkedin: social.linkedin, linkedinComment: social.linkedin_comment }, null, 2));
+fs.writeFileSync('.draft-meta.json', JSON.stringify({ branch: `draft/${today}-${slug}`, slug, title: pick.title, file, coverFile, slides: slideFiles, link, preview: body.slice(0, 700), x: social.x, threads: social.threads, linkedin: social.linkedin }, null, 2));
 console.log('Draft ready:', pick.title);

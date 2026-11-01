@@ -19,7 +19,7 @@ ${imgs.map((_, i) => `<img src="cid:img${i}" width="270" style="border-radius:10
 <p><a href="https://github.com/${process.env.REPO}/blob/${encodeURIComponent(m.branch).replace(/%2F/g, '/')}/${m.file}">Read full draft</a></p>
 <p>${btn(link('approve'), 'Approve', '#16a34a')}${btn(link('reject'), 'Reject', '#dc2626')}</p>
 <p style="color:#666;font-size:13px">Links expire in 48h. Copy-paste posts below (images are attached, post both on LinkedIn).</p>
-${box('LinkedIn post', m.linkedin)}${box('LinkedIn first comment', m.linkedinComment)}${box('X thread', m.x)}${box('Threads', m.threads)}
+${box('LinkedIn post', m.linkedin)}${box('X thread', m.x)}${box('Threads', m.threads)}
 </div>`;
 
 const tx = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD } });
