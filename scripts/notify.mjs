@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import path from 'node:path';
 import crypto from 'node:crypto';
 import nodemailer from 'nodemailer';
 
@@ -8,16 +9,25 @@ const sign = (a) => crypto.createHmac('sha256', process.env.SIGNING_SECRET).upda
 const link = (a) => `${process.env.WORKER_URL.replace(/\/$/, '')}/?a=${a}&b=${encodeURIComponent(m.branch)}&e=${exp}&s=${sign(a)}`;
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const btn = (href, label, bg) => `<a href="${href}" style="display:inline-block;padding:14px 26px;margin:6px 8px 6px 0;background:${bg};color:#fff;text-decoration:none;border-radius:8px;font-weight:600">${label}</a>`;
+const box = (label, txt) => `<p style="color:#666;font-size:13px;margin:18px 0 4px">${label}</p><pre style="white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;font-size:13px;margin:0">${esc(txt)}</pre>`;
 
+const imgs = m.slides?.length ? m.slides : [m.coverFile];
 const html = `<div style="font-family:system-ui,sans-serif;max-width:560px">
+${imgs.map((_, i) => `<img src="cid:img${i}" width="270" style="border-radius:10px;margin:0 6px 6px 0" alt="">`).join('')}
 <h2>${esc(m.title)}</h2>
 <p style="white-space:pre-wrap;color:#333">${esc(m.preview)}…</p>
 <p><a href="https://github.com/${process.env.REPO}/blob/${encodeURIComponent(m.branch).replace(/%2F/g, '/')}/${m.file}">Read full draft</a></p>
 <p>${btn(link('approve'), 'Approve', '#16a34a')}${btn(link('reject'), 'Reject', '#dc2626')}</p>
-<p style="color:#666;font-size:13px">Links expire in 48h. X thread to copy-paste after approving:</p>
-<pre style="white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;font-size:13px">${esc(m.x)}</pre>
+<p style="color:#666;font-size:13px">Links expire in 48h. Copy-paste posts below (images are attached, post both on LinkedIn).</p>
+${box('LinkedIn post', m.linkedin)}${box('LinkedIn first comment', m.linkedinComment)}${box('X thread', m.x)}${box('Threads', m.threads)}
 </div>`;
 
 const tx = nodemailer.createTransport({ service: 'gmail', auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD } });
-await tx.sendMail({ from: process.env.GMAIL_USER, to: process.env.GMAIL_USER, subject: `Blog draft: ${m.title}`, html });
+await tx.sendMail({
+  from: process.env.GMAIL_USER,
+  to: process.env.GMAIL_USER,
+  subject: `Blog draft: ${m.title}`,
+  html,
+  attachments: imgs.map((f, i) => ({ filename: path.basename(f), path: f, cid: `img${i}` })),
+});
 console.log('Email sent');

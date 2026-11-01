@@ -4,13 +4,16 @@ import { marked } from "marked";
 
 const DIR = path.join(process.cwd(), "content", "blog");
 
-export type Post = {
+export type PostMeta = {
 	slug: string;
 	title: string;
 	description: string;
 	date: string;
-	html: string;
+	category: string;
+	readTime: number;
+	cover: string;
 };
+export type Post = PostMeta & { html: string };
 
 const esc = (s: string) =>
 	s
@@ -55,11 +58,15 @@ function parse(file: string): Post | null {
 		meta[line.slice(0, i).trim()] = v;
 	}
 	const slug = file.replace(/\.md$/, "");
+	const words = m[2].split(/\s+/).length;
 	return {
 		slug,
 		title: meta.title ?? slug,
 		description: meta.description ?? "",
 		date: meta.pubDate ?? "",
+		category: meta.category || "General",
+		readTime: Number(meta.readTime) || Math.max(1, Math.ceil(words / 200)),
+		cover: meta.cover ?? "",
 		html: marked.parse(m[2]) as string,
 	};
 }

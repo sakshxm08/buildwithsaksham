@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { getPosts } from "../../lib/blog";
+import { BlogList } from "./_components/blog-list";
 
 export const metadata = {
 	title: "Blog | Saksham",
@@ -7,21 +7,13 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-	const posts = getPosts();
+	// biome-ignore lint/correctness/noUnusedVariables: html is stripped so it is not shipped to the client
+	const posts = getPosts().map(({ html, ...meta }) => meta);
 	return (
-		<main className="mx-auto max-w-3xl px-6 py-16">
-			<h1 className="text-4xl font-bold">Blog</h1>
-			<ul className="mt-10 space-y-8">
-				{posts.map((p) => (
-					<li key={p.slug}>
-						<Link href={`/blog/${p.slug}`} className="block">
-							<h2 className="text-2xl font-semibold">{p.title}</h2>
-							<p className="mt-1 text-sm opacity-60">{p.date}</p>
-							<p className="mt-2 opacity-80">{p.description}</p>
-						</Link>
-					</li>
-				))}
-			</ul>
+		<main className="mx-auto max-w-5xl px-6 py-16">
+			<h1 className="text-4xl font-bold">Insights &amp; Notes</h1>
+			<p className="mt-3 max-w-2xl opacity-75">Daily notes on development, AI and LLMs, with sources.</p>
+			<BlogList posts={posts} />
 		</main>
 	);
 }

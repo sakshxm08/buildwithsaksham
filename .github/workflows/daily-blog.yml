@@ -6,7 +6,8 @@ on:
 permissions:
   contents: write
 env:
-  BLOG_DIR: apps/portfolio/content/blog        # <- change if your posts live elsewhere
+  BLOG_DIR: apps/portfolio/content/blog
+  COVER_DIR: apps/portfolio/public/blog-covers
   SITE_URL: https://buildwithsaksham.in
   BLOG_URL_PATH: /blog/
 jobs:
@@ -17,7 +18,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm i nodemailer --no-save --no-package-lock
+      - run: sudo apt-get install -y fonts-dejavu-core > /dev/null
+      - run: npm i nodemailer @resvg/resvg-js --no-save --no-package-lock
       - name: Research + write draft
         run: node scripts/generate.mjs
         env:
@@ -30,7 +32,7 @@ jobs:
           git config user.name "blog-bot"
           git config user.email "blog-bot@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add "$BLOG_DIR" social data
+          git add "$BLOG_DIR" "$COVER_DIR" social data
           git commit -m "draft: $(jq -r .title .draft-meta.json)"
           git push origin "$BRANCH"
       - name: Email me the draft
