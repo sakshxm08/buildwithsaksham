@@ -95,16 +95,19 @@ async function github() {
   const d = await j(`https://api.github.com/search/repositories?q=${encodeURIComponent(`topic:llm created:>${since}`)}&sort=stars&per_page=10`, h);
   return d.items.map((r) => ({ title: `${r.full_name}: ${r.description || ''}`.slice(0, 140), url: r.html_url, source: 'GitHub', score: r.stargazers_count }));
 }
-async function reddit() {
-  const out = [];
-  for (const s of ['LocalLLaMA', 'programming', 'MachineLearning', 'webdev']) {
-    try {
-      const x = await t(`https://www.reddit.com/r/${s}/top/.rss?t=day`);
-      for (const m of x.matchAll(/<entry>[\s\S]*?<title>([\s\S]*?)<\/title>[\s\S]*?<link href="([^"]+)"/g))
-        out.push({ title: decode(m[1]), url: m[2], source: `r/${s}`, score: 0 });
-    } catch (e) { console.warn(`reddit r/${s} skipped:`, e.message); }
-  }
-  return out;
+async function lobsters() {
+  const d = await j('https://lobste.rs/hottest.json');
+  return d.filter((x) => x.url && (KW.test(x.title) || (x.tags || []).some((t) => /^(ai|ml|programming|web|rust|python|javascript|security|devops|show)$/.test(t))))
+    .map((x) => ({ title: x.title, url: x.url, source: 'Lobsters', score: x.score }));
+}
+async function hfPapers() {
+  const d = await j('https://huggingface.co/api/daily_papers');
+  return d.filter((x) => x.paper?.id && x.paper?.title).map((x) => ({ title: x.paper.title.replace(/\s+/g, ' '), url: `https://arxiv.org/abs/${x.paper.id}`, source: 'HF Papers', score: x.paper.upvotes || 0 }));
+}
+async function arxiv() {
+  const x = await t('https://export.arxiv.org/api/query?search_query=cat:cs.CL+OR+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=15');
+  return [...x.matchAll(/<entry>[\s\S]*?<id>([^<]+)<\/id>[\s\S]*?<title>([\s\S]*?)<\/title>/g)]
+    .map((m) => ({ title: decode(m[2]).replace(/\s+/g, ' ').trim(), url: m[1].trim().replace('http://', 'https://').replace(/v\d+$/, ''), source: 'arXiv', score: 0 }));
 }
 const safe = (f) => f().catch((e) => { console.warn(f.name, 'failed:', e.message); return []; });
 
@@ -123,6 +126,14 @@ function loadHistory() {
 }
 
 async function page(url) {
+  const ax = url.match(/^https:\/\/arxiv\.org\/abs\/(.+)$/);
+  if (ax) {
+    const full = await page1(`https://arxiv.org/html/${ax[1]}`);
+    if (full.length > 1500) return full;
+  }
+  return page1(url);
+}
+async function page1(url) {
   try {
     const h = await t(url);
     return h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<nav[\s\S]*?<\/nav>|<footer[\s\S]*?<\/footer>/gi, ' ')
@@ -132,7 +143,7 @@ async function page(url) {
 
 // ---------- Main ----------
 const hist = loadHistory();
-const all = (await Promise.all([safe(hn), safe(devto), safe(github), safe(reddit)])).flat();
+const all = (await Promise.all([safe(hn), safe(devto), safe(github), safe(lobsters), safe(hfPapers), safe(arxiv)])).flat();
 const seen = new Set();
 const bySource = {};
 for (const c of all) {
@@ -140,7 +151,7 @@ for (const c of all) {
   seen.add(c.url);
   (bySource[c.source] ||= []).push(c);
 }
-const cands = Object.values(bySource).flatMap((l) => l.sort((a, b) => b.score - a.score).slice(0, 10));
+const cands = Object.values(bySource).flatMap((l) => l.sort((a, b) => b.score - a.score).slice(0, 8));
 if (!cands.length) throw new Error('No candidates found');
 console.log(`${cands.length} candidates`);
 
