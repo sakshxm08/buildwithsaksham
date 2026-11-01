@@ -1,9 +1,13 @@
 {
   "urls": [
     "https://thedataexchange.media/leo-de-moura-lean-aws/",
-    "https://florianwilhelm.info/2026/10/sentinel_values/"
+    "https://florianwilhelm.info/2026/10/sentinel_values/",
+    "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
+    "https://www.youtube.com/watch?v=gQRmSlcTq9c",
+    "https://dev.to/sizzlebop/i-retested-my-moe-offloading-benchmarks-some-of-my-conclusions-changed-6f4"
   ],
   "titles": [
-    "AI, Lean, and the Future of Formal Verification"
+    "AI, Lean, and the Future of Formal Verification",
+    "The Hidden AI Cost of JavaScript Frameworks"
   ]
 }
