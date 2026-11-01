@@ -1,0 +1,51 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-cli" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#022C22"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="20" fill="url(#bg-cli)"/>
+  <circle cx="700" cy="100" r="160" fill="#10B981" fill-opacity="0.12" filter="blur(40px)"/>
+  <circle cx="100" cy="380" r="160" fill="#065F46" fill-opacity="0.1" filter="blur(40px)"/>
+
+  <!-- Terminal Window -->
+  <rect x="90" y="50" width="620" height="380" rx="14" fill="#090D16" stroke="#1E293B" stroke-width="2"/>
+  <rect x="90" y="50" width="620" height="40" rx="14" fill="#131B2E"/>
+  <rect x="90" y="76" width="620" height="14" fill="#131B2E"/>
+  <circle cx="116" cy="70" r="5" fill="#EF4444"/>
+  <circle cx="134" cy="70" r="5" fill="#F59E0B"/>
+  <circle cx="152" cy="70" r="5" fill="#10B981"/>
+  <text x="400" y="75" fill="#94A3B8" font-family="monospace" font-size="12" text-anchor="middle">zsh — npx buildwithsaksham</text>
+
+  <!-- Prompt line -->
+  <text x="120" y="125" fill="#10B981" font-family="monospace" font-size="14" font-weight="bold">❯</text>
+  <text x="140" y="125" fill="#F8FAFC" font-family="monospace" font-size="14">npx buildwithsaksham</text>
+
+  <!-- Boxen Output Box -->
+  <rect x="120" y="145" width="560" height="235" rx="8" fill="#0F172A" stroke="#10B981" stroke-width="1.5" stroke-dasharray="4 2"/>
+  
+  <text x="145" y="185" fill="#38BDF8" font-family="monospace" font-size="18" font-weight="bold">Saksham Gambhir</text>
+  <text x="320" y="185" fill="#94A3B8" font-family="monospace" font-size="13">/ Full-Stack Web Developer</text>
+
+  <text x="145" y="220" fill="#CBD5E1" font-family="monospace" font-size="12">Work:</text>
+  <text x="240" y="220" fill="#F8FAFC" font-family="monospace" font-size="12">Full Stack Engineer @ TechiZen India</text>
+
+  <text x="145" y="245" fill="#CBD5E1" font-family="monospace" font-size="12">npm:</text>
+  <text x="240" y="245" fill="#F43F5E" font-family="monospace" font-size="12">https://npmjs.com/package/buildwithsaksham</text>
+
+  <text x="145" y="270" fill="#CBD5E1" font-family="monospace" font-size="12">GitHub:</text>
+  <text x="240" y="270" fill="#10B981" font-family="monospace" font-size="12">https://github.com/sakshxm08</text>
+
+  <text x="145" y="295" fill="#CBD5E1" font-family="monospace" font-size="12">LinkedIn:</text>
+  <text x="240" y="295" fill="#38BDF8" font-family="monospace" font-size="12">https://linkedin.com/in/sakshxm08</text>
+
+  <text x="145" y="320" fill="#CBD5E1" font-family="monospace" font-size="12">Card:</text>
+  <text x="240" y="320" fill="#F59E0B" font-family="monospace" font-size="12">npx buildwithsaksham</text>
+
+  <!-- Bottom Tip -->
+  <text x="145" y="360" fill="#64748B" font-family="monospace" font-size="11">Tip: Run this command in any terminal to get in touch!</text>
+  
+  <text x="120" y="405" fill="#10B981" font-family="monospace" font-size="14" font-weight="bold">❯ <tspan fill="#64748B">_</tspan></text>
+</svg>

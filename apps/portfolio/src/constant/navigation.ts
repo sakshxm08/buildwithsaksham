@@ -4,7 +4,19 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
     href: "/",
   },
   {
-    name: "Project",
+    name: "Experience",
+    href: "/#experience",
+  },
+  {
+    name: "Projects",
     href: "/project",
+  },
+  {
+    name: "Blog",
+    href: "/blog",
+  },
+  {
+    name: "Contact",
+    href: "/#contact",
   },
 ];

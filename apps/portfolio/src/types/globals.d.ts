@@ -17,6 +17,7 @@ declare type Config = {
   };
   email: string;
   role: string;
+  headline?: string;
   location: string;
   quotes: {
     text: string;
@@ -48,5 +49,23 @@ declare type Config = {
       figma?: string;
     };
     category: string;
+    featured?: boolean;
+    highlights?: string[];
+  }[];
+  experience?: {
+    role: string;
+    company: string;
+    companyUrl?: string;
+    period: string;
+    location: string;
+    description: string;
+    skills: string[];
+  }[];
+  education?: {
+    degree: string;
+    institution: string;
+    period: string;
+    location: string;
+    grade?: string;
   }[];
 };
