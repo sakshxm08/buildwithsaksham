@@ -95,14 +95,41 @@ const HeroSection = () => {
           </MotionWrapper>
           <MotionWrapper
             as="p"
-            className="text-base font-medium text-center md:text-xl lg:text-2xl text-accent xl:text-left"
+            className="text-base font-medium text-center md:text-xl lg:text-2xl text-accent xl:text-left max-w-xl"
             aria-label="Introduction"
           >
             I&apos;m {CONFIG.name.first}
-            {CONFIG.name.last && ` ${CONFIG.name.last}`}. A passionate{" "}
-            {CONFIG.role} based in {CONFIG.location}.
+            {CONFIG.name.last && ` ${CONFIG.name.last}`}. Full-stack Software Engineer at Optum building consumer-facing healthcare products for 55M+ users. DTU &apos;25 graduate based in {CONFIG.location}.
           </MotionWrapper>
-          <MotionWrapper aria-label="Terminal">
+
+          {/* Action CTAs */}
+          <MotionWrapper className="flex flex-wrap items-center justify-center xl:justify-start gap-4 mt-6">
+            <a
+              href="#projects"
+              className="px-6 py-3 rounded-xl text-white dk-gradient-btn font-bold text-sm md:text-base shadow-lg hover:shadow-xl transition-all"
+            >
+              Explore Projects
+            </a>
+            <a
+              href="#contact"
+              className="px-6 py-3 rounded-xl text-neutral-800 bg-white border border-gray-200 hover:border-primary font-bold text-sm md:text-base shadow-sm hover:shadow-md transition-all"
+            >
+              Let&apos;s Connect
+            </a>
+            <a
+              href={CONFIG.resume.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 rounded-xl text-primary bg-primary/10 hover:bg-primary/20 font-bold text-sm md:text-base transition-all"
+            >
+              Resume ↗
+            </a>
+          </MotionWrapper>
+
+          <MotionWrapper
+            aria-label="Terminal"
+            className="w-full flex justify-center xl:justify-start"
+          >
             <Terminal />
           </MotionWrapper>
         </div>
@@ -134,7 +161,7 @@ const HeroSection = () => {
                     animate,
                     transition,
                   },
-                  index
+                  index,
                 ) => (
                   <AnimatedImage
                     key={`decorative-image-${index.toString()}`}
@@ -148,7 +175,7 @@ const HeroSection = () => {
                     transition={transition}
                     aria-hidden={!inView}
                   />
-                )
+                ),
               )}
             </div>
           </div>

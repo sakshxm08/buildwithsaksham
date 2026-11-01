@@ -31,12 +31,13 @@ const QuoteSection = () => {
         width={item.width}
         height={item.height}
         initial={item.initial}
-        animate={{ x: 0, y: [0, -5, 0], opacity: 1 }}
+        animate={inView ? { x: 0, y: [0, -6, 0], opacity: 1 } : {}}
         transition={{
           delay: item.delay,
-          y: { duration: 3, repeat: Infinity, delay: item.delay },
+          y: { duration: 3.5, repeat: Infinity, delay: item.delay },
         }}
         alt=""
+        aria-hidden="true"
       />
     );
   };
@@ -44,37 +45,37 @@ const QuoteSection = () => {
   const animatedFloatingImages = [
     {
       className:
-        "absolute -z-10 -top-20 left-10 md:left-36 lg:left-48 lg:-top-24 w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]",
+        "hidden sm:block absolute -z-10 -top-16 left-6 md:left-24 lg:left-36 w-[60px] h-[60px] lg:w-[90px] lg:h-[90px]",
       src: ASSETS.decoratives.teaCup,
-      width: 100,
-      height: 100,
+      width: 90,
+      height: 90,
       initial: { opacity: 0 },
       delay: 0.2,
     },
     {
       className:
-        "absolute -z-10 -top-20 right-10 md:right-36 lg:right-48 lg:-top-24 w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]",
+        "hidden sm:block absolute -z-10 -top-16 right-6 md:right-24 lg:right-36 w-[60px] h-[60px] lg:w-[90px] lg:h-[90px]",
       src: ASSETS.decoratives.bulb,
-      width: 100,
-      height: 100,
+      width: 90,
+      height: 90,
       initial: { opacity: 0 },
       delay: 0.4,
     },
     {
       className:
-        "absolute -z-10 -bottom-40 md:-bottom-20 left-8 md:left-32 lg:-bottom-24 xl:left-72 w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]",
+        "hidden sm:block absolute -z-10 -bottom-16 left-8 md:left-28 xl:left-52 w-[60px] h-[60px] lg:w-[90px] lg:h-[90px]",
       src: ASSETS.decoratives.paintKit,
-      width: 100,
-      height: 100,
+      width: 90,
+      height: 90,
       initial: { opacity: 0 },
       delay: 0.6,
     },
     {
       className:
-        "absolute -z-10 -bottom-36 md:-bottom-20 right-8 md:right-28 xl:right-72 w-[70px] h-[70px] lg:w-[100px] lg:h-[100px]",
+        "hidden sm:block absolute -z-10 -bottom-16 right-8 md:right-28 xl:right-52 w-[60px] h-[60px] lg:w-[90px] lg:h-[90px]",
       src: ASSETS.decoratives.heart,
-      width: 100,
-      height: 100,
+      width: 90,
+      height: 90,
       initial: { opacity: 0 },
       delay: 0.8,
     },
@@ -86,21 +87,19 @@ const QuoteSection = () => {
         ref.current = el;
         refCallback(el);
       }}
-      className="dk-safe-x-padding dk-section-distance"
+      className="dk-safe-x-padding dk-section-distance overflow-hidden"
       aria-label="Quote Section"
     >
-      <div className="relative">
+      <div className="relative max-w-4xl mx-auto py-8">
         <MotionWrapper
           as="p"
-          initial={{ y: 100, opacity: 0 }}
+          initial={{ y: 50, opacity: 0 }}
           animate={inView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="font-medium text-base md:text-xl leading-[38px] lg:text-2xl text-accent max-w-[933px] mx-auto text-center"
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: constant quote text
-          dangerouslySetInnerHTML={{
-            __html: CONFIG.quotes.text,
-          }}
-        />
+          className="font-medium text-lg md:text-2xl leading-relaxed lg:text-3xl text-accent text-center italic"
+        >
+          &ldquo;{CONFIG.quotes.text}&rdquo;
+        </MotionWrapper>
 
         {animatedFloatingImages.map((item, index) => (
           <FloatingImage key={index.toString()} item={item} inView={inView} />
@@ -108,10 +107,10 @@ const QuoteSection = () => {
       </div>
       <MotionWrapper
         as="p"
-        initial={{ y: 100, opacity: 0 }}
+        initial={{ y: 50, opacity: 0 }}
         animate={inView ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.5, delay: 0.5 }}
-        className="font-medium text-6xl lg:text-7xl text-accent text-center mt-5"
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="font-medium text-5xl lg:text-6xl text-accent text-center mt-3"
         style={FONT_SUARTE.style}
       >
         {CONFIG.quotes.author}

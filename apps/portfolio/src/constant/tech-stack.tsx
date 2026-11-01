@@ -1,15 +1,23 @@
 import {
-  SiExpo,
+  SiAmazonwebservices,
+  SiDocker,
   SiExpress,
+  SiGit,
+  SiGo,
   SiJavascript,
-  SiLaravel,
+  SiMongodb,
   SiNextdotjs,
-  SiPrisma,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
   SiReact,
+  SiRedux,
+  SiRubyonrails,
   SiTailwindcss,
   SiTypescript,
+  SiVite,
+  SiVuedotjs,
 } from "react-icons/si";
-import { TbBrandReactNative } from "react-icons/tb";
 
 /**
  * Register your tech stack used in your projects here.
@@ -17,46 +25,76 @@ import { TbBrandReactNative } from "react-icons/tb";
  */
 export const TECH_STACK = {
   nextjs: {
-    name: "Next JS",
+    name: "Next.js",
     icon: <SiNextdotjs />,
-    color: "text-gray-900",
+    color: "text-neutral-900 dark:text-neutral-100",
     siteUrl: "https://nextjs.org/",
   },
-  laravel: {
-    name: "Laravel",
-    icon: <SiLaravel />,
-    color: "text-red-500",
-    siteUrl: "https://laravel.com/",
+  reactjs: {
+    name: "React",
+    icon: <SiReact />,
+    color: "text-cyan-500",
+    siteUrl: "https://react.dev/",
   },
-  expo: {
-    name: "Expo",
-    icon: <SiExpo />,
-    color: "text-black",
-    siteUrl: "https://expo.dev/",
-  },
-  prisma: {
-    name: "Prisma",
-    icon: <SiPrisma />,
-    color: "text-neutral-800",
-    siteUrl: "https://www.prisma.io/",
-  },
-  expressjs: {
-    name: "Express JS",
-    icon: <SiExpress />,
-    color: "text-black",
-    siteUrl: "https://expressjs.com/",
+  typescript: {
+    name: "TypeScript",
+    icon: <SiTypescript />,
+    color: "text-blue-600",
+    siteUrl: "https://www.typescriptlang.org/",
   },
   javascript: {
-    name: "Javascript",
+    name: "JavaScript",
     icon: <SiJavascript />,
-    color: "text-yellow-400",
+    color: "text-amber-400",
     siteUrl: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
   },
-  reactjs: {
-    name: "React JS",
-    icon: <SiReact />,
+  nodejs: {
+    name: "Node.js",
+    icon: <SiNodedotjs />,
+    color: "text-emerald-600",
+    siteUrl: "https://nodejs.org/",
+  },
+  expressjs: {
+    name: "Express.js",
+    icon: <SiExpress />,
+    color: "text-neutral-800",
+    siteUrl: "https://expressjs.com/",
+  },
+  mongodb: {
+    name: "MongoDB",
+    icon: <SiMongodb />,
+    color: "text-emerald-500",
+    siteUrl: "https://www.mongodb.com/",
+  },
+  postgresql: {
+    name: "PostgreSQL",
+    icon: <SiPostgresql />,
+    color: "text-blue-600",
+    siteUrl: "https://www.postgresql.org/",
+  },
+  python: {
+    name: "Python",
+    icon: <SiPython />,
     color: "text-blue-500",
-    siteUrl: "https://reactjs.org/",
+    siteUrl: "https://www.python.org/",
+  },
+  rubyonrails: {
+    name: "Ruby on Rails",
+    icon: <SiRubyonrails />,
+    color: "text-rose-600",
+    siteUrl: "https://rubyonrails.org/",
+  },
+  docker: {
+    name: "Docker",
+    icon: <SiDocker />,
+    color: "text-sky-500",
+    siteUrl: "https://www.docker.com/",
+  },
+  aws: {
+    name: "AWS",
+    icon: <SiAmazonwebservices />,
+    color: "text-amber-500",
+    siteUrl: "https://aws.amazon.com/",
   },
   tailwindcss: {
     name: "Tailwind CSS",
@@ -64,16 +102,34 @@ export const TECH_STACK = {
     color: "text-cyan-500",
     siteUrl: "https://tailwindcss.com/",
   },
-  reactnative: {
-    name: "React Native",
-    icon: <TbBrandReactNative />,
-    color: "text-blue-500",
-    siteUrl: "https://reactnative.dev/",
+  redux: {
+    name: "Redux",
+    icon: <SiRedux />,
+    color: "text-purple-600",
+    siteUrl: "https://redux.js.org/",
   },
-  typescript: {
-    name: "Typescript",
-    icon: <SiTypescript />,
-    color: "text-blue-600",
-    siteUrl: "https://www.typescriptlang.org/",
+  golang: {
+    name: "Go (Golang)",
+    icon: <SiGo />,
+    color: "text-cyan-600",
+    siteUrl: "https://go.dev/",
+  },
+  vite: {
+    name: "Vite",
+    icon: <SiVite />,
+    color: "text-purple-500",
+    siteUrl: "https://vitejs.dev/",
+  },
+  vuejs: {
+    name: "Vue.js",
+    icon: <SiVuedotjs />,
+    color: "text-emerald-500",
+    siteUrl: "https://vuejs.org/",
+  },
+  git: {
+    name: "Git",
+    icon: <SiGit />,
+    color: "text-orange-600",
+    siteUrl: "https://git-scm.com/",
   },
 } satisfies Record<string, TechStack>;

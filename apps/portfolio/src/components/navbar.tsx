@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { BsFileEarmarkPerson } from "react-icons/bs";
 import { RxCaretRight } from "react-icons/rx";
 import { CONFIG } from "@/config";
-import { NAVIGATION_LINKS } from "@/constant/navigation";
-import Image from "next/image";
 import { ASSETS } from "@/constant/assets";
+import { NAVIGATION_LINKS } from "@/constant/navigation";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -59,29 +59,33 @@ const Navbar = () => {
       >
         {/* <Banner /> */}
         <div className="flex flex-row items-center justify-between py-6 border-b-2 border-b-gray dk-safe-x-padding">
-          <Link className="z-50" href="/" onClick={closeMenu} prefetch={false}>
-            {/* <div className="w-8 h-10 lg:w-[42px] lg:h-[50px]"> */}
-            {/* <BrandIcon /> */}
+          <Link
+            className="z-50 flex items-center gap-3 group"
+            href="/"
+            onClick={closeMenu}
+            prefetch={false}
+          >
             <Image
               src={ASSETS.logos.buildwithsaksham}
-              alt="Logo"
-              // width={42}
-              height={40}
+              alt="Build With Saksham"
+              height={38}
               className="object-contain"
             />
-            {/* </div> */}
+            <span className="font-montserrat font-bold text-lg md:text-xl text-neutral-900 tracking-tight group-hover:text-primary transition-colors">
+              Build With <span className="dk-gradient-text">Saksham</span>
+            </span>
           </Link>
           {/* desktop menu */}
-          <div className="flex-row items-center justify-between hidden text-lg font-bold md:flex md:gap-6 lg:gap-8">
-            <ul className="flex flex-row md:gap-6 lg:gap-8 justify-evenly">
+          <div className="flex-row items-center justify-between hidden text-base lg:text-lg font-bold md:flex md:gap-4 lg:gap-6">
+            <ul className="flex flex-row md:gap-4 lg:gap-6 justify-evenly">
               {NAVIGATION_LINKS.map((link, _index) => (
                 <li key={link.name}>
                   <Link
                     className={`${
                       pathname === link.href
-                        ? "text-accent"
-                        : "text-accent2 hover:text-gray-500 duration-300"
-                    } p-4`}
+                        ? "text-primary"
+                        : "text-accent2 hover:text-neutral-900 transition-colors"
+                    } py-2 px-3`}
                     href={link.href}
                   >
                     {link.name}
@@ -90,17 +94,21 @@ const Navbar = () => {
               ))}
             </ul>
             <a
-              className="px-6 py-2 text-white dk-gradient-btn rounded-xl"
+              className="px-5 py-2 text-white dk-gradient-btn rounded-xl shadow-md hover:shadow-lg transition-all"
               href={CONFIG.resume.downloadUrl}
               download={CONFIG.resume.fileName}
               target="_blank"
+              rel="noopener noreferrer"
             >
               Resume
             </a>
           </div>
           {/* mobile hamburger menu */}
           <div className="z-50 md:hidden">
-            <label className="cursor-pointer hamburger">
+            <label
+              className="cursor-pointer hamburger"
+              aria-label="Toggle navigation menu"
+            >
               <input
                 className="hidden"
                 type="checkbox"
@@ -162,9 +170,12 @@ const Navbar = () => {
             ))}
             <li className="flex text-white rounded-lg dk-gradient-bg">
               <a
-                href="/"
+                href={CONFIG.resume.downloadUrl}
                 className="flex-1 py-4 dk-safe-x-padding"
-                download="Deri Kurniawan Resume"
+                download={CONFIG.resume.fileName}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-2xl font-semibold">Resume</span>

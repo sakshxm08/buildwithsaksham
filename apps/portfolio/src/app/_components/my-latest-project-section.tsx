@@ -2,203 +2,189 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { BsGithub } from "react-icons/bs";
-import { FiFigma } from "react-icons/fi";
+import { useMemo, useState } from "react";
+import { BsArrowRight, BsGithub } from "react-icons/bs";
 import { IoMdOpen } from "react-icons/io";
 import { useInView } from "react-intersection-observer";
 import MotionWrapper from "@/components/motion-wrapper";
 import SectionHeader from "@/components/section-header";
 import { CONFIG } from "@/config";
-import { ASSETS } from "@/constant/assets";
 
-const tabs = [
-  {
-    name: "Project",
-    image: ASSETS.home.myLatestProject.suitcase,
-    data: [...CONFIG.projects],
-  },
-  {
-    name: "More",
-    image: ASSETS.home.myLatestProject.rocket,
-    data: [],
-  },
+const CATEGORIES = [
+  "All",
+  "AI & EdTech",
+  "Full Stack & E-Commerce",
+  "Dev Tools & Systems",
 ];
 
 const MyLatestProjectSection = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
 
-  const router = useRouter();
-
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get("tab");
-    if (tab && parseInt(tab, 10) < tabs.length - 1) {
-      setActiveTab(parseInt(tab, 10));
+  const filteredProjects = useMemo(() => {
+    if (selectedCategory === "All") {
+      return CONFIG.projects;
     }
-  }, []);
+    if (selectedCategory === "Dev Tools & Systems") {
+      return CONFIG.projects.filter(
+        (p) =>
+          p.category.includes("Dev Tools") ||
+          p.category.includes("System") ||
+          p.category.includes("CLI"),
+      );
+    }
+    return CONFIG.projects.filter((p) => p.category.includes(selectedCategory));
+  }, [selectedCategory]);
 
   return (
-    <section ref={ref} className="dk-safe-x-padding dk-section-distance">
+    <section
+      id="projects"
+      ref={ref}
+      className="dk-safe-x-padding dk-section-distance scroll-mt-24"
+      aria-label="Projects Section"
+    >
       <SectionHeader
-        title="My Latest Project"
-        description="Take a look at something I've worked on, such as a case study, real project, and more."
+        title="Featured Projects"
+        description="A selection of production web platforms, AI tools, and developer systems I've architected and built."
         inViewport={inView}
         className="text-center"
         animate
       />
-      <div className="mt-[50px] h-full">
-        <div className="flex flex-col items-center justify-center md:items-start md:flex-row gap-9">
-          {/* tabs */}
-          <div className="flex flex-row md:flex-col bg-gray p-3 md:p-[26px] rounded-2xl md:rounded-[25px] gap-x-3 md:gap-x-0 gap-y-[26px]">
-            {tabs.map((tab, index) => (
-              <MotionWrapper
-                as="button"
-                key={index.toString()}
-                className={`relative ${
-                  activeTab === index ? "dk-gradient-bg" : "bg-white"
-                } w-[75px] h-[75px] md:w-[150px] md:h-[150px] rounded-2xl md:rounded-[25px] flex justify-center items-center shadow-xl overflow-hidden cursor-pointer`}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                onClick={() => {
-                  if (index === tabs.length - 1) {
-                    router.push("/project");
-                    return;
-                  }
-                  setActiveTab(index);
-                  window.history.pushState({}, "", `?tab=${index}`);
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
+
+      {/* Category Filter Pills */}
+      <div className="flex flex-wrap items-center justify-center gap-2.5 mt-10">
+        {CATEGORIES.map((category) => (
+          <button
+            key={category}
+            type="button"
+            onClick={() => setSelectedCategory(category)}
+            className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
+              selectedCategory === category
+                ? "dk-gradient-bg text-white shadow-md scale-105"
+                : "bg-white text-neutral-700 border border-gray-200 hover:border-primary hover:text-primary"
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Projects Grid */}
+      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {filteredProjects.map((project, index) => (
+          <MotionWrapper
+            key={project.title}
+            as="article"
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: (index % 6) * 0.08 }}
+            whileHover={{ y: -6 }}
+            className="group flex flex-col justify-between rounded-3xl bg-white border border-gray-100 shadow-sm hover:shadow-2xl hover:border-primary/30 transition-all duration-300 overflow-hidden"
+          >
+            <div>
+              {/* Thumbnail Header */}
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-900 border-b border-gray-100">
                 <Image
-                  src={tab.image}
-                  alt={`${tab.name} tab icon`}
-                  width={100}
-                  height={100}
-                  style={{ height: "auto" }}
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  width={600}
+                  height={375}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute top-0 left-0 flex items-center justify-center w-full h-full transition-opacity duration-300 opacity-0 bg-gray/10 backdrop-blur-sm rounded-2xl md:rounded-[25px] hover:opacity-100 md:text-2xl">
-                  <p
-                    className={`${
-                      activeTab === index ? "text-white" : "text-accent"
-                    } font-bold transition-colors duration-75 ease-in-out`}
-                  >
-                    {tab.name}
-                  </p>
+                <span className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-xs font-bold bg-white/95 text-neutral-900 shadow-md backdrop-blur-sm">
+                  {project.category}
+                </span>
+              </div>
+
+              {/* Body */}
+              <div className="p-6">
+                <h3 className="font-montserrat font-bold text-xl text-neutral-900 group-hover:text-primary transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="mt-2.5 text-sm text-accent2 leading-relaxed line-clamp-3">
+                  {project.summary}
+                </p>
+
+                {/* Tech Stack Chips */}
+                <div className="flex flex-wrap items-center gap-2 mt-4">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech.name}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray text-neutral-800"
+                      title={tech.name}
+                    >
+                      <span className={`${tech.color} text-sm`}>
+                        {tech.icon}
+                      </span>
+                      <span>{tech.name}</span>
+                    </span>
+                  ))}
                 </div>
-              </MotionWrapper>
-            ))}
-          </div>
-          {/* content */}
-          <div className="overflow-hidden">
-            <div className="bg-gray rounded-[36px] p-[26px] w-full h-[600px] overflow-y-auto">
-              <div className="grid grid-flow-row grid-cols-12 gap-[26px]">
-                {tabs.map((tab, tabIndex) =>
-                  tab.data.map(
-                    (item, dataIndex) =>
-                      activeTab === tabIndex && (
-                        <MotionWrapper
-                          key={dataIndex.toString()}
-                          className="relative col-span-12 overflow-hidden group xl:col-span-6"
-                          initial={{ opacity: 0, x: -50 }}
-                          animate={inView ? { opacity: 1, x: 0 } : {}}
-                          transition={{ duration: 0.5 }}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <div className="col-span-6">
-                            <MotionWrapper
-                              className="bg-white p-[26px] rounded-2xl md:rounded-[25px] h-[261px] overflow-hidden"
-                              initial={{ opacity: 0, x: -50 }}
-                              animate={inView ? { opacity: 1, x: 0 } : {}}
-                              transition={{
-                                duration: 0.5,
-                                delay: 0.2 + dataIndex * 0.1,
-                              }}
-                            >
-                              <Image
-                                className="object-contain w-full h-auto"
-                                src={item.image}
-                                alt={`${item.title} project image`}
-                                width={441}
-                                height={261}
-                                priority
-                              />
-                            </MotionWrapper>
-                          </div>
-                          <div className="absolute top-0 bottom-0 left-0 right-0 transition-all duration-300 opacity-0 backdrop-blur-0 gap-y-2 group-hover:opacity-100 group-hover:backdrop-blur-sm bg-gray/10 rounded-2xl">
-                            <div className="flex flex-col items-center justify-center w-full h-full select-none lg:select-auto">
-                              <p className="p-8 text-xl font-bold text-center transition-all duration-150 ease-in-out line-clamp-1">
-                                {item.title}
-                              </p>
-                              <div className="flex flex-row gap-4 text-3xl">
-                                {item?.urls?.demo && (
-                                  <Link
-                                    className="p-4 transition-all duration-300 ease-in-out bg-gray rounded-2xl hover:text-white hover:bg-linear-to-r hover:from-primary hover:to-secondary"
-                                    href={{
-                                      pathname: item.urls?.demo,
-                                      query: {
-                                        utm_medium: "campaign",
-                                        utm_campaign: "3d-theme-portfolio",
-                                      },
-                                    }}
-                                    target="_blank"
-                                    title="Demo"
-                                  >
-                                    <IoMdOpen />
-                                  </Link>
-                                )}
-                                {item?.urls?.github && (
-                                  <Link
-                                    className="p-4 transition-all duration-150 ease-in-out bg-gray rounded-2xl hover:text-white hover:bg-linear-to-r hover:from-primary hover:to-secondary"
-                                    href={{
-                                      pathname: item.urls?.github,
-                                      query: {
-                                        utm_medium: "campaign",
-                                        utm_campaign: "3d-theme-portfolio",
-                                      },
-                                    }}
-                                    target="_blank"
-                                    title="GitHub Repository"
-                                  >
-                                    <BsGithub />
-                                  </Link>
-                                )}
-                                {item?.urls?.figma && (
-                                  <Link
-                                    className="p-4 transition-all duration-150 ease-in-out bg-gray rounded-2xl hover:text-white hover:bg-linear-to-r hover:from-primary hover:to-secondary"
-                                    href={{
-                                      pathname: item.urls.figma,
-                                      query: {
-                                        utm_medium: "campaign",
-                                        utm_campaign: "3d-theme-portfolio",
-                                      },
-                                    }}
-                                    target="_blank"
-                                    title="Figma Design"
-                                  >
-                                    <FiFigma />
-                                  </Link>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </MotionWrapper>
-                      ),
-                  ),
+
+                {/* Highlights */}
+                {project.highlights && (
+                  <ul className="mt-4 space-y-1">
+                    {project.highlights.slice(0, 2).map((highlight) => (
+                      <li
+                        key={highlight}
+                        className="flex items-center gap-2 text-xs text-accent2"
+                      >
+                        <span className="size-1.5 rounded-full bg-primary" />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
             </div>
-          </div>
-        </div>
+
+            {/* Footer Actions */}
+            <div className="p-6 pt-0 border-t border-gray-100/60 mt-4 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                {project.urls.demo && (
+                  <a
+                    href={project.urls.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white dk-gradient-btn shadow-sm hover:shadow-md transition-all"
+                    aria-label={`Live demo for ${project.title}`}
+                  >
+                    <IoMdOpen className="text-base" />
+                    <span>Live Demo</span>
+                  </a>
+                )}
+                {project.urls.github && (
+                  <a
+                    href={project.urls.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-neutral-800 bg-gray hover:bg-neutral-800 hover:text-white transition-all"
+                    aria-label={`GitHub repository for ${project.title}`}
+                  >
+                    <BsGithub className="text-sm" />
+                    <span>GitHub</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </MotionWrapper>
+        ))}
+      </div>
+
+      {/* View All Projects CTA */}
+      <div className="flex justify-center mt-12">
+        <Link
+          href="/project"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-neutral-900 text-white font-bold text-sm md:text-base hover:bg-neutral-800 shadow-lg hover:shadow-xl hover:gap-3 transition-all"
+        >
+          <span>Explore All {CONFIG.projects.length} Projects</span>
+          <BsArrowRight className="text-lg" />
+        </Link>
       </div>
     </section>
   );

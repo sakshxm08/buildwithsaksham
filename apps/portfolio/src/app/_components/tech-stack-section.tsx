@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import MotionWrapper from "@/components/motion-wrapper";
 import SectionHeader from "@/components/section-header";
@@ -13,40 +12,47 @@ const TechStackSection = () => {
   });
 
   return (
-    <section ref={ref} className="dk-safe-x-padding dk-section-distance">
+    <section
+      ref={ref}
+      className="dk-safe-x-padding dk-section-distance"
+      aria-label="Technology Stack Section"
+    >
       <SectionHeader
-        title="Technology Stack"
-        description="I am concerned about security and performance for my clients. That's why I always keep updating and use the best technologies in a product."
+        title="Technical Skills &amp; Stack"
+        description="A curated toolkit of modern frameworks, programming languages, databases, and cloud technologies I build with."
         inViewport={inView}
         className="text-center"
         animate
       />
       <div className="flex items-center justify-center mt-12">
-        <div className="flex flex-row gap-[50px] max-w-[864px] flex-wrap justify-center items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 max-w-5xl w-full">
           {CONFIG.techStacks.map((item, index) => (
-            <div key={index.toString()} className="relative h-full">
-              <MotionWrapper
-                className="flex justify-center items-center size-[100px]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+            <MotionWrapper
+              key={item.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              whileHover={{ y: -4, scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="group relative flex flex-col items-center justify-center p-5 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-primary/40 transition-all duration-300"
+            >
+              <a
+                href={item.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={`Visit ${item.name} documentation`}
+                className="flex flex-col items-center justify-center w-full text-center"
               >
-                <Link
-                  href={`${item.siteUrl}?utm_source=deri.my.id&utm_medium=campaign&utm_campaign=portfolio`}
-                  target="_blank"
-                  title={`Figure out about ${item.name}`}
+                <div
+                  className={`${item.color} text-4xl md:text-5xl mb-3 group-hover:scale-110 transition-transform duration-300`}
                 >
-                  <span
-                    className={`${item.color} **:size-20 lg:**:size-[100px]`}
-                  >
-                    {item.icon}
-                    <div className="sr-only">{item.name} Technology</div>
-                  </span>
-                </Link>
-              </MotionWrapper>
-            </div>
+                  {item.icon}
+                </div>
+                <span className="font-montserrat font-bold text-sm text-neutral-800 group-hover:text-primary transition-colors">
+                  {item.name}
+                </span>
+              </a>
+            </MotionWrapper>
           ))}
         </div>
       </div>

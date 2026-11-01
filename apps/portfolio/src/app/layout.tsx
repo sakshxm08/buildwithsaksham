@@ -8,34 +8,31 @@ import "./globals.css";
 
 export const dynamic = "force-static";
 
+const fullName = `${CONFIG.name.first} ${CONFIG.name.last}`;
+const siteDescription = `${fullName} — ${CONFIG.role} based in ${CONFIG.location}. Transforming ideas into high-performance, user-centric web experiences with modern architecture.`;
+
 export const metadata: Metadata = {
-  title: "3D theme Portfolio",
-  description: `${CONFIG.name.first.concat(
-    " ",
-    CONFIG.name.last
-  )}'s 3D theme Portfolio`,
+  title: {
+    default: `${fullName} — ${CONFIG.role}`,
+    template: `%s | ${fullName}`,
+  },
+  description: siteDescription,
   openGraph: {
-    title: "3D theme Portfolio",
-    description: `${CONFIG.name.first.concat(
-      " ",
-      CONFIG.name.last
-    )}'s 3D theme Portfolio`,
+    title: `${fullName} — ${CONFIG.role}`,
+    description: siteDescription,
     url: env.NEXT_PUBLIC_APP_URL,
     images: [
       {
         url: `${env.NEXT_PUBLIC_APP_URL}/og-image.webp`,
         width: 1200,
         height: 630,
-        alt: "3D theme Portfolio",
+        alt: `${fullName} Portfolio`,
       },
     ],
   },
   twitter: {
-    title: "3D theme Portfolio",
-    description: `${CONFIG.name.first.concat(
-      " ",
-      CONFIG.name.last
-    )}'s 3D theme Portfolio`,
+    title: `${fullName} — ${CONFIG.role}`,
+    description: siteDescription,
     images: [`${env.NEXT_PUBLIC_APP_URL}/og-image.webp`],
     card: "summary_large_image",
   },
@@ -47,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body
         className={`${FONT_MONTSERRAT.variable} ${FONT_POPPINS.variable} antialiased`}
       >

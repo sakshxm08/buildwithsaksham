@@ -1,0 +1,77 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-ohstree" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#18181B"/>
+      <stop offset="50%" stop-color="#27272A"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <linearGradient id="ohs-accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="50%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="20" fill="url(#bg-ohstree)"/>
+  <circle cx="680" cy="100" r="150" fill="#F59E0B" fill-opacity="0.08" filter="blur(40px)"/>
+  <circle cx="120" cy="380" r="160" fill="#E11D48" fill-opacity="0.08" filter="blur(40px)"/>
+
+  <!-- Browser frame -->
+  <rect x="80" y="50" width="640" height="380" rx="16" fill="#18181B" stroke="#3F3F46" stroke-width="1.5"/>
+  <rect x="80" y="50" width="640" height="42" rx="16" fill="#27272A"/>
+  <rect x="80" y="78" width="640" height="14" fill="#27272A"/>
+  <circle cx="106" cy="71" r="5" fill="#EF4444"/>
+  <circle cx="124" cy="71" r="5" fill="#F59E0B"/>
+  <circle cx="142" cy="71" r="5" fill="#10B981"/>
+  <text x="400" y="76" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="12" font-weight="600" text-anchor="middle">ohstree.in — E-Commerce Storefront &amp; Admin Platform</text>
+
+  <!-- Storefront Header -->
+  <rect x="105" y="105" width="590" height="36" rx="8" fill="#27272A"/>
+  <text x="125" y="128" fill="#F4F4F5" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">OHSTREE</text>
+  <text x="210" y="128" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="11">Shop</text>
+  <text x="260" y="128" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="11">Collections</text>
+  <text x="345" y="128" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="11">About</text>
+  <rect x="620" y="112" width="60" height="22" rx="6" fill="#F59E0B"/>
+  <text x="650" y="127" fill="#18181B" font-family="system-ui, sans-serif" font-size="10" font-weight="bold" text-anchor="middle">Cart (3)</text>
+
+  <!-- Product Grid -->
+  <!-- Product 1 -->
+  <rect x="105" y="155" width="185" height="255" rx="10" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+  <rect x="115" y="165" width="165" height="130" rx="8" fill="#3F3F46"/>
+  <circle cx="197" cy="230" r="35" fill="#52525B"/>
+  <text x="197" y="235" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">✨</text>
+  <text x="120" y="315" fill="#F4F4F5" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Oversized Heavy Tee</text>
+  <text x="120" y="332" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="10">Premium 280 GSM Cotton</text>
+  <text x="120" y="354" fill="#F59E0B" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">₹1,499</text>
+  <rect x="120" y="368" width="155" height="28" rx="6" fill="#F59E0B"/>
+  <text x="197" y="386" fill="#18181B" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Add to Cart</text>
+
+  <!-- Product 2 -->
+  <rect x="305" y="155" width="185" height="255" rx="10" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+  <rect x="315" y="165" width="165" height="130" rx="8" fill="#3F3F46"/>
+  <circle cx="397" cy="230" r="35" fill="#52525B"/>
+  <text x="397" y="235" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" text-anchor="middle">🧥</text>
+  <text x="320" y="315" fill="#F4F4F5" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Minimalist Hoodie</text>
+  <text x="320" y="332" fill="#A1A1AA" font-family="system-ui, sans-serif" font-size="10">Fleece Brushed Interior</text>
+  <text x="320" y="354" fill="#F59E0B" font-family="system-ui, sans-serif" font-size="12" font-weight="bold">₹2,899</text>
+  <rect x="320" y="368" width="155" height="28" rx="6" fill="#F59E0B"/>
+  <text x="397" y="386" fill="#18181B" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">Add to Cart</text>
+
+  <!-- Admin / Pipeline Stats Card -->
+  <rect x="505" y="155" width="190" height="255" rx="10" fill="#27272A" stroke="#3F3F46" stroke-width="1"/>
+  <text x="520" y="180" fill="#F4F4F5" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Platform Features</text>
+  
+  <rect x="520" y="195" width="160" height="32" rx="6" fill="#18181B"/>
+  <text x="530" y="215" fill="#10B981" font-family="system-ui, sans-serif" font-size="10" font-weight="600">✓ Resend Emails</text>
+
+  <rect x="520" y="235" width="160" height="32" rx="6" fill="#18181B"/>
+  <text x="530" y="255" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="10" font-weight="600">✓ Shiprocket Tracking</text>
+
+  <rect x="520" y="275" width="160" height="32" rx="6" fill="#18181B"/>
+  <text x="530" y="295" fill="#F59E0B" font-family="system-ui, sans-serif" font-size="10" font-weight="600">✓ OTP Session Auth</text>
+
+  <rect x="520" y="315" width="160" height="32" rx="6" fill="#18181B"/>
+  <text x="530" y="335" fill="#A855F7" font-family="system-ui, sans-serif" font-size="10" font-weight="600">✓ Redux + Mongo Store</text>
+
+  <rect x="520" y="360" width="160" height="36" rx="6" fill="#3F3F46"/>
+  <text x="600" y="382" fill="#E4E4E7" font-family="system-ui, sans-serif" font-size="10" font-weight="600" text-anchor="middle">Next.js App Router</text>
+</svg>

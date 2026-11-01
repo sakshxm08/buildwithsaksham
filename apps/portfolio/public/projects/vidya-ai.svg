@@ -1,0 +1,108 @@
+<svg width="800" height="480" viewBox="0 0 800 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-vidya" x1="0" y1="0" x2="800" y2="480" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#311042"/>
+    </linearGradient>
+    <linearGradient id="card-grad" x1="100" y1="60" x2="700" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="accent-vidya" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="50%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+    <filter id="shadow" x="60" y="40" width="680" height="400" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" rx="20" fill="url(#bg-vidya)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="80" r="160" fill="#6366F1" fill-opacity="0.12" filter="blur(40px)"/>
+  <circle cx="100" cy="400" r="180" fill="#EC4899" fill-opacity="0.1" filter="blur(40px)"/>
+
+  <!-- Window Frame -->
+  <g filter="url(#shadow)">
+    <rect x="80" y="50" width="640" height="380" rx="16" fill="url(#card-grad)" stroke="#334155" stroke-width="1.5"/>
+    <!-- Window Header -->
+    <rect x="80" y="50" width="640" height="44" rx="16" fill="#1E293B"/>
+    <rect x="80" y="78" width="640" height="16" fill="#1E293B"/>
+    <circle cx="106" cy="72" r="5" fill="#EF4444"/>
+    <circle cx="124" cy="72" r="5" fill="#F59E0B"/>
+    <circle cx="142" cy="72" r="5" fill="#10B981"/>
+    <text x="400" y="77" fill="#94A3B8" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" text-anchor="middle">VidyaAI — Socratic DSA Learning Assistant</text>
+
+    <!-- App Content Layout -->
+    <!-- Left Chat / Dialogue Area -->
+    <rect x="105" y="110" width="370" height="300" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    
+    <!-- Socratic AI bubble -->
+    <rect x="125" y="130" width="310" height="70" rx="10" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+    <circle cx="145" cy="150" r="12" fill="url(#accent-vidya)"/>
+    <text x="145" y="154" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">V</text>
+    <text x="168" y="152" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Vidya Socratic Tutor</text>
+    <text x="168" y="172" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">What invariant changes when we partition the array?</text>
+    <text x="168" y="186" fill="#64748B" font-family="system-ui, sans-serif" font-size="9">Guided thinking • NeMo Guardrails protected</text>
+
+    <!-- User bubble -->
+    <rect x="165" y="215" width="290" height="50" rx="10" fill="#4338CA" fill-opacity="0.4" stroke="#6366F1" stroke-width="1"/>
+    <text x="180" y="235" fill="#E0E7FF" font-family="system-ui, sans-serif" font-size="10" font-weight="500">Elements smaller than the pivot shift to left,</text>
+    <text x="180" y="250" fill="#C7D2FE" font-family="system-ui, sans-serif" font-size="10">larger elements shift to right.</text>
+
+    <!-- Socratic AI followup bubble -->
+    <rect x="125" y="280" width="310" height="60" rx="10" fill="#1E293B" stroke="#475569" stroke-width="1"/>
+    <circle cx="145" cy="300" r="12" fill="url(#accent-vidya)"/>
+    <text x="145" y="304" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" text-anchor="middle">V</text>
+    <text x="168" y="300" fill="#E2E8F0" font-family="system-ui, sans-serif" font-size="11" font-weight="600">Vidya</text>
+    <text x="168" y="318" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="10">Spot on! How does that affect average time complexity?</text>
+
+    <!-- Input bar -->
+    <rect x="125" y="355" width="330" height="38" rx="8" fill="#1E293B" stroke="#6366F1" stroke-width="1"/>
+    <text x="140" y="378" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">Type your reasoning here...</text>
+    <rect x="420" y="361" width="26" height="26" rx="6" fill="url(#accent-vidya)"/>
+    <path d="M430 374 L436 369 L430 364" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Right Sidebar: Badges & Features -->
+    <rect x="495" y="110" width="205" height="300" rx="12" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+    
+    <text x="515" y="140" fill="#F8FAFC" font-family="system-ui, sans-serif" font-size="13" font-weight="700">VidyaAI</text>
+    <text x="515" y="158" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="10">Socratic Teaching Assistant</text>
+
+    <!-- Pills -->
+    <rect x="515" y="175" width="88" height="22" rx="11" fill="#312E81"/>
+    <text x="559" y="189" fill="#A5B4FC" font-family="system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">NVIDIA NeMo</text>
+
+    <rect x="610" y="175" width="70" height="22" rx="11" fill="#065F46"/>
+    <text x="645" y="189" fill="#6EE7B7" font-family="system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">DSA Topics</text>
+
+    <rect x="515" y="205" width="65" height="22" rx="11" fill="#701A75"/>
+    <text x="547" y="219" fill="#F472B6" font-family="system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">LLM Core</text>
+
+    <rect x="586" y="205" width="60" height="22" rx="11" fill="#1E3A8A"/>
+    <text x="616" y="219" fill="#93C5FD" font-family="system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">React UI</text>
+
+    <!-- Topic progress -->
+    <text x="515" y="255" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="10" font-weight="600">Learning Progress</text>
+    
+    <text x="515" y="278" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9">QuickSort &amp; Divide/Conquer</text>
+    <rect x="515" y="285" width="165" height="6" rx="3" fill="#1E293B"/>
+    <rect x="515" y="285" width="140" height="6" rx="3" fill="url(#accent-vidya)"/>
+
+    <text x="515" y="310" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9">Binary Search Trees</text>
+    <rect x="515" y="317" width="165" height="6" rx="3" fill="#1E293B"/>
+    <rect x="515" y="317" width="110" height="6" rx="3" fill="#10B981"/>
+
+    <text x="515" y="342" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9">Dynamic Programming</text>
+    <rect x="515" y="349" width="165" height="6" rx="3" fill="#1E293B"/>
+    <rect x="515" y="349" width="85" height="6" rx="3" fill="#F59E0B"/>
+
+    <!-- Bottom note -->
+    <rect x="515" y="375" width="165" height="24" rx="6" fill="#1E293B"/>
+    <text x="597" y="391" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="9" font-weight="600" text-anchor="middle">Interactive Socratic Feedback</text>
+  </g>
+</svg>

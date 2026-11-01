@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { GoCopy } from "react-icons/go";
 import { MdDone } from "react-icons/md";
-import { useState } from "react";
 
 const Terminal = () => {
   const [hasCopied, setHasCopied] = useState(false);
@@ -26,14 +26,18 @@ const Terminal = () => {
         <span>
           <span className="text-main-500">npx</span> buildwithsaksham
         </span>
-        <div
+        <button
+          type="button"
+          aria-label={
+            hasCopied ? "Command copied" : "Copy npx command to clipboard"
+          }
           className={`${
             hasCopied ? "dk-gradient-bg" : "hover:bg-primary/20"
-          } aspect-square w-8 flex items-center justify-center border border-gray-400 rounded hover:border-primary cursor-pointer transition-all duration-500`}
+          } aspect-square w-8 flex items-center justify-center border border-gray-400 rounded hover:border-primary cursor-pointer transition-all duration-300`}
           onClick={onCopy}
         >
           {hasCopied ? <MdDone className="text-white" /> : <GoCopy />}
-        </div>
+        </button>
       </div>
     </pre>
   );
