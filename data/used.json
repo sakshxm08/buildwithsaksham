@@ -4,10 +4,14 @@
     "https://florianwilhelm.info/2026/10/sentinel_values/",
     "https://nolanlawson.com/2026/10/28/the-ai-cost-of-javascript-frameworks/",
     "https://www.youtube.com/watch?v=gQRmSlcTq9c",
-    "https://dev.to/sizzlebop/i-retested-my-moe-offloading-benchmarks-some-of-my-conclusions-changed-6f4"
+    "https://dev.to/sizzlebop/i-retested-my-moe-offloading-benchmarks-some-of-my-conclusions-changed-6f4",
+    "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
+    "https://github.com/postmanlabs/postman-app-support/issues/14370",
+    "https://www.figma.com/blog/training-a-figma-fluent-editing-model/"
   ],
   "titles": [
     "AI, Lean, and the Future of Formal Verification",
-    "The Hidden AI Cost of JavaScript Frameworks"
+    "The Hidden AI Cost of JavaScript Frameworks",
+    "Nvidia RTX Spark Encrypted Firmware Slows Inference Speed by 35% on Linux – What Developers Need to Know"
   ]
 }
