@@ -7,11 +7,15 @@
     "https://dev.to/sizzlebop/i-retested-my-moe-offloading-benchmarks-some-of-my-conclusions-changed-6f4",
     "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
     "https://github.com/postmanlabs/postman-app-support/issues/14370",
-    "https://www.figma.com/blog/training-a-figma-fluent-editing-model/"
+    "https://www.figma.com/blog/training-a-figma-fluent-editing-model/",
+    "https://www.anthropic.com/research/provable-inference",
+    "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+    "https://arxiv.org/abs/2611.06918"
   ],
   "titles": [
     "AI, Lean, and the Future of Formal Verification",
     "The Hidden AI Cost of JavaScript Frameworks",
-    "Nvidia RTX Spark Encrypted Firmware Slows Inference Speed by 35% on Linux – What Developers Need to Know"
+    "Nvidia RTX Spark Encrypted Firmware Slows Inference Speed by 35% on Linux – What Developers Need to Know",
+    "Progress on Provable Inference for Large Language Models"
   ]
 }
