@@ -7,11 +7,15 @@
     "https://dev.to/sizzlebop/i-retested-my-moe-offloading-benchmarks-some-of-my-conclusions-changed-6f4",
     "https://www.mindstudio.ai/blog/linux-nvidia-rtx-spark-laptop",
     "https://github.com/postmanlabs/postman-app-support/issues/14370",
-    "https://www.figma.com/blog/training-a-figma-fluent-editing-model/"
+    "https://www.figma.com/blog/training-a-figma-fluent-editing-model/",
+    "https://github.com/AmpereComputing/panthera",
+    "https://vincent.bernat.ch/en/blog/2026-bunny-geodns",
+    "https://joturk.net/posts/dtls"
   ],
   "titles": [
     "AI, Lean, and the Future of Formal Verification",
     "The Hidden AI Cost of JavaScript Frameworks",
-    "Nvidia RTX Spark Encrypted Firmware Slows Inference Speed by 35% on Linux – What Developers Need to Know"
+    "Nvidia RTX Spark Encrypted Firmware Slows Inference Speed by 35% on Linux – What Developers Need to Know",
+    "Understanding Panthera: Ampere’s New CPU Performance Model and What It Means for Developers"
   ]
 }
