@@ -99,7 +99,9 @@ const HeroSection = () => {
             aria-label="Introduction"
           >
             I&apos;m {CONFIG.name.first}
-            {CONFIG.name.last && ` ${CONFIG.name.last}`}. Full-stack Software Engineer at Optum building consumer-facing healthcare products for 55M+ users. DTU &apos;25 graduate based in {CONFIG.location}.
+            {CONFIG.name.last && ` ${CONFIG.name.last}`}. Full-stack Software
+            Engineer at Optum building consumer-facing healthcare products for
+            55M+ users. DTU &apos;25 graduate based in {CONFIG.location}.
           </MotionWrapper>
 
           {/* Action CTAs */}
