@@ -112,8 +112,33 @@ async function arxiv() {
 const safe = (f) => f().catch((e) => { console.warn(f.name, 'failed:', e.message); return []; });
 
 // ---------- Dedupe against old posts ----------
-function loadHistory() {
+// GitHub API helpers (drafts live on branches, so we ask GitHub what is still pending)
+const GH_REPO = process.env.GITHUB_REPOSITORY;
+const GH_TOKEN = process.env.GITHUB_TOKEN;
+const ghApi = (p, init = {}) => fetch(`https://api.github.com/repos/${GH_REPO}${p}`, { ...init, headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'User-Agent': UA['User-Agent'] }, signal: AbortSignal.timeout(15000) });
+async function draftBranches() {
+  if (!GH_REPO || !GH_TOKEN) return [];
+  try {
+    const r = await ghApi('/branches?per_page=100');
+    return r.ok ? (await r.json()).map((b) => b.name).filter((n) => n.startsWith('draft/')) : [];
+  } catch { return []; }
+}
+// drafts nobody approved within 7 days are deleted so they never pile up
+async function cleanOldDrafts(names) {
+  const keep = [];
+  for (const n of names) {
+    const d = n.match(/^draft\/(\d{4}-\d{2}-\d{2})-/);
+    if (d && Date.now() - new Date(d[1]).getTime() > 7 * 864e5) {
+      try { await ghApi(`/git/refs/heads/${n}`, { method: 'DELETE' }); console.log('Deleted stale draft', n); } catch {}
+    } else keep.push(n);
+  }
+  return keep;
+}
+
+// Each post keeps its own files (social/<slug>.json holds its sources), so two drafts never touch the same file.
+function loadHistory(pending) {
   const titles = [];
+  const urls = new Set();
   if (fs.existsSync(BLOG_DIR)) {
     for (const f of fs.readdirSync(BLOG_DIR)) {
       if (!/\.mdx?$/.test(f)) continue;
@@ -121,8 +146,16 @@ function loadHistory() {
       titles.push(m ? m[1] : f.replace(/\.mdx?$/, ''));
     }
   }
-  const used = fs.existsSync('data/used.json') ? JSON.parse(fs.readFileSync('data/used.json', 'utf8')) : { urls: [], titles: [] };
-  return { titles: [...new Set([...titles, ...used.titles])], urls: new Set(used.urls), used };
+  if (fs.existsSync('social')) {
+    for (const f of fs.readdirSync('social').filter((x) => x.endsWith('.json'))) {
+      try { for (const u of JSON.parse(fs.readFileSync(path.join('social', f), 'utf8')).sources || []) urls.add(u); } catch {}
+    }
+  }
+  if (fs.existsSync('data/used.json')) { // older posts, read only
+    try { const u = JSON.parse(fs.readFileSync('data/used.json', 'utf8')); titles.push(...(u.titles || [])); for (const x of u.urls || []) urls.add(x); } catch {}
+  }
+  for (const n of pending) titles.push(n.replace(/^draft\/\d{4}-\d{2}-\d{2}-/, '').replace(/-/g, ' '));
+  return { titles: [...new Set(titles)], urls };
 }
 
 async function page(url) {
@@ -142,7 +175,8 @@ async function page1(url) {
 }
 
 // ---------- Main ----------
-const hist = loadHistory();
+const pending = await cleanOldDrafts(await draftBranches());
+const hist = loadHistory(pending);
 const all = (await Promise.all([safe(hn), safe(devto), safe(github), safe(lobsters), safe(hfPapers), safe(arxiv)])).flat();
 const seen = new Set();
 const bySource = {};
@@ -245,14 +279,10 @@ const post = `---\ntitle: ${JSON.stringify(pick.title)}\ndescription: ${JSON.str
 fs.mkdirSync(BLOG_DIR, { recursive: true });
 fs.mkdirSync(COVER_DIR, { recursive: true });
 fs.mkdirSync('social', { recursive: true });
-fs.mkdirSync('data', { recursive: true });
 const file = path.join(BLOG_DIR, `${slug}.md`);
 const coverFile = path.join(COVER_DIR, `${slug}.png`);
 fs.writeFileSync(file, post);
 fs.writeFileSync(coverFile, makeCover({ title: pick.title, category, readMin: readTime, seed: slug }));
-fs.writeFileSync(`social/${slug}.json`, JSON.stringify({ link, cover: coverUrl, ...social }, null, 2));
-hist.used.urls.push(...sources.map((s) => s.url));
-hist.used.titles.push(pick.title);
-fs.writeFileSync('data/used.json', JSON.stringify(hist.used, null, 2));
+fs.writeFileSync(`social/${slug}.json`, JSON.stringify({ link, cover: coverUrl, title: pick.title, sources: sources.map((x) => x.url), ...social }, null, 2));
 fs.writeFileSync('.draft-meta.json', JSON.stringify({ branch: `draft/${today}-${slug}`, slug, title: pick.title, file, coverFile, slides: slideFiles, link, preview: body.slice(0, 700), x: social.x, threads: social.threads, linkedin: social.linkedin }, null, 2));
 console.log('Draft ready:', pick.title);

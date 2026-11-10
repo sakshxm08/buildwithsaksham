@@ -3,6 +3,9 @@ on:
   schedule:
     - cron: '30 3 * * *'   # 9:00 AM IST
   workflow_dispatch:
+concurrency:
+  group: daily-blog
+  cancel-in-progress: false
 permissions:
   contents: write
 env:
@@ -32,9 +35,9 @@ jobs:
           git config user.name "blog-bot"
           git config user.email "blog-bot@users.noreply.github.com"
           git checkout -b "$BRANCH"
-          git add "$BLOG_DIR" "$COVER_DIR" social data
+          git add "$BLOG_DIR" "$COVER_DIR" social
           git commit -m "draft: $(jq -r .title .draft-meta.json)"
-          git push origin "$BRANCH"
+          git push -f origin "$BRANCH"
       - name: Email me the draft
         run: node scripts/notify.mjs
         env:
