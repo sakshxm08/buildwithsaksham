@@ -214,12 +214,33 @@ try {
   slideFiles = makeSlides(d, slug).map((buf, i) => { const f = path.join(dir, `slide-${i + 1}.png`); fs.writeFileSync(f, buf); return f; });
 } catch (e) { console.warn('Slides skipped:', e.message); }
 
+let blocks = null;
+try {
+  const raw = await llm(
+    'You extract structured data for a blog page. Reply with JSON only. Use ONLY facts and numbers that appear in the post.',
+    `Post:\n${brief}\n\nReturn exactly this JSON shape:\n{"tldr":["<=120 chars"],"stats":[{"value":"<=7 chars","label":"<=60 chars"}],"chart":null,"flow":null}\n- "tldr": 3 or 4 bullets with the key points.\n- "stats": 3 or 4 of the most striking numbers in the post.\n- "chart": only if the post has 2 to 6 comparable numbers with the same unit, as {"title":"<=60 chars","unit":"%","note":"<=80 chars, what the numbers measure","items":[{"label":"<=18 chars","value":<number>}]}. Otherwise null.\n- "flow": a how-it-works or what-happened-when sequence of 3 to 6 steps from the post, as {"kind":"steps" or "timeline","title":"<=50 chars","steps":[{"label":"<=28 chars","text":"<=90 chars"}]}. Otherwise null.`
+  );
+  const d = JSON.parse(raw.match(/\{[\s\S]*\}/)[0]);
+  const cl = (v, n) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
+  // every digit group in a number must appear in the post, so invented figures are dropped
+  const inPost = (v) => (String(v).match(/\d+/g) || []).every((x) => body.includes(x));
+  const stats = (d.stats || []).map((x) => ({ value: cl(x?.value, 8), label: cl(x?.label, 70) })).filter((x) => x.value && x.label && inPost(x.value)).slice(0, 4);
+  const tldr = (d.tldr || []).map((x) => cl(x, 140)).filter(Boolean).slice(0, 4);
+  let chart = null;
+  const items = (d.chart?.items || []).map((x) => ({ label: cl(x?.label, 20), value: Number(x?.value) })).filter((x) => x.label && Number.isFinite(x.value) && inPost(x.value)).slice(0, 6);
+  if (items.length >= 2) chart = { title: cl(d.chart.title, 70), unit: cl(d.chart.unit, 6), note: cl(d.chart.note, 90), items };
+  let flow = null;
+  const steps = (d.flow?.steps || []).map((x) => ({ label: cl(x?.label, 30), text: cl(x?.text, 100) })).filter((x) => x.label).slice(0, 6);
+  if (steps.length >= 3) flow = { kind: d.flow.kind === 'timeline' ? 'timeline' : 'steps', title: cl(d.flow.title, 60), steps };
+  blocks = { tldr, stats, chart, flow };
+} catch (e) { console.warn('Blocks skipped:', e.message); }
+
 const desc = body.replace(/^#+.*$/gm, '').replace(/[#*_`>\[\]]/g, '').trim().split(/\n\s*\n/)[0].replace(/\s+/g, ' ').slice(0, 155);
 const readTime = Math.max(1, Math.ceil(body.split(/\s+/).length / 200));
 const CATS = ['AI & LLMs', 'Software Development', 'Open Source', 'Tools & Automation', 'Security'];
 const category = CATS.includes(pick.category) ? pick.category : 'AI & LLMs';
 const coverUrl = `/blog-covers/${slug}.png`;
-const post = `---\ntitle: ${JSON.stringify(pick.title)}\ndescription: ${JSON.stringify(desc)}\npubDate: ${today}\ncategory: ${JSON.stringify(category)}\nreadTime: ${readTime}\ncover: ${JSON.stringify(coverUrl)}\n---\n\n${body}\n`;
+const post = `---\ntitle: ${JSON.stringify(pick.title)}\ndescription: ${JSON.stringify(desc)}\npubDate: ${today}\ncategory: ${JSON.stringify(category)}\nreadTime: ${readTime}\ncover: ${JSON.stringify(coverUrl)}\n${blocks ? `blocks: ${JSON.stringify(blocks)}\n` : ''}---\n\n${body}\n`;
 
 fs.mkdirSync(BLOG_DIR, { recursive: true });
 fs.mkdirSync(COVER_DIR, { recursive: true });
