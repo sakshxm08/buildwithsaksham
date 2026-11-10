@@ -58,7 +58,14 @@ export const CONFIG = {
       location: "Gurugram, India · On-site",
       description:
         "Full-Stack Developer building consumer-facing healthcare products serving over 55M+ users. Engineering resilient frontend architectures, performant REST APIs, automated performance testing pipelines, and exploring Generative AI & agentic development workflows.",
-      skills: ["React.js", "Full-Stack Development", "APIs", "Generative AI", "Performance Testing", "Healthcare Tech"],
+      skills: [
+        "React.js",
+        "Full-Stack Development",
+        "APIs",
+        "Generative AI",
+        "Performance Testing",
+        "Healthcare Tech",
+      ],
     },
     {
       role: "Technology Development Program (TDP) Associate",
@@ -68,7 +75,14 @@ export const CONFIG = {
       location: "Gurugram, India · On-site",
       description:
         "Graduated from the Technology Development Program with a Recognition Award. Engineered frontend modules, integrated RESTful APIs, designed automated test suites, and explored AI-assisted development across cross-functional teams.",
-      skills: ["React.js", "Python", "Automation Testing", "APIs", "CI/CD", "TDP Award"],
+      skills: [
+        "React.js",
+        "Python",
+        "Automation Testing",
+        "APIs",
+        "CI/CD",
+        "TDP Award",
+      ],
     },
     {
       role: "Software Developer Intern",
@@ -78,7 +92,14 @@ export const CONFIG = {
       location: "Remote",
       description:
         "Engaged in redesigning and engineering an ed-tech learning platform with deep AI feature integration for enhanced user engagement. Developed robust frontend interfaces and scalable backend services with Vue.js, Node.js, Express, and MongoDB.",
-      skills: ["Vue.js", "Node.js", "Express.js", "MongoDB", "REST APIs", "AI Integration"],
+      skills: [
+        "Vue.js",
+        "Node.js",
+        "Express.js",
+        "MongoDB",
+        "REST APIs",
+        "AI Integration",
+      ],
     },
     {
       role: "Full Stack Developer Intern",
@@ -88,7 +109,16 @@ export const CONFIG = {
       location: "Remote",
       description:
         "Architected a production-ready mental wellness platform using React, TailwindCSS, Ruby on Rails, and PostgreSQL. Created an offline-capable Progressive Web App (PWA) with Vite, increasing user engagement by 25%. Deployed backend services on AWS EC2 with CloudWatch monitoring, frontend on Cloudflare, and built a Python-based AI Reddit bot with OpenAI API and AWS S3.",
-      skills: ["React", "Ruby on Rails", "PostgreSQL", "TailwindCSS", "Vite PWA", "AWS EC2", "AWS S3", "OpenAI API"],
+      skills: [
+        "React",
+        "Ruby on Rails",
+        "PostgreSQL",
+        "TailwindCSS",
+        "Vite PWA",
+        "AWS EC2",
+        "AWS S3",
+        "OpenAI API",
+      ],
     },
     {
       role: "Frontend Developer Intern",
@@ -98,12 +128,20 @@ export const CONFIG = {
       location: "Remote",
       description:
         "Built responsive web platform from scratch using React and TailwindCSS based on Figma designs, improving mobile interaction by 50%. Implemented React Context API for global state, deployed on Cloudflare with dynamic Open Graph workers (<200ms latency), and contributed to Django/Python backend features.",
-      skills: ["React", "TailwindCSS", "Cloudflare Workers", "Django", "Python", "PostgreSQL"],
+      skills: [
+        "React",
+        "TailwindCSS",
+        "Cloudflare Workers",
+        "Django",
+        "Python",
+        "PostgreSQL",
+      ],
     },
   ],
   education: [
     {
-      degree: "Bachelor of Technology (B.Tech) — Electronics & Communication Engineering",
+      degree:
+        "Bachelor of Technology (B.Tech) — Electronics & Communication Engineering",
       institution: "Delhi Technological University (Formerly DCE)",
       period: "Dec 2021 — Jul 2025",
       location: "Delhi, India",
@@ -124,7 +162,7 @@ export const CONFIG = {
       ],
       urls: {
         demo: "https://vidyaai.netlify.app/",
-        github: "https://github.com/sakshxm08/VidyaAI",
+        github: "https://github.com/sakshxm08/vidya-ai",
       },
       category: "AI & EdTech",
       featured: true,
@@ -146,9 +184,7 @@ export const CONFIG = {
         TECH_STACK.mongodb,
         TECH_STACK.redux,
       ],
-      urls: {
-        github: "https://github.com/sakshxm08/ohstree",
-      },
+      urls: {},
       category: "Full Stack & E-Commerce",
       featured: true,
       highlights: [
@@ -194,10 +230,7 @@ export const CONFIG = {
         TECH_STACK.tailwindcss,
         TECH_STACK.aws,
       ],
-      urls: {
-        demo: "https://calmclove.com/",
-        github: "https://github.com/sakshxm08",
-      },
+      urls: {},
       category: "Full Stack & HealthTech",
       featured: true,
       highlights: [
@@ -214,7 +247,6 @@ export const CONFIG = {
       techStack: [TECH_STACK.reactjs, TECH_STACK.tailwindcss, TECH_STACK.aws],
       urls: {
         demo: "https://ithinkyoua.re/",
-        github: "https://github.com/sakshxm08",
       },
       category: "Frontend & Social",
       featured: false,
@@ -238,7 +270,6 @@ export const CONFIG = {
         TECH_STACK.tailwindcss,
       ],
       urls: {
-        demo: "https://wearworx.sakshxm08.in/",
         github: "https://github.com/sakshxm08/wearworx_mern",
       },
       category: "Full Stack & E-Commerce",
@@ -297,9 +328,7 @@ export const CONFIG = {
         TECH_STACK.reactjs,
         TECH_STACK.tailwindcss,
       ],
-      urls: {
-        github: "https://github.com/sakshxm08/caption-generator",
-      },
+      urls: {},
       category: "AI & Dev Tools",
       featured: false,
       highlights: [
