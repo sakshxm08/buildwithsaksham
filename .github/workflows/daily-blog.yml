@@ -46,3 +46,4 @@ jobs:
           SIGNING_SECRET: ${{ secrets.SIGNING_SECRET }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
           REPO: ${{ github.repository }}
+          LINKEDIN_EXPIRES_AT: ${{ secrets.LINKEDIN_EXPIRES_AT }}

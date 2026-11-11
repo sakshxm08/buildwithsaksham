@@ -1,0 +1,56 @@
+name: Post to social
+on:
+  push:
+    branches: [main]
+    paths: ['social/*.json']     # a draft was approved: its social/<slug>.json just landed on main
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Post this social/<slug>.json (leave empty for new ones)'
+        required: false
+concurrency:
+  group: post-social
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  linkedin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Find posts to publish
+        id: find
+        env:
+          SLUG: ${{ github.event.inputs.slug }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if [ -n "$SLUG" ]; then
+            FILES="social/$SLUG.json"
+          else
+            FILES=$(git diff --name-only --diff-filter=A "$BEFORE" "$GITHUB_SHA" -- 'social/*.json' | grep -v '\.posted\.json$' || true)
+          fi
+          echo "files=$(echo $FILES)" >> "$GITHUB_OUTPUT"
+      - name: Post to LinkedIn
+        if: steps.find.outputs.files != ''
+        env:
+          FILES: ${{ steps.find.outputs.files }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+          LINKEDIN_EXPIRES_AT: ${{ secrets.LINKEDIN_EXPIRES_AT }}
+        run: |
+          for f in $FILES; do node scripts/post-linkedin.mjs "$f"; done
+      - name: Remember what was posted
+        if: steps.find.outputs.files != ''
+        run: |
+          git config user.name "blog-bot"
+          git config user.email "blog-bot@users.noreply.github.com"
+          git add social/*.posted.json 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: record social posts"
+          git pull --rebase origin main
+          git push origin HEAD:main

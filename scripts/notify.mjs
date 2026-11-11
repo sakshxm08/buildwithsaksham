@@ -12,7 +12,13 @@ const btn = (href, label, bg) => `<a href="${href}" style="display:inline-block;
 const box = (label, txt) => `<p style="color:#666;font-size:13px;margin:18px 0 4px">${label}</p><pre style="white-space:pre-wrap;background:#f4f4f5;padding:12px;border-radius:8px;font-size:13px;margin:0">${esc(txt)}</pre>`;
 
 const imgs = m.slides?.length ? m.slides : [m.coverFile];
+const liExp = process.env.LINKEDIN_EXPIRES_AT;
+const liDays = liExp ? Math.ceil((new Date(liExp) - Date.now()) / 864e5) : null;
+const liWarn = liDays !== null && liDays <= 10
+  ? `<p style="background:#fef3c7;color:#78350f;padding:10px 12px;border-radius:8px">LinkedIn login ${liDays > 0 ? `expires in ${liDays} days` : 'has expired'}. Run scripts/linkedin-login.mjs and update the 3 LINKEDIN_ secrets, or auto-posting stops.</p>`
+  : '';
 const html = `<div style="font-family:system-ui,sans-serif;max-width:560px">
+${liWarn}
 ${imgs.map((_, i) => `<img src="cid:img${i}" width="270" style="border-radius:10px;margin:0 6px 6px 0" alt="">`).join('')}
 <h2>${esc(m.title)}</h2>
 <p style="white-space:pre-wrap;color:#333">${esc(m.preview)}…</p>
