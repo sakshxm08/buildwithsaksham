@@ -236,16 +236,26 @@ marks.forEach((m, i) => { social[m[1].toLowerCase()] = socialRaw.slice(m.index +
 if (!social.x || !social.threads || !social.linkedin) throw new Error('Social parse failed');
 
 let slideFiles = [];
+let slideData = null;
+let slideUrls = [];
 try {
   const raw = await llm(
     'You turn a blog post into two LinkedIn image cards. Reply with JSON only. Use ONLY facts from the post.',
-    `Post:\n${brief}\n\nReturn exactly this JSON shape and respect the length limits:\n{"kicker":"<=26 chars, the report or source name","stat":{"value":"<=7 chars, the single most striking number, like 80% or 6:1 or 27→9%","label":"<=70 chars, what that number measures"},"headline":"<=70 chars, the news in one sentence-case line","title2":"<=24 chars, like Key takeaways","points":[{"icon":"<one of: ${ICON_NAMES.join(', ')}>","title":"<=26 chars","text":"<=80 chars"}]}\n"points" must hold 3 or 4 items, each a distinct fact from the post.`
+    `Post:\n${brief}\n\nReturn exactly this JSON shape and respect the length limits:\n{"kicker":"<=26 chars, the report or source name","stat":{"value":"<=7 chars, the single most striking number, like 80% or 6:1 or 27→9%","label":"<=70 chars, what that number measures"},"headline":"<=70 chars, the news in one sentence-case line","title2":"<=24 chars, like Key takeaways","topic_icon":"<one of: ${ICON_NAMES.join(', ')}>","points":[{"icon":"<one of: ${ICON_NAMES.join(', ')}>","title":"<=26 chars","text":"<=80 chars"}]}\n"points" must hold 3 or 4 items, each a distinct fact from the post.`
   );
   const d = JSON.parse(raw.match(/\{[\s\S]*\}/)[0]);
   if (!d.stat?.value || !Array.isArray(d.points) || d.points.length < 3) throw new Error('bad slide json');
+  slideData = d;
+  fs.mkdirSync(COVER_DIR, { recursive: true });
   const dir = path.join('social', slug);
   fs.mkdirSync(dir, { recursive: true });
-  slideFiles = makeSlides(d, slug).map((buf, i) => { const f = path.join(dir, `slide-${i + 1}.png`); fs.writeFileSync(f, buf); return f; });
+  slideFiles = makeSlides(d, slug).map((buf, i) => {
+    const f = path.join(dir, `slide-${i + 1}.png`);
+    fs.writeFileSync(f, buf);
+    fs.writeFileSync(path.join(COVER_DIR, `${slug}-slide-${i + 1}.png`), buf);
+    slideUrls.push(`/blog-covers/${slug}-slide-${i + 1}.png`);
+    return f;
+  });
 } catch (e) { console.warn('Slides skipped:', e.message); }
 
 let blocks = null;
@@ -274,7 +284,7 @@ const readTime = Math.max(1, Math.ceil(body.split(/\s+/).length / 200));
 const CATS = ['AI & LLMs', 'Software Development', 'Open Source', 'Tools & Automation', 'Security'];
 const category = CATS.includes(pick.category) ? pick.category : 'AI & LLMs';
 const coverUrl = `/blog-covers/${slug}.png`;
-const post = `---\ntitle: ${JSON.stringify(pick.title)}\ndescription: ${JSON.stringify(desc)}\npubDate: ${today}\ncategory: ${JSON.stringify(category)}\nreadTime: ${readTime}\ncover: ${JSON.stringify(coverUrl)}\n${blocks ? `blocks: ${JSON.stringify(blocks)}\n` : ''}---\n\n${body}\n`;
+const post = `---\ntitle: ${JSON.stringify(pick.title)}\ndescription: ${JSON.stringify(desc)}\npubDate: ${today}\ncategory: ${JSON.stringify(category)}\nreadTime: ${readTime}\ncover: ${JSON.stringify(coverUrl)}\n${blocks ? `blocks: ${JSON.stringify(blocks)}\n` : ''}${slideUrls.length ? `slides: ${JSON.stringify(slideUrls)}\n` : ''}---\n\n${body}\n`;
 
 fs.mkdirSync(BLOG_DIR, { recursive: true });
 fs.mkdirSync(COVER_DIR, { recursive: true });
@@ -282,7 +292,7 @@ fs.mkdirSync('social', { recursive: true });
 const file = path.join(BLOG_DIR, `${slug}.md`);
 const coverFile = path.join(COVER_DIR, `${slug}.png`);
 fs.writeFileSync(file, post);
-fs.writeFileSync(coverFile, makeCover({ title: pick.title, category, readMin: readTime, seed: slug }));
+fs.writeFileSync(coverFile, makeCover({ title: pick.title, category, readMin: readTime, seed: slug, icon: slideData?.topic_icon, stat: slideData?.stat }));
 fs.writeFileSync(`social/${slug}.json`, JSON.stringify({ link, cover: coverUrl, title: pick.title, sources: sources.map((x) => x.url), ...social }, null, 2));
 fs.writeFileSync('.draft-meta.json', JSON.stringify({ branch: `draft/${today}-${slug}`, slug, title: pick.title, file, coverFile, slides: slideFiles, link, preview: body.slice(0, 700), x: social.x, threads: social.threads, linkedin: social.linkedin }, null, 2));
 console.log('Draft ready:', pick.title);

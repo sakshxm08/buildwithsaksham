@@ -34,6 +34,7 @@ export type Post = PostMeta & {
   html: string;
   blocks: Blocks;
   toc: { id: string; text: string }[];
+  slides: string[];
 };
 
 const esc = (s: string) =>
@@ -144,6 +145,18 @@ function parseBlocks(raw?: string): Blocks {
   }
 }
 
+// only same-site png paths are accepted for the visual summary images
+function parseSlides(raw?: string): string[] {
+  if (!raw) return [];
+  try {
+    return arr(JSON.parse(raw))
+      .filter((x): x is string => typeof x === "string" && /^\/[\w\-./]+\.png$/.test(x))
+      .slice(0, 4);
+  } catch {
+    return [];
+  }
+}
+
 function parse(file: string): Post | null {
   const raw = fs.readFileSync(path.join(DIR, file), "utf8");
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
@@ -180,6 +193,7 @@ function parse(file: string): Post | null {
     html: marked.parse(m[2]) as string,
     blocks: parseBlocks(meta.blocks),
     toc,
+    slides: parseSlides(meta.slides),
   };
 }
 

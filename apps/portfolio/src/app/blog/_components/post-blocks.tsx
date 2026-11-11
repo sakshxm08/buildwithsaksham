@@ -99,3 +99,45 @@ export function FlowBlock({ flow }: { flow: NonNullable<Blocks["flow"]> }) {
     </figure>
   );
 }
+
+export function VisualSummary({ slides, title }: { slides: string[]; title: string }) {
+  return (
+    <section className="my-12">
+      <h2 className="text-2xl font-bold">Visual summary</h2>
+      <p className="mt-2 text-sm opacity-70">
+        The key points as images. Tap one to open it, or save it to share.
+      </p>
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        {slides.map((src, i) => (
+          <a
+            key={src}
+            href={src}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group overflow-hidden rounded-2xl border border-current/15 transition hover:-translate-y-1"
+          >
+            {/* biome-ignore lint/performance/noImgElement: static export, images are unoptimized */}
+            <img
+              src={src}
+              alt={`${title}, visual summary ${i + 1} of ${slides.length}`}
+              loading="lazy"
+              className="aspect-square w-full object-cover"
+            />
+          </a>
+        ))}
+      </div>
+      <div className="mt-4 flex flex-wrap gap-3 text-sm">
+        {slides.map((src, i) => (
+          <a
+            key={src}
+            href={src}
+            download
+            className="rounded-full border border-current/20 px-4 py-1.5 font-semibold transition hover:bg-current/10"
+          >
+            Download image {i + 1}
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}

@@ -13,12 +13,12 @@ const rngFor = (seed) => mulberry32(xmur3(String(seed))());
 
 // ---------- brand palettes (dark and light) ----------
 const PALETTES = [
-  { n: 'ember', bg: '#1a1423', bg2: '#2f1f3f', ink: '#fff7ed', accent: '#ff6b4a', accent2: '#ffd166', muted: '#c9b8d9', card: '#2a2035', onAccent: '#1a1423' },
-  { n: 'mint', bg: '#06241f', bg2: '#0c4037', ink: '#ecfdf5', accent: '#34d399', accent2: '#fde68a', muted: '#9fd8c8', card: '#0e3b33', onAccent: '#06241f' },
-  { n: 'citrus', bg: '#fff7e6', bg2: '#ffe3ad', ink: '#1b2a41', accent: '#ff7a00', accent2: '#2563eb', muted: '#5b6b84', card: '#ffffff', onAccent: '#1b2a41' },
-  { n: 'orchid', bg: '#f6f1ff', bg2: '#e4d8ff', ink: '#231942', accent: '#7c3aed', accent2: '#ec4899', muted: '#6b5f8f', card: '#ffffff', onAccent: '#ffffff' },
-  { n: 'graphite', bg: '#101214', bg2: '#1d2227', ink: '#f4f4f5', accent: '#a3e635', accent2: '#38bdf8', muted: '#a1a1aa', card: '#1e2227', onAccent: '#101214' },
-  { n: 'ocean', bg: '#e9f5ff', bg2: '#cde6ff', ink: '#0b2545', accent: '#0ea5e9', accent2: '#f43f5e', muted: '#4b6584', card: '#ffffff', onAccent: '#06243d' },
+  { n: 'ember', bg: '#1a1423', bg2: '#2f1f3f', ink: '#fff7ed', accent: '#ff6b4a', accent2: '#ffd166', muted: '#c9b8d9', card: '#2a2035', onAccent: '#1a1423', onAccent2: '#1a1423' },
+  { n: 'mint', bg: '#06241f', bg2: '#0c4037', ink: '#ecfdf5', accent: '#34d399', accent2: '#fde68a', muted: '#9fd8c8', card: '#0e3b33', onAccent: '#06241f', onAccent2: '#06241f' },
+  { n: 'citrus', bg: '#fff7e6', bg2: '#ffe3ad', ink: '#1b2a41', accent: '#ff7a00', accent2: '#2563eb', muted: '#5b6b84', card: '#ffffff', onAccent: '#1b2a41', onAccent2: '#ffffff' },
+  { n: 'orchid', bg: '#f6f1ff', bg2: '#e4d8ff', ink: '#231942', accent: '#7c3aed', accent2: '#ec4899', muted: '#6b5f8f', card: '#ffffff', onAccent: '#ffffff', onAccent2: '#ffffff' },
+  { n: 'graphite', bg: '#101214', bg2: '#1d2227', ink: '#f4f4f5', accent: '#a3e635', accent2: '#38bdf8', muted: '#a1a1aa', card: '#1e2227', onAccent: '#101214', onAccent2: '#101214' },
+  { n: 'ocean', bg: '#e9f5ff', bg2: '#cde6ff', ink: '#0b2545', accent: '#0ea5e9', accent2: '#f43f5e', muted: '#4b6584', card: '#ffffff', onAccent: '#06243d', onAccent2: '#ffffff' },
 ];
 const PATTERNS = ['dots', 'stripes', 'arcs', 'blocks', 'waves'];
 
@@ -77,7 +77,7 @@ const ICONS = {
   branch: '<circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12M18 9a9 9 0 0 1-9 9"/>',
 };
 export const ICON_NAMES = Object.keys(ICONS);
-const icon = (name, cx, cy, size, color) => `<g transform="translate(${(cx - size / 2).toFixed(0)} ${(cy - size / 2).toFixed(0)}) scale(${(size / 24).toFixed(3)})" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.spark}</g>`;
+const icon = (name, cx, cy, size, color, sw = 2) => `<g transform="translate(${(cx - size / 2).toFixed(0)} ${(cy - size / 2).toFixed(0)}) scale(${(size / 24).toFixed(3)})" fill="none" stroke="${color}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${ICONS[name] || ICONS.spark}</g>`;
 
 // ---------- shell ----------
 const bgDefs = (p, W, H) => `<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p.bg}"/><stop offset="1" stop-color="${p.bg2}"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#bg)"/>`;
@@ -85,18 +85,51 @@ const shell = (W, H, inner) => `<svg xmlns="http://www.w3.org/2000/svg" width="$
 const render = (svg) => new Resvg(svg, { font: { loadSystemFonts: true, defaultFontFamily: 'DejaVu Sans' } }).render().asPng();
 const chip = (x, y, text, bg, fg) => { const w = text.length * 19 + 56; return `<rect x="${x}" y="${y}" width="${w}" height="48" rx="24" fill="${bg}"/><text x="${x + w / 2}" y="${y + 32}" font-size="22" font-weight="700" fill="${fg}" text-anchor="middle" letter-spacing="1.5">${esc(text)}</text>`; };
 
-// ---------- site cover (1200x627) ----------
-export function makeCover({ title, category, readMin, seed }) {
+// ---------- site cover (1200x627): big topic icon + stat badge, 3 layouts ----------
+const CAT_ICON = { 'AI & LLMs': 'cpu', 'Software Development': 'code', 'Open Source': 'branch', 'Tools & Automation': 'layers', Security: 'shield' };
+
+export function makeCover({ title, category, readMin, seed, icon: ic, stat }) {
   const t = theme(seed || title); const p = t.pal;
-  const lines = wrap(title, maxChars(1020, 60, true), 4);
-  const y0 = 330 - ((lines.length - 1) * 72) / 2;
-  const inner = bgDefs(p, 1200, 627)
-    + pattern(t.pattern, t.seed, 640, 0, 560, 627, p.accent, p.accent2)
-    + chip(80, 70, clip(category, 24).toUpperCase(), p.accent, p.onAccent)
-    + block(lines, 80, y0, 72, `font-size="60" font-weight="800" fill="${p.ink}"`)
-    + brand(80, 520, p, 38)
+  const W = 1200, H = 627, L = t.layout;
+  const iconName = ICONS[ic] ? ic : CAT_ICON[category] || 'spark';
+  const sv = clip(stat?.value, 7);
+  const badge = (x, y, r) => {
+    if (!sv) return '';
+    const fs = Math.min(44, Math.floor((r * 1.7) / (Math.max(sv.length, 2) * 0.72)));
+    return `<circle cx="${x}" cy="${y}" r="${r}" fill="${p.accent2}" stroke="${p.bg}" stroke-width="8"/><text x="${x}" y="${(y + fs * 0.35).toFixed(0)}" font-size="${fs}" font-weight="800" fill="${p.onAccent2}" text-anchor="middle">${esc(sv)}</text>`;
+  };
+  let tx = 80, tw = 620, size = 50, maxLines = 5, art = '';
+  if (L === 0) {
+    art = pattern(t.pattern, t.seed, 640, 0, 560, H, p.accent, p.accent2)
+      + `<circle cx="940" cy="300" r="205" fill="none" stroke="${p.accent2}" stroke-width="6"/><circle cx="940" cy="300" r="180" fill="${p.accent}"/>`
+      + icon(iconName, 940, 300, 200, p.onAccent, 1.5) + badge(790, 470, 74);
+  } else if (L === 1) {
+    art = pattern(t.pattern, t.seed, 640, 0, 560, H, p.accent, p.accent2)
+      + `<rect x="760" y="60" width="330" height="330" rx="72" fill="${p.accent}"/>`
+      + icon(iconName, 925, 225, 190, p.onAccent, 1.5) + badge(790, 400, 74);
+  } else {
+    tx = 450; tw = 680; size = 52;
+    art = `<rect width="380" height="${H}" fill="${p.accent}"/>`
+      + pattern(t.pattern, t.seed, 0, 0, 380, H, p.onAccent, p.onAccent, 0.5)
+      + icon(iconName, 190, 250, 210, p.onAccent, 1.5)
+      + (sv ? `<rect x="60" y="430" width="260" height="96" rx="48" fill="${p.onAccent}"/><text x="190" y="${(478 + Math.min(52, Math.floor(200 / (Math.max(sv.length, 2) * 0.72))) * 0.35).toFixed(0)}" font-size="${Math.min(52, Math.floor(200 / (Math.max(sv.length, 2) * 0.72)))}" font-weight="800" fill="${p.accent}" text-anchor="middle">${esc(sv)}</text>` : '');
+  }
+  // shrink the type for long titles instead of cutting them off
+  let lines = wrap(title, maxChars(tw, size, true), 9);
+  for (const sz of [size, size - 6, size - 10]) {
+    size = sz;
+    lines = wrap(title, maxChars(tw, size, true), 9);
+    if (lines.length <= maxLines) break;
+  }
+  if (lines.length > maxLines) lines = wrap(title, maxChars(tw, size, true), maxLines);
+  const lh = size * 1.2;
+  const y0 = Math.max(170 + size * 0.9, 330 - ((lines.length - 1) * lh) / 2);
+  const inner = bgDefs(p, W, H) + art
+    + chip(tx, 70, clip(category, 24).toUpperCase(), L === 2 ? p.accent : p.accent, p.onAccent)
+    + block(lines, tx, y0, lh, `font-size="${size}" font-weight="800" fill="${p.ink}"`)
+    + brand(tx, 520, p, 36)
     + `<text x="1120" y="556" font-size="24" fill="${p.muted}" text-anchor="end">${readMin} min read</text>`;
-  return render(shell(1200, 627, inner));
+  return render(shell(W, H, inner));
 }
 
 // ---------- LinkedIn slide 1: the big number ----------

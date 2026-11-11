@@ -7,6 +7,7 @@ import {
   FlowBlock,
   StatCards,
   TldrBox,
+  VisualSummary,
 } from "../_components/post-blocks";
 import { ReadingProgress, Toc } from "../_components/toc";
 
@@ -48,6 +49,8 @@ export default async function PostPage({ params }: Props) {
   const [intro, ...sections] = post.html.split(/(?=<h2 )/);
   const flowAt = Math.min(2, sections.length - 1);
   const chartAt = Math.min(3, sections.length - 1);
+  // the image summary sits right before the final Sources section
+  const galleryAt = Math.max(0, sections.length - 2);
 
   return (
     <>
@@ -90,6 +93,9 @@ export default async function PostPage({ params }: Props) {
                   />
                   {i === flowAt && flow && <FlowBlock flow={flow} />}
                   {i === chartAt && chart && <ChartBlock chart={chart} />}
+                  {i === galleryAt && post.slides.length > 0 && (
+                    <VisualSummary slides={post.slides} title={post.title} />
+                  )}
                 </div>
               ))}
             </article>
