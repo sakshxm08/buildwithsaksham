@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/top-5-ai-agent-patterns-for-frontend-devs",
+  "cover": "/blog-covers/top-5-ai-agent-patterns-for-frontend-devs.png",
+  "title": "Top 5 AI Agent Patterns for Frontend Devs",
+  "sources": [
+    "https://dev.to/erikch/top-5-ai-agent-patterns-for-frontend-devs-5g5m",
+    "https://dev.to/amananandrai/from-attention-to-3-bit-caches-how-llms-learned-to-remember-less-mha-gqa-mla-moe-quantisation-3obj",
+    "https://dev.to/xulingfeng/we-keep-hearing-about-ai-productivity-the-qa-group-chat-told-a-different-story-2nma"
+  ],
+  "x": "1/ Ever tried to get an AI to code a whole feature? One prompt isn’t enough—most devs hit a bottleneck after the first few lines.\n\n2/ The new patterns let an LLM act like a background worker: scheduled jobs, memory, sub‑agents, workflows, and bots.\n\n3/ With Kiro Crew you can schedule a nightly Lighthouse audit that auto‑opens a pull request with fixes.\n\n4/ The full breakdown with sources is on the blog https://buildwithsaksham.in/blog/top-5-ai-agent-patterns-for-frontend-devs",
+  "threads": "Hey, have you seen how AI agents can now run on a schedule, remember your coding preferences, and even spawn helper sub‑agents? It’s like having a tiny dev teammate that works while you focus on design. Curious to try it out?\n\nhttps://buildwithsaksham.in/blog/top-5-ai-agent-patterns-for-frontend-devs",
+  "linkedin": "What if an AI could keep coding while you’re in meetings? Erik Hanchett’s recent DEV post shows exactly that.\n\nHe outlines five reusable patterns—scheduled jobs, persistent memory, sub‑agents, workflow orchestration, and autonomous bots—that let an LLM run as a background worker.\n\nUsing the open‑source Kiro Crew harness, a daily Lighthouse audit can run automatically, capture the report, and open a pull request with suggested fixes. Memory files stored as markdown let the agent recall preferences like “Vue.js” or “tabs over spaces” without being reminded each time.\n\nThe post also notes that similar capabilities appear in Claude Code, Codex, and OpenClaw, meaning you can experiment with any of these tools today.\n\nWhy does this matter? It removes repetitive grunt work, freeing developers to focus on design, testing, and performance‑critical tasks.\n\nA small caveat: running multimodal models in visual comparison workflows can increase token counts and cost per run, so budgeting is needed.\n\nHow would you integrate a scheduled AI job into your current workflow?\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/top-5-ai-agent-patterns-for-frontend-devs"
+}
