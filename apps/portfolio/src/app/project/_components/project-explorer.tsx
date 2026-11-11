@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BsGithub, BsSearch } from "react-icons/bs";
 import { IoMdOpen } from "react-icons/io";
 import MotionWrapper from "@/components/motion-wrapper";
@@ -48,28 +48,16 @@ export default function ProjectExplorer() {
 
   return (
     <div className="w-full">
-      {/* Search & Filter Controls */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 max-w-5xl mx-auto my-8">
-        {/* Search Bar */}
-        <div className="relative w-full md:w-80">
-          <BsSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm" />
-          <input
-            type="text"
-            placeholder="Search by name, tech or keyword..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 rounded-2xl bg-white border border-gray-200 text-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-          />
-        </div>
-
-        {/* Category Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2">
+      {/* Category Slider */}
+      <div className="flex w-full items-center justify-center gap-2 max-w-5xl mx-auto my-8">
+        <div className="flex w-full items-center justify-center gap-2 overflow-x-auto whitespace-nowrap scroll-smooth pb-1">
           {ALL_CATEGORIES.map((cat) => (
             <button
               key={cat}
               type="button"
+              data-category={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
+              className={`shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 cursor-pointer ${
                 selectedCategory === cat
                   ? "dk-gradient-bg text-white shadow-md scale-105"
                   : "bg-white text-neutral-700 border border-gray-200 hover:border-primary hover:text-primary"
@@ -79,25 +67,6 @@ export default function ProjectExplorer() {
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Results Count */}
-      <div className="max-w-5xl mx-auto mb-6 flex items-center justify-between text-xs font-semibold text-accent2 px-2">
-        <span>
-          Showing {filteredProjects.length} of {CONFIG.projects.length} projects
-        </span>
-        {(searchQuery || selectedCategory !== "All") && (
-          <button
-            type="button"
-            onClick={() => {
-              setSearchQuery("");
-              setSelectedCategory("All");
-            }}
-            className="text-primary hover:underline cursor-pointer"
-          >
-            Clear filters
-          </button>
-        )}
       </div>
 
       {/* Grid */}
@@ -129,7 +98,7 @@ export default function ProjectExplorer() {
             >
               <div>
                 {/* Thumbnail */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-900 border-b border-gray-100">
+                <div className="relative aspect-16/10 w-full overflow-hidden bg-neutral-900 border-b border-gray-100">
                   <Image
                     src={project.image}
                     alt={`${project.title} screenshot`}

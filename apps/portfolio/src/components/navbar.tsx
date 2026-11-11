@@ -71,9 +71,6 @@ const Navbar = () => {
               height={38}
               className="object-contain"
             />
-            <span className="font-montserrat font-bold text-lg md:text-xl text-neutral-900 tracking-tight group-hover:text-primary transition-colors">
-              Build With <span className="dk-gradient-text">Saksham</span>
-            </span>
           </Link>
           {/* desktop menu */}
           <div className="flex-row items-center justify-between hidden text-base lg:text-lg font-bold md:flex md:gap-4 lg:gap-6">
