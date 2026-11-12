@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/exploring-gemini-decisions-api-real-time-llm-powered-decisio",
+  "cover": "/blog-covers/exploring-gemini-decisions-api-real-time-llm-powered-decisio.png",
+  "title": "Exploring Gemini Decisions API: Real‑Time LLM‑Powered Decision Making for Developers",
+  "sources": [
+    "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+    "https://machinelearning.apple.com/research/faster-retrieval",
+    "https://arxiv.org/abs/2611.13410"
+  ],
+  "x": "Google’s new Gemini Decisions API can handle up to 1,000 yes/no, multiple‑choice, or rubric‑scoring questions in a single call.\n\n2/ It returns calibrated confidence scores for text, images, audio, video, and PDFs—all in one pass.\n\n3/ Batch processing cuts latency and cost by avoiding 1,000 separate model calls.\n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/exploring-gemini-decisions-api-real-time-llm-powered-decisio",
+  "threads": "Did you see the Gemini Decisions API launch? It lets you send a thousand questions at once and get confidence scores for any media type—text, images, audio, video, PDFs. Imagine grading an entire assignment or moderating a batch of posts in milliseconds. Want to try it? https://buildwithsaksham.in/blog/exploring-gemini-decisions-api-real-time-llm-powered-decisio",
+  "linkedin": "Google announced the Gemini Decisions API, a new endpoint that lets developers submit up to 1,000 yes/no, multiple‑choice, or rubric‑scoring questions in a single request.\n\nThe service returns calibrated confidence scores for each item and supports text, images, audio, video, and PDF inputs, all processed in one forward pass of the Gemini Decision 1 model.\n\nDevelopers can start immediately by generating an API key in Google AI Studio and using the provided Python, JavaScript, or REST examples. The batch approach reduces both latency and cost compared with issuing separate calls for each question.\n\n“Fast, calibrated decisions let us treat a whole class of routing problems as a single API call.”  \n\nThis matters because it enables real‑time query routing, content grading, and policy enforcement without building custom multimodal pipelines, offering a production‑grade building block that scales efficiently.\n\nThe API’s batch size and multimodal support are impressive, but it remains a closed‑set decision model, so it’s best suited for tasks with predefined answer sets.\n\nHow could batch‑processed confidence scores change the way your team handles content moderation or automated grading?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/exploring-gemini-decisions-api-real-time-llm-powered-decisio"
+}
