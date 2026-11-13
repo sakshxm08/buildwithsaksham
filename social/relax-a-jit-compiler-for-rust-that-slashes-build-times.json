@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/relax-a-jit-compiler-for-rust-that-slashes-build-times",
+  "cover": "/blog-covers/relax-a-jit-compiler-for-rust-that-slashes-build-times.png",
+  "title": "Relax: A JIT Compiler for Rust That Slashes Build Times",
+  "sources": [
+    "https://makepad.github.io/relax/",
+    "https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer",
+    "https://developer.apple.com/foundation-models-framework/"
+  ],
+  "x": "1/ A 3‑minute cold build for a large 3‑D Rust game drops to an 11‑second first frame with Relax.\n\n2/ The JIT‑compiled code runs about 1.12× slower on x86‑64 and 1.24× slower on arm64 compared to a release build.\n\n3/ After a warm‑up, a tiny app launches in 0.41 seconds instead of 3.7 seconds.\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/relax-a-jit-compiler-for-rust-that-slashes-build-times",
+  "threads": "Imagine cutting your Rust build time from minutes to seconds.  \nRelax lets you run a Cargo package directly from source, compiling functions on first call.  \nEdit a function, save, and it hot‑patches without restarting.  \n\nSounds like a game‑changer for rapid prototyping, right?  \nhttps://buildwithsaksham.in/blog/relax-a-jit-compiler-for-rust-that-slashes-build-times",
+  "linkedin": "What if you could shave minutes off every Rust build cycle and see changes in seconds? Relax, a live JIT compiler for Rust, makes that possible by running Cargo packages straight from source.\n\nOn an M4 MacBook a large 3‑D demo goes from a three‑minute cold build to an 11‑second first frame, and subsequent runs start in just over a second. A tiny example drops from 3.7 seconds cold to 0.41 seconds warm.\n\nThe trade‑off is modest: JIT‑generated code runs about 1.12× slower on x86‑64 and 1.24× slower on arm64, a geometric mean slowdown of roughly 1.18× versus a traditional release binary.\n\n“Relax hot‑patches edited functions while preserving program state,” the authors note.\n\nThis matters because faster iteration keeps developers in the flow, especially for large Rust projects where build latency can dominate the workflow.\n\nThe data comes from tests on an M4‑based MacBook and a suite of 21 benchmarks; performance varies with hardware and code size.\n\nWould you try a tool that trades a small runtime slowdown for dramatically quicker edit‑run loops?\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/relax-a-jit-compiler-for-rust-that-slashes-build-times"
+}
