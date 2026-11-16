@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/a-datetime-library-for-rust",
+  "cover": "/blog-covers/a-datetime-library-for-rust.png",
+  "title": "A datetime library for Rust",
+  "sources": [
+    "https://burntsushi.net/jiff/",
+    "https://bvisness.me/periodic-oriented-programming/",
+    "https://yorickpeterse.com/articles/migrating-from-github-to-codeberg/"
+  ],
+  "x": "Jiff just hit 1.0 and is already powering at least eight high‑profile Rust projects, from Cargo to AWS LLRT’s Temporal implementation.\n\n2/ Jiff makes time‑zone handling front‑and‑center, automatically applying daylight‑saving rules so you don’t have to write custom logic.\n\n3/ The author pledges the 1.0 API will stay stable indefinitely unless a serious defect is discovered, protecting downstream crates from breaking changes.\n\n4/ Full breakdown with sources: https://buildwithsaksham.in/blog/a-datetime-library-for-rust #Rust",
+  "threads": "Hey, have you heard? Jiff 1.0 is now the go‑to datetime crate for Rust.  \nIt’s already in production for Cargo, Starship, AWS LLRT and more.  \nTime‑zone quirks and DST are handled automatically, and the API promises long‑term stability.  \nThink it could simplify your project’s date handling?  \nhttps://buildwithsaksham.in/blog/a-datetime-library-for-rust",
+  "linkedin": "Jiff 1.0 has just been released, and it’s already being used in production by major Rust projects such as Cargo, Starship, and AWS LLRT’s Temporal implementation.\n\nThe library puts time‑zone handling front‑and‑center, automatically managing daylight‑saving transitions so developers no longer need custom DST logic. It also offers core types like `DateTime`, `Span`, and `Duration` that implement `FromStr` and `Display` for easy parsing and formatting.\n\nBeyond its ergonomic API, Jiff is adopted by at least eight well‑known Rust tools—including uv, fd, Nushell, mise, Jujutsu, and uutils/coreutils—demonstrating its battle‑tested reliability in real‑world workloads.\n\n“Jiff puts time‑zone handling front‑and‑center.” This focus reduces bugs related to clock changes and keeps code deterministic.\n\nStability matters: the maintainer commits to keeping the 1.0 API stable indefinitely unless a significant defect is found, avoiding disruptive semver‑incompatible releases for downstream crates.\n\nGiven these advantages, could Jiff become the default datetime solution for your Rust applications?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/a-datetime-library-for-rust"
+}
