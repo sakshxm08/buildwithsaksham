@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/inside-claude-s-code-team-their-approach-to-verification-and",
+  "cover": "/blog-covers/inside-claude-s-code-team-their-approach-to-verification-and.png",
+  "title": "Inside Claude's Code Team: Their Approach to Verification and What Developers Can Learn",
+  "sources": [
+    "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+    "https://dev.to/aws/llms-are-compressors-so-i-chatted-with-gzip-12ji",
+    "https://dev.to/aws/once-upon-agentic-ai-part-2-develop-your-own-mcp-server-and-cast-its-tools-from-strands-agents-9ob"
+  ],
+  "x": "1/ Claude Code ships ~90 % of its code generated and reviewed by Claude itself, cutting manual review dramatically.  \n\n2/ End‑to‑end tests are the team’s default verification, giving clear pass/fail results and visual evidence.  \n\n3/ Adding a rubric‑based grader boosted structured‑file‑generation success by up to ten points on the hardest problems.  \n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/inside-claude-s-code-team-their-approach-to-verification-and",
+  "threads": "Did you hear Claude’s code team now lets the model check its own work?  \nThey run dozens of agents in parallel, each generating and executing its own tests.  \nA separate grader even added ten points on the toughest tasks.  \nCurious how you could set up a similar loop?  \nhttps://buildwithsaksham.in/blog/inside-claude-s-code-team-their-approach-to-verification-and",
+  "linkedin": "Claude Code reports that roughly ninety percent of the code it ships is both written and reviewed by Claude itself, turning the model into a self‑auditing partner.\n\nThe team’s verification loop uses three test families—end‑to‑end, property‑based, and differential—allowing dozens of agents to run in parallel without human bottlenecks.\n\nA separate rubric‑driven grader lifted structured‑file‑generation success by as much as ten points on the most challenging problems, showing the power of cheap, automated evidence.\n\n“End‑to‑end tests give a clear pass or fail and visual proof of failures.”  \n\nEmbedding automated verification into LLM pipelines reduces manual review time and improves code reliability at scale.\n\nThe data reflects internal benchmarks focused on structured‑file generation; results may vary for other domains.\n\nHow might you integrate a similar verification loop into your own AI‑assisted development workflow?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/inside-claude-s-code-team-their-approach-to-verification-and"
+}
