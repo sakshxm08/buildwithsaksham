@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/harvard-researchers-find-ai-coding-agents-shifted-the-bottle",
+  "cover": "/blog-covers/harvard-researchers-find-ai-coding-agents-shifted-the-bottle.png",
+  "title": "Harvard Researchers Find AI Coding Agents Shifted the Bottleneck to Code Review",
+  "sources": [
+    "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+    "https://dev.to/sylwia-lask/is-coding-with-ai-actually-faster-and-cheaper-2810",
+    "https://dev.to/aws-builders/ai-agents-open-17-million-pull-requests-a-month-i-built-a-gate-that-rejects-the-ones-that-lie-46n7"
+  ],
+  "x": "1/ Engineers using AI coding agents wrote 30% more code, but shipped work didn’t increase.  \n2/ Pull‑request review time jumped 49% after AI agents were introduced.  \n3/ Over 17 million AI‑generated pull requests are created each month, yet they still need human eyes.  \nFull breakdown with sources on the blog https://buildwithsaksham.in/blog/harvard-researchers-find-ai-coding-agents-shifted-the-bottle",
+  "threads": "Did you hear AI tools let engineers crank out 30% more code?  \nBut the review bottleneck grew by almost half, so nothing ships faster.  \nMakes you wonder if the hype is missing the real cost.  \nhttps://buildwithsaksham.in/blog/harvard-researchers-find-ai-coding-agents-shifted-the-bottle",
+  "linkedin": "Harvard researchers Fiona Chen and James Stratton reveal a surprising twist: AI‑assisted coding agents boost raw code output by roughly 30 percent, yet the amount of finished, ship‑ready work stays flat.\n\nThe study, covering 718 firms and nearly 726 k engineers from January 2021 to March 2026, shows that while engineers wrote more lines, the average pull‑request review cycle lengthened by about 49 percent after AI adoption.\n\nAdditional signals reinforce the shift: AI‑generated pull requests now exceed 17 million per month, and legal‑AI tools keep a human reviewer in the loop, highlighting that the bottleneck has moved downstream.\n\n“The faster drafting phase simply pushes the bottleneck to human review.”  \n\nThis matters because the hidden cost of slower reviews can erase the time saved in drafting, affecting overall delivery speed and ROI calculations for AI tools.\n\nThe analysis relies on Jellyfish engineering‑activity data and LinkedIn employment records, using a staggered difference‑in‑differences design to isolate the effect of AI adoption.\n\nGiven these findings, how should teams balance AI‑driven drafting gains with the need for reviewer capacity or automated gate‑keeping?\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/harvard-researchers-find-ai-coding-agents-shifted-the-bottle"
+}
