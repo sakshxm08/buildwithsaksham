@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/critical-unauthenticated-rce-in-nginx-what-developers-must-d",
+  "cover": "/blog-covers/critical-unauthenticated-rce-in-nginx-what-developers-must-d.png",
+  "title": "Critical Unauthenticated RCE in Nginx: What Developers Must Do Now",
+  "sources": [
+    "https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities",
+    "https://xint.io/blog/nginx2root-remote-code-execution",
+    "https://calif.io/java4shell/"
+  ],
+  "x": "A single NGINX flaw could let anyone run code on servers worldwide – CVSS 9.2, critical severity.\n\n2/ The two HTTP/2 bugs (CVE‑2026‑123633 & CVE‑2026‑123007) have existed since 2015 and affect every NGINX version up to 1.31.8.\n\n3/ Exploiting them requires only a crafted HTTP/2 request; no authentication or vulnerable app code needed.\n\nFull breakdown with sources on the blog https://buildwithsaksham.in/blog/critical-unauthenticated-rce-in-nginx-what-developers-must-d",
+  "threads": "Did you hear NGINX has two critical HTTP/2 bugs that have been lurking since 2015?  \nThey let an unauthenticated attacker execute code on any server with HTTP/2 enabled.  \nMost deployments up to version 1.31.8 are vulnerable until the 1.31.9 patch lands.  \nWhat are you doing to protect your stack?  \nhttps://buildwithsaksham.in/blog/critical-unauthenticated-rce-in-nginx-what-developers-must-d",
+  "linkedin": "Is your NGINX front‑end truly safe? Researchers disclosed two critical HTTP/2 flaws on 18 November 2026, each scoring 9.2 on the CVSS scale.\n\nThe vulnerabilities, CVE‑2026‑123633 (use‑after‑free) and CVE‑2026‑123007 (integer underflow), affect every NGINX release from 1.9.5 through 1.31.8 when HTTP/2 is enabled, allowing unauthenticated remote‑code execution.\n\nA coordinated patch will arrive in version 1.31.9, but until then the only reliable mitigation is to disable HTTP/2 on affected listeners. The bugs have been present for over a decade, meaning most production deployments remain exposed.\n\n“An unauthenticated attacker can run arbitrary code simply by sending a crafted HTTP/2 request.”  \n\nBecause NGINX sits at the front door of millions of sites and APIs, a compromise can give attackers full control over traffic, credentials, and downstream services.\n\nThe data reflects disclosures from multiple research groups and the upcoming F5 security release; the exact impact may vary by configuration.\n\nHow are you ensuring your NGINX instances are protected while the patch is pending?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/critical-unauthenticated-rce-in-nginx-what-developers-must-d"
+}
