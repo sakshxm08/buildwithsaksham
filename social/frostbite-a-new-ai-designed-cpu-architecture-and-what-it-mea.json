@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/frostbite-a-new-ai-designed-cpu-architecture-and-what-it-mea",
+  "cover": "/blog-covers/frostbite-a-new-ai-designed-cpu-architecture-and-what-it-mea.png",
+  "title": "Frostbite: A New AI‑Designed CPU Architecture and What It Means for Developers",
+  "sources": [
+    "https://architectlabs.com/blog/frostbite",
+    "https://www.anthropic.com/research/claude-black-hole-physics",
+    "https://thedataexchange.media/pete-warden-moonshine/"
+  ],
+  "x": "Frostbite delivers a 4.59× performance‑per‑watt advantage over a modern dual‑issue, in‑order superscalar core.\n\n2/ The whole CPU stack—from instruction set to physical layout—was generated and verified end‑to‑end by AI, without human‑in‑the‑loop redesigns.\n\n3/ Its ISA is built on interaction nets, giving inherent locality and linearity that remove many traditional bottlenecks.\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/frostbite-a-new-ai-designed-cpu-architecture-and-what-it-mea",
+  "threads": "Did you see the new Frostbite CPU? It’s an AI‑crafted core that beats a modern dual‑issue design by 4.59× in performance‑per‑watt.  \nThe AI handled everything—from compiler to silicon layout—without a human touch.  \nAnd it’s based on interaction nets, which give the hardware built‑in parallelism.  \nWhat could this mean for our next project?  \nhttps://buildwithsaksham.in/blog/frostbite-a-new-ai-designed-cpu-architecture-and-what-it-mea",
+  "linkedin": "Architect Labs announced Frostbite, a completely AI‑designed general‑purpose CPU that shatters recent efficiency trends.  \n\nThe benchmark suite of 25 workloads, including 15 held‑out tests, shows Frostbite achieving a 4.59× performance‑per‑watt gain over a modern dual‑issue, in‑order superscalar core.  \n\nBeyond the raw numbers, the AI‑driven flow produced an entirely new ISA built around interaction nets, along with novel micro‑architectural primitives and RTL that were verified automatically.  \n\n“novel hardware implementations and runtime features” emerged from the autonomous iteration.  \n\nThis matters because higher efficiency translates directly into lower power budgets for data‑center servers and longer battery life for edge devices, reducing the need for over‑provisioned hardware.  \n\nThe results are based on a curated benchmark set with a large held‑out portion, so the gains reflect performance on unseen code paths rather than over‑fitting.  \n\nHow will AI‑crafted hardware change the way developers approach performance engineering?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/frostbite-a-new-ai-designed-cpu-architecture-and-what-it-mea"
+}
