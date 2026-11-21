@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/tidecache-efficient-hybrid-llm-serving-with-transparent-cach",
+  "cover": "/blog-covers/tidecache-efficient-hybrid-llm-serving-with-transparent-cach.png",
+  "title": "TideCache: Efficient Hybrid LLM Serving with Transparent Cache Management and Layer‑Wise Streaming",
+  "sources": [
+    "https://arxiv.org/abs/2611.26619",
+    "https://arxiv.org/abs/2611.26531",
+    "https://arxiv.org/abs/2611.26613"
+  ],
+  "x": "1/ Hybrid LLM serving can now handle over twice as many agent turns on the same GPU hardware.  \n\n2/ TideCache cuts median per‑token latency by up to 59 % compared with the previous SGLang + HiCache setup.  \n\n3/ First‑token generation speeds improve between 1.40× and 3.05× thanks to layer‑wise streaming.  \n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/tidecache-efficient-hybrid-llm-serving-with-transparent-cach",
+  "threads": "Hey, have you seen the new TideCache system for hybrid LLMs?  \nIt reshuffles GPU memory on the fly and streams cache data while the model is decoding.  \nThe result? Up to 2× more agent turns and latency drops of up to 59 %.  \nCurious how it could change your serving stack?  \nhttps://buildwithsaksham.in/blog/tidecache-efficient-hybrid-llm-serving-with-transparent-cach",
+  "linkedin": "Can hybrid language‑model serving really double its throughput without adding hardware? The paper *TideCache: Efficient Hybrid LLM Serving with Transparent Cache Management and Layer‑Wise Streaming* (arXiv 2611.26619) says yes.\n\nTideCache delivers up to a 2.04× increase in completed agent turns, while median per‑token latency falls by 20 %‑59 % and first‑token times speed up 1.40×‑3.05× versus the prior SGLang + HiCache baseline.\n\nThe system achieves this by dynamically reallocating HBM across heterogeneous caches, pre‑fetching the next global‑attention prefix during bounded‑state computation, and scheduling requests to run either resident or streamed based on size and queue pressure.\n\n“Transparent Cache Pool reshuffles physical pages without changing virtual addresses.”  \n\nThese gains matter because they let operators serve more users with the same expensive GPU resources, improving QPS and reducing tail latency for interactive chat and coding agents.\n\nThe evaluation was limited to two NVIDIA Grace‑based superchips (GB300 and GH200) and seven model‑platform pairings, so results may vary on other hardware.\n\nWhat hybrid serving challenges are you facing that could benefit from dynamic cache management?\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/tidecache-efficient-hybrid-llm-serving-with-transparent-cach"
+}
