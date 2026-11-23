@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/glm-5-4-toward-generalized-coding-with-our-first-loop-transf",
+  "cover": "/blog-covers/glm-5-4-toward-generalized-coding-with-our-first-loop-transf.png",
+  "title": "GLM-5.4: Toward Generalized Coding with Our First Loop Transformer",
+  "sources": [
+    "https://z.ai/blog/glm-5.4",
+    "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth",
+    "https://github.com/gulivan/worker755"
+  ],
+  "x": "48% pass@1 on HumanEval – GLM‑5.4 hits a new high for open‑weight coding models. No hashtags.\n\n2/ The Loop Transformer lets the model run arbitrarily long execution traces without blowing up the context window.\n\n3/ GLM‑5.4 is a 7.5 B‑parameter model trained on 1.2 T tokens, half of which are code‑execution traces.\n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/glm-5-4-toward-generalized-coding-with-our-first-loop-transf",
+  "threads": "Just saw Zhipu AI’s GLM‑5.4 drop. It’s an open‑weight model that can actually run the code it writes and give you a verdict in one go. Imagine dropping a single prompt and getting back a compiled, tested snippet. Could this be the next big thing for our dev tools? https://buildwithsaksham.in/blog/glm-5-4-toward-generalized-coding-with-our-first-loop-transf",
+  "linkedin": "Zhipu AI just released GLM‑5.4, the first model to embed a Loop Transformer for code generation and execution.\n\nThe model achieves a 48 % pass@1 score on the HumanEval benchmark, narrowing the gap with proprietary coding assistants.\n\nGLM‑5.4 doubles the parameter count of its predecessor to 7.5 B and was trained on 1.2 trillion tokens, with a large portion consisting of code‑execution traces.\n\n“The Loop Transformer enables iterative reasoning over arbitrary execution traces.”  \n\nThis architecture lets a single prompt contain an entire program’s run history, reducing the need for separate testing pipelines.\n\nThe open‑weight release means developers can self‑host the model, avoiding API limits and privacy concerns.\n\nHow will you integrate a model that can write, run, and verify code in one step into your workflow?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/glm-5-4-toward-generalized-coding-with-our-first-loop-transf"
+}
