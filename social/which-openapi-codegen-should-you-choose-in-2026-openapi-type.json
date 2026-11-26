@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/which-openapi-codegen-should-you-choose-in-2026-openapi-type",
+  "cover": "/blog-covers/which-openapi-codegen-should-you-choose-in-2026-openapi-type.png",
+  "title": "Which OpenAPI Codegen Should You Choose in 2026? 🤔 openapi-typescript vs Hey API vs Orval vs Kubb v5 🔥",
+  "sources": [
+    "https://dev.to/necoz/which-openapi-codegen-should-you-choose-in-2026-openapi-typescript-vs-hey-api-vs-orval-vs-kubb-m8c",
+    "https://www.marginalia.nu/log/a_141_marginalia_update/",
+    "https://donsz.nl/blog/optimizing-rustcs-next-trait-solver"
+  ],
+  "x": "Kubb v5 cranked out types for a 1,200‑operation spec in just 337 ms – the fastest of the four generators.\n\n2/ Hey API slashed its SDK generation time by over 80 % compared to six months ago, now at 1,329 ms.\n\n3/ Peak memory usage ranged from 145 MiB (Orval) to 240 MiB (Hey API), affecting CI stability.\n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/which-openapi-codegen-should-you-choose-in-2026-openapi-type",
+  "threads": "Just ran the latest OpenAPI generator benchmarks. Kubb v5 is now the speed champion at 337 ms, and Hey API cut its generation time by 82 %. Memory footprints vary a lot, which can bite CI pipelines. Curious which tool fits your workflow best?\n\nhttps://buildwithsaksham.in/blog/which-openapi-codegen-should-you-choose-in-2026-openapi-type",
+  "linkedin": "Which OpenAPI generator should you trust for rapid iteration? A recent DEV Community roundup tested four popular tools on a synthetic spec with 1,200 operations and 484 schemas, using a Ryzen 9 7900 under Node 26.\n\nKubb v5 generated types in a median of 337 ms, the fastest among the group, while Hey API reduced its SDK generation time to 1,329 ms, an 82 % improvement over six months ago. Openapi‑typescript sat at 438 ms, and Orval took 866 ms for type‑only generation.\n\nMemory usage also differed: Kubb peaked at 156 MiB, openapi‑typescript at 191 MiB, Hey API at 240 MiB, and Orval at 145 MiB. Generated file counts ranged from a single 1.45 MB file for openapi‑typescript to 2,897 files totaling 3.13 MB for Kubb.\n\n\"Generation speed directly shapes how quickly we can iterate on an API contract.\"\n\nThese differences matter because faster generation shortens feedback loops and lower memory footprints keep CI runners stable, especially on shared environments with limited resources.\n\nThe benchmarks reflect a single hardware setup and synthetic spec, so results may vary with real‑world APIs.\n\nWhich generator’s trade‑offs align best with your team’s workflow and CI constraints?\n\nFull breakdown with sources: https://buildwithsaksham.in/blog/which-openapi-codegen-should-you-choose-in-2026-openapi-type"
+}
