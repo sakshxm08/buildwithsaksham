@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/rvoip-a-high-performance-voip-stack-written-in-rust-what-dev",
+  "cover": "/blog-covers/rvoip-a-high-performance-voip-stack-written-in-rust-what-dev.png",
+  "title": "Rvoip: A High‑Performance VoIP Stack Written in Rust – What Developers Need to Know",
+  "sources": [
+    "https://github.com/eisenzopf/rvoip",
+    "https://lvignoli.eu/posts/2026-11-16-typed-indexes-in-zig/",
+    "https://sunshowers.io/posts/on-poisoning/"
+  ],
+  "x": "1/ 8,300 calls‑per‑second on a single c8i.4xlarge – a pure‑Rust SIP stack outpaces many commercial SBCs.  \n\n2/ The benchmark showed sub‑millisecond (p50 ≈ 1 ms) setup latency even at 90 % load.  \n\n3/ When media is added, it still handled over 1,200 CPS with G.711 over UDP + RTP.  \n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/rvoip-a-high-performance-voip-stack-written-in-rust-what-dev",
+  "threads": "Did you see the latest on rvoip?  \nIt just hit 0.5.0 and smashed 8 k calls‑per‑second on a single cloud VM.  \nEven with G.711 media it stays above 1 k CPS and latency stays under a few milliseconds.  \nThink this could replace a traditional SBC in your stack?  \nhttps://buildwithsaksham.in/blog/rvoip-a-high-performance-voip-stack-written-in-rust-what-dev",
+  "linkedin": "Rvoip 0.5.0 has just been released on GitHub, and the performance numbers are startling.\n\nIn a benchmark on an AWS c8i.4xlarge (16 vCPU, 32 GiB RAM) the library sustained roughly 8,300 calls‑per‑second for SIP‑over‑TLS signaling, with median setup latency around 1 ms and the 99th percentile staying under 6 ms.\n\nWhen media handling is added, the stack still delivered over 1,200 calls‑per‑second for UDP + RTP with G.711, and the latency remained sub‑millisecond (p50 ≈ 1 ms, p99 ≈ 4‑6 ms). Under overload it returned fast 503 responses and recovered cleanly.\n\nThe repository now bundles SIP, WebRTC, SRTP, QUIC and even AI voice agents in a single Rust crate, eliminating the need for separate proxies or media servers. Interoperability tests against Asterisk, FreeSWITCH, Kamailio and others confirm it can negotiate standard dialogs and media streams without issue.\n\nThese results give developers a concrete baseline to compare against traditional session border controllers, while benefiting from Rust’s memory safety. The data reflects a single VM workload; real‑world deployments may see different scaling characteristics.\n\nCould a single‑crate, high‑throughput Rust stack simplify your next telephony project?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/rvoip-a-high-performance-voip-stack-written-in-rust-what-dev"
+}
