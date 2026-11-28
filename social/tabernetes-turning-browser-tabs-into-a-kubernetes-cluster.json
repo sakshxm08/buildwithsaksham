@@ -1,0 +1,13 @@
+{
+  "link": "https://buildwithsaksham.in/blog/tabernetes-turning-browser-tabs-into-a-kubernetes-cluster",
+  "cover": "/blog-covers/tabernetes-turning-browser-tabs-into-a-kubernetes-cluster.png",
+  "title": "Tabernetes: Turning Browser Tabs into a Kubernetes Cluster",
+  "sources": [
+    "https://tabernet.es/",
+    "https://fleetlayer.ai/",
+    "https://cetra3.github.io/blog/state-of-allocators-2026-finally-stabilised/"
+  ],
+  "x": "1/ A 5 MB download can turn any modern browser tab into a full Kubernetes node.\n\n2/ The tab runs a Linux kernel compiled to WebAssembly, giving pods near‑native performance on a single core.\n\n3/ Closing the tab instantly removes the node, and the scheduler automatically reschedules the pod elsewhere.\n\nFull breakdown with sources is on the blog https://buildwithsaksham.in/blog/tabernetes-turning-browser-tabs-into-a-kubernetes-cluster",
+  "threads": "Imagine turning every open browser tab into a tiny compute node.  \nJust a 5 MB download boots a WebAssembly Linux kernel inside the tab.  \nPods run on that single core and disappear when you close the tab.  \nCould this make browsers the new edge compute layer?  \nhttps://buildwithsaksham.in/blog/tabernetes-turning-browser-tabs-into-a-kubernetes-cluster",
+  "linkedin": "Tabernetes demonstrates that a 5 MB bundle can convert any modern browser tab into a Kubernetes node, challenging the traditional view of where pods can run.\n\nWhen a user opens the join page, the page downloads roughly 5 MB of assets and boots a tiny Linux kernel compiled to WebAssembly inside the tab. The kernel runs on the tab’s single CPU core, and a custom runtime called **tabc** starts the pod’s container directly within that environment.\n\nThe control plane remains unchanged; the tab registers as a node via a WebSocket, reports one core of capacity, and the scheduler treats it like any other node. When the tab is closed, the socket drops, the node deregisters, and the scheduler automatically reschedules the pod to another available tab.\n\n“Turning tabs into a cluster is a fun experiment and a practical tool for edge‑scale compute.”  \n\nThis matters because it opens up the vast, untapped compute capacity of everyday browsers, allowing developers to dispatch standard Kubernetes workloads to users’ devices without installing native agents.\n\nA limitation is that each tab can only use a single CPU core and the memory allocated by the browser, so performance scales with the tab’s own resource constraints.\n\nWhat kinds of workloads do you think are best suited for this browser‑based Kubernetes model?  \n\nFull breakdown with sources: https://buildwithsaksham.in/blog/tabernetes-turning-browser-tabs-into-a-kubernetes-cluster"
+}
